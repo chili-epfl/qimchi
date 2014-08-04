@@ -11,6 +11,8 @@ The global QtCreator project references the following modules:
 
 * qmlchilitags: integration of [Chilitags](https://github.com/chili-epfl/chilitags)
   in QML
+* qmlchilitags-demo: demonstration of how to use qmlchilitags for "regular" AR,
+  i.e. displaying virtual element on a camera feed
 
 Documentation
 -------------

@@ -1,0 +1,14 @@
+Demonstration of Augmented Reality with QMLChilitags
+====================================================
+
+This demo shows how to add graphical elements linked to tags appearing on a
+camera image.
+
+The demo is contained in the main.qml file, which serves as documentation with
+its comments.
+
+The other files simply come from the "New sub-project/Qt Quick application"
+wizard from Qt Creator, except for this line add into main.cpp:
+```
+    engine.addImportPath("../imports");
+```
