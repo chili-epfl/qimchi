@@ -13,6 +13,8 @@ The global QtCreator project references the following modules:
   in QML
 * qmlchilitags-demo: demonstration of how to use qmlchilitags for "regular" AR,
   i.e. displaying virtual element on a camera feed
+* qmlchilitags-projection: demonstration of how to use qmlchilitags in a
+  camera+projector setting
 
 Documentation
 -------------

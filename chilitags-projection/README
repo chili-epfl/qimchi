@@ -1,0 +1,14 @@
+Demonstration of QMLChilitags in a camera+projection setting
+============================================================
+
+This demo shows how to display graphical elements linked to tags placed on the
+display surface.
+
+The demo is contained in the main.qml file, which serves as documentation with
+its comments.
+
+The other files simply come from the "New sub-project/Qt Quick application"
+wizard from Qt Creator, except for this line add into main.cpp:
+```
+    engine.addImportPath("../imports");
+```
