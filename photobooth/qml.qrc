@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>img/capture.png</file>
+        <file>img/trash.png</file>
+        <file>img/print.png</file>
+    </qresource>
+</RCC>

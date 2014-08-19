@@ -4,3 +4,4 @@ SUBDIRS = \
           chilitags-demo \
           chilitags-projection \
           print \
+          photobooth \
