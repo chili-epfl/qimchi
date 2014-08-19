@@ -3,3 +3,4 @@ SUBDIRS = \
           chilitags \
           chilitags-demo \
           chilitags-projection \
+          print \
