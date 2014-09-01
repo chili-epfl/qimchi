@@ -20,7 +20,9 @@ Documentation
 -------------
 
 Qimchi requires Qt 5, and is developped using Qt Creator.
-It has been tested with Qt 5.3 on Ubuntu 14.04.
+It has been tested with Qt 5.3 on Ubuntu 14.04, and would probably not work
+with lower than 5.3 due to 
+https://bugreports.qt-project.org/browse/QTBUG-34736?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel.
 For more details, each module contains a specific README.
 
 License
