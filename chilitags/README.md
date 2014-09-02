@@ -47,5 +47,5 @@ make install
 
 If you have Qt installed in your usual system paths, the build might work
 without the `export` step. The above will build the chilitags QML plugin
-and put the necessary files under `import/Chilitags/`. 
+and put the necessary files under `import/Chilitags/`.
 
