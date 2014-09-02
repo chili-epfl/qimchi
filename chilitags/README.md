@@ -28,3 +28,24 @@ Prerequisite
 
 Chilitags and OpenCv need to be installed on the system (so that the
 `-lchilitags`, `-lopencv_core`, etc. options of the linker finds them)
+
+How to build with CMake
+-----------------------
+
+You need at least CMake 2.8.11 in addition to `chilitags`, `opencv_core` and
+`opencv_imgproc` installed on your system. This build was tested on Ubuntu
+14.04 with CMake 2.8.12.2 and Qt 5.3.1. Run:
+
+```
+export CMAKE_PREFIX_PATH=/path/to/qt5/installation
+mkdir build
+cd build
+cmake ..
+make -j 5
+make install
+```
+
+If you have Qt installed in your usual system paths, the build might work
+without the `export` step. The above will build the chilitags QML plugin
+and put the necessary files under `import/Chilitags/`. 
+
