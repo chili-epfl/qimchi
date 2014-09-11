@@ -70,31 +70,45 @@ Window {
             Item {
                 transform: Transform { matrix: redTag.transform }
                 Rectangle {
-                    color: "blue"
+                    color: "white"
                     width: 20; height: 20
                     visible: redTag.visible
+                    Text {
+                        text: "好"
+                        visible: redTag.visible
+                        width: parent.width
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
                 }
-                Image {
-                    source: "qrc:/qt-logo.png"
-                    width: 20; height: 20
-                    visible: redTag.visible
-                }
+                //Image {
+                //    source: "qrc:/qt-logo.png"
+                //    width: 20; height: 20
+                //    visible: redTag.visible
+                //}
             }
 
             // Same for the other tag
             Item {
                 transform: Transform { matrix: blueTag.transform }
                 Rectangle {
-                    id: redTagBackground
-                    color: "red"
+                    id: blueTagBackground
+                    color: "white"
                     width: 20; height: 20
                     visible: blueTag.visible
+
+                    Text {
+                        text: "吗"
+                        visible: blueTag.visible
+                        width: parent.width
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                 }
-                Image {
-                    source: "qrc:/qt-logo.png";
-                    width: 20; height: 20
-                    visible: blueTag.visible
-                }
+//                Image {
+//                    source: "qrc:/qt-logo.png";
+//                    width: 20; height: 20
+//                    visible: blueTag.visible
+//                }
             }
         }
 
