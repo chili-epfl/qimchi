@@ -1,6 +1,6 @@
 TEMPLATE = lib
 TARGET = pgrcameraqml
-QT += qml quick
+QT += qml quick multimedia
 CONFIG += qt plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
@@ -20,7 +20,7 @@ HEADERS += \
 OTHER_FILES = qmldir
 
 INCLUDEPATH += /usr/include/flycapture
-LIBS += -L/usr/lib/ -lflycapture
+LIBS += -L/usr/lib/ -lflycapture -lopencv_core -lopencv_imgproc
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir
