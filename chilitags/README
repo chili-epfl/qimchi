@@ -1,0 +1,30 @@
+QML plugin for Chilitags
+========================
+
+This plugin exposes Chilitags to QML applications.
+
+For now, it exposes 3 QML objects:
+
+* ChilitagsDetection: takes a video stream as `source` and can itself be used as
+  a source to forward the video stream (e.g. to a VideoOutput). The videoframes
+  are intercepted to detect Chilitags, which are stored in a `tags` property.
+  It also exposes a projectionMatrix property computed from the camera matrix
+  used to estimate the 3d position of the tags.
+
+* ChilitagsObject: placed as a child of a ChilitagsDetection, it reads a `name` 
+  property corresponding to the identifier of the 3D objects detected by
+  Chilitags, i.e. tags or aggregates of tags. A ChilitagsObject takes care of
+  updating its `transform` property with the 4x4 matrix estimated by the parent
+  ChilitagsDetection, and a `visible` boolean property corresponding to whether
+  the tag was detected in the last frame.
+
+* Transform: a QuickTransform computed from a 4x4 matrix (Qt only seems to
+  provide scales, rotations and translations). It serves as an adapter between
+  the transformation matrices of Chilitags and the transform properties of QML
+  items.
+
+Prerequisite
+------------
+
+Chilitags and OpenCv need to be installed on the system (so that the
+`-lchilitags`, `-lopencv_core`, etc. options of the linker finds them)
