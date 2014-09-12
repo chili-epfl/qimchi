@@ -5,8 +5,11 @@ import QtMultimedia 5.0
 
 Window {
     visible: true
-    width: 360
-    height: 360
+    visibility: "FullScreen"
+    color: "black"
+    //Settings for a "normal" window
+    //width: 360
+    //height: 360
 
     // Simple use the standard QML camera for video input
     Camera { id: camera }
@@ -35,6 +38,38 @@ Window {
             name: "tag_5"
             property vector3d center : transform.times(parent.tagCenter)
         }
+
+
+        ChilitagsObject {
+            id: deconstructCard
+            name: "tag_1"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+
+        // We declare tags for the basic sheet
+        ChilitagsObject {
+            id: sheetTopLeft
+            name: "tag_100"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: sheetTopRight
+            name: "tag_101"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: sheetDownRight
+            name: "tag_102"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: sheetDownLeft
+            name: "tag_103"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+
     }
 
     // This Item is the main graphic container, where AR happens.
@@ -81,11 +116,6 @@ Window {
                     }
 
                 }
-                //Image {
-                //    source: "qrc:/qt-logo.png"
-                //    width: 20; height: 20
-                //    visible: redTag.visible
-                //}
             }
 
             // Same for the other tag
@@ -104,12 +134,59 @@ Window {
                         horizontalAlignment: Text.AlignHCenter
                     }
                 }
-//                Image {
-//                    source: "qrc:/qt-logo.png";
-//                    width: 20; height: 20
-//                    visible: blueTag.visible
-//                }
             }
+
+            // This is the containter for graphic elements attached to the sheet
+            // Inside this item, coordinates are in the sheet referential
+            // i.e. in mm, where 0,0,0 is the top left corner of the tag
+            Item {
+                transform: Transform { matrix: sheetTopLeft.transform }
+
+                // Some title text with instructions
+                Text {
+                    id: sheetTitle
+                    text: "What are the components of this character?"
+                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible)
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 162
+                    y: -8
+                }
+
+                // Rectangle around the base symbol
+                Rectangle {
+                    id: rectangleSymbol
+                    color: "transparent"
+                    border.color: "red"
+                    x: 140
+                    y: 6
+                    width: 30
+                    height: 30
+                    visible: sheetTitle.visible && !deconstructCard.visible
+                }
+
+
+                // The symbols at the decomposition stage
+                Text {
+                    text: "女"
+                    visible: sheetTitle.visible && deconstructCard.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 55
+                    y: 50
+                    color: "#AA0000"
+                }
+                Text {
+                    text: "马"
+                    visible: sheetTitle.visible && deconstructCard.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 260
+                    y: 50
+                }
+
+            }
+
         }
 
         // Back to input image referential, to show another way to deal with
