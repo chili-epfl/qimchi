@@ -18,6 +18,7 @@ ChilitagsSurface::ChilitagsSurface(QObject *parent)
     //, m_timer()
 {
     //m_timer.start();
+    m_chilitags.getChilitags().setPerformance(chilitags::Chilitags::FASTER);
 }
 
 QList<QVideoFrame::PixelFormat> ChilitagsSurface::supportedPixelFormats(

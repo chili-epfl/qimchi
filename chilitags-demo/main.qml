@@ -4,6 +4,12 @@ import Chilitags 1.0
 import QtMultimedia 5.0
 
 Window {
+    property matrix4x4 displayTransform : Qt.matrix4x4(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 1
+    )
     visible: true
     visibility: "FullScreen"
     color: "black"
@@ -171,6 +177,15 @@ Window {
             Item {
                 transform: Transform { matrix: sheetTopLeft.transform }
 
+                Text {
+                    id: dummy
+                    text: "a"
+                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible)
+                    z: 0.1
+                    x: -300
+                    y: -300
+                }
+
                 // Some title text with instructions
                 Text {
                     id: sheetTitleDecomposition
@@ -180,6 +195,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 125
                     y: -25
+                    z: 1
                     font.pointSize: 6; font.bold: true
                 }
                 Text {
@@ -190,6 +206,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 125
                     y: -25
+                    z: 1
                     font.pointSize: 6; font.bold: true
                 }
                 Text {
@@ -200,6 +217,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 125
                     y: -25
+                    z: 1
                     font.pointSize: 6; font.bold: true
                 }
 
@@ -213,6 +231,7 @@ Window {
                     y: 4
                     width: 30
                     height: 30
+                    z: 1
                     visible: sheetTitleDecomposition.visible
                 }
 
@@ -225,6 +244,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 55
                     y: 50
+                    z: 1
                     color: "#660000"
                 }
                 Text {
@@ -234,6 +254,7 @@ Window {
                     horizontalAlignment: Text.AlignLeft
                     x: 65
                     y: 45
+                    z: 1
                     color: "#660000"
                     font.pointSize: 4
                 }
@@ -242,6 +263,7 @@ Window {
                     visible: sheetTitleComposition.visible || sheetTitleComposition2.visible
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
+                    z: 1
                     x: 220
                     y: 45
                 }
@@ -252,6 +274,7 @@ Window {
                     horizontalAlignment: Text.AlignRight
                     x: 210
                     y: 45
+                    z: 1
                     color: "#000000"
                     font.pointSize: 4
                 }
@@ -264,6 +287,7 @@ Window {
                     horizontalAlignment: Text.AlignRight
                     x: 13
                     y: 77
+                    z: 1
                     color: "#006600"
                     font.pointSize: 6
                 }
@@ -274,6 +298,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 17
                     y: 97
+                    z: 1
                     font.pointSize: 16
                 }
                 Text {
@@ -283,6 +308,7 @@ Window {
                     horizontalAlignment: Text.AlignRight
                     x: 13
                     y: 77
+                    z: 1
                     color: "#AA0000"
                     font.pointSize: 6
                 }
@@ -294,6 +320,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     x: 17
                     y: 85
+                    z: 1
                     font.pointSize: 30
                 }
 
@@ -309,6 +336,7 @@ Window {
                     horizontalAlignment: Text.AlignLeft
                     x: 7
                     y: 27
+                    z: 1
                     font.pointSize: 6
                 }
             }
@@ -322,6 +350,7 @@ Window {
                     horizontalAlignment: Text.AlignLeft
                     x: 7
                     y: 27
+                    z: 1
                     font.pointSize: 8
                 }
             }
@@ -353,6 +382,7 @@ Window {
             // given by the tags to a (x,y,length,rotation) description
             x: start.x
             y: start.y
+            z: 0
             width: Math.sqrt( (end.y-start.y)*(end.y-start.y)
                             + (end.x-start.x)*(end.x-start.x) )
             rotation: Math.atan2(end.y-start.y, end.x-start.x)*180.0/Math.PI;
