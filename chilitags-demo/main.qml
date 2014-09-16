@@ -8,12 +8,12 @@ Window {
     visibility: "FullScreen"
     color: "black"
     //Settings for a "normal" window
-    //width: 360
-    //height: 360
+    //width: 1024
+    //height: 768
+    //title: qsTr("Hello World")
 
     // Simple use the standard QML camera for video input
     Camera { id: camera }
-
 
     // Set up chilitag detection
     ChilitagsDetection {
@@ -39,10 +39,38 @@ Window {
             property vector3d center : transform.times(parent.tagCenter)
         }
 
-
+        // We declare tags for the action cards
         ChilitagsObject {
             id: deconstructCard
             name: "tag_1"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: constructCard
+            name: "tag_0"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        // We declare tags for the action cards
+        ChilitagsObject {
+            id: pinyinCard
+            name: "tag_3"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: wordCombinationCard
+            name: "tag_2"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        // We declare tags for the components
+        ChilitagsObject {
+            id: correctSymbol
+            name: "tag_106"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: wrongSymbol
+            name: "tag_109"
             property vector3d center : transform.times(parent.tagCenter)
         }
 
@@ -139,53 +167,165 @@ Window {
             // This is the containter for graphic elements attached to the sheet
             // Inside this item, coordinates are in the sheet referential
             // i.e. in mm, where 0,0,0 is the top left corner of the tag
+            // TODO: find some way of getting more accurate positions by using the four sheet tags
             Item {
                 transform: Transform { matrix: sheetTopLeft.transform }
 
                 // Some title text with instructions
                 Text {
-                    id: sheetTitle
+                    id: sheetTitleDecomposition
                     text: "What are the components of this character?"
-                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible)
+                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible) && !constructCard.visible && !deconstructCard.visible
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
-                    x: 162
-                    y: -8
+                    x: 125
+                    y: -25
+                    font.pointSize: 6; font.bold: true
+                }
+                Text {
+                    id: sheetTitleComposition
+                    text: ""
+                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible) && !constructCard.visible && deconstructCard.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 125
+                    y: -25
+                    font.pointSize: 6; font.bold: true
+                }
+                Text {
+                    id: sheetTitleComposition2
+                    text: "Select which components form a valid symbol"
+                    visible: (sheetTopLeft.visible || sheetTopRight.visible || sheetDownLeft.visible || sheetDownRight.visible) && constructCard.visible && deconstructCard.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 125
+                    y: -25
+                    font.pointSize: 6; font.bold: true
                 }
 
                 // Rectangle around the base symbol
                 Rectangle {
                     id: rectangleSymbol
                     color: "transparent"
-                    border.color: "red"
-                    x: 140
-                    y: 6
+                    border.color: "blue"
+                    border.width: 3
+                    x: 125
+                    y: 4
                     width: 30
                     height: 30
-                    visible: sheetTitle.visible && !deconstructCard.visible
+                    visible: sheetTitleDecomposition.visible
                 }
 
 
                 // The symbols at the decomposition stage
                 Text {
                     text: "女"
-                    visible: sheetTitle.visible && deconstructCard.visible
+                    visible: sheetTitleComposition.visible || sheetTitleComposition2.visible
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
                     x: 55
                     y: 50
-                    color: "#AA0000"
+                    color: "#660000"
+                }
+                Text {
+                    text: "Radical\nSemantic component"
+                    visible: sheetTitleComposition.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignLeft
+                    x: 65
+                    y: 45
+                    color: "#660000"
+                    font.pointSize: 4
                 }
                 Text {
                     text: "马"
-                    visible: sheetTitle.visible && deconstructCard.visible
+                    visible: sheetTitleComposition.visible || sheetTitleComposition2.visible
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
-                    x: 260
-                    y: 50
+                    x: 220
+                    y: 45
+                }
+                Text {
+                    text: "Component\nPhonetic component"
+                    visible: sheetTitleComposition.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignRight
+                    x: 210
+                    y: 45
+                    color: "#000000"
+                    font.pointSize: 4
+                }
+
+                //Messages for the construction activity
+                Text {
+                    text: "Correct!\n对"
+                    visible: sheetTitleComposition2.visible && correctSymbol.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignRight
+                    x: 13
+                    y: 77
+                    color: "#006600"
+                    font.pointSize: 6
+                }
+                Text {
+                    text: "姐"
+                    visible: sheetTitleComposition2.visible && correctSymbol.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 17
+                    y: 97
+                    font.pointSize: 16
+                }
+                Text {
+                    text: "Try again!\n再试一次"
+                    visible: sheetTitleComposition2.visible && wrongSymbol.visible
+                    width: parent.width
+                    horizontalAlignment: Text.AlignRight
+                    x: 13
+                    y: 77
+                    color: "#AA0000"
+                    font.pointSize: 6
+                }
+                Text {
+                    text: "x"
+                    visible: sheetTitleComposition2.visible && wrongSymbol.visible
+                    width: parent.width
+                    color: "#AA0000"
+                    horizontalAlignment: Text.AlignHCenter
+                    x: 17
+                    y: 85
+                    font.pointSize: 30
                 }
 
             }
+
+            // Additional hints, displayed on cards
+            Item {
+                transform: Transform { matrix: pinyinCard.transform }
+                Text {
+                    id: pinyinhint
+                    visible: pinyinCard.visible
+                    text: "jie (3)"
+                    horizontalAlignment: Text.AlignLeft
+                    x: 7
+                    y: 27
+                    font.pointSize: 6
+                }
+            }
+            // Additional hints, displayed on cards
+            Item {
+                transform: Transform { matrix: wordCombinationCard.transform }
+                Text {
+                    id: wordhint
+                    visible: wordCombinationCard.visible
+                    text: "姐姐"
+                    horizontalAlignment: Text.AlignLeft
+                    x: 7
+                    y: 27
+                    font.pointSize: 8
+                }
+            }
+
 
         }
 
