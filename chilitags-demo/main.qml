@@ -34,11 +34,20 @@ Window {
         //A tag to test the animated gifs
           ChilitagsObject {
               id: animatedTag
-              name: "tag_1023"
-              // Add a property that is computed as a the 3D position of the
-              // center of this tag
+              name: "tag_30"
               property vector3d center : transform.times(parent.tagCenter)
           }
+        //A tag to test the sound/speech
+        //For now we can get mp3s using: curl -A "Mozilla" "http://translate.google.com/translate_tts?ie=UTF-8&tl=zh&q=%E5%A5%BD" > hao.mp3
+          ChilitagsObject {
+              id: soundTag
+              name: "tag_31"
+              property vector3d center : transform.times(parent.tagCenter)
+              //onVisibleChanged: {
+              //    if(soundTag.visible) playHao.play();
+              //}
+          }
+
 
         // Declare two 3D objects that are used in this demo
         ChilitagsObject {
@@ -133,6 +142,10 @@ Window {
             source: detection
         }
 
+
+
+
+
         // This item is a container for the 3D objects to be projected on
         // the video input image.
         // Inside this item, coodinates are in the world referential,
@@ -141,7 +154,7 @@ Window {
             // It uses the projection matrix from Chilitags
             transform: Transform { matrix: detection.projectionMatrix }
 
-
+            //Character strokes animation
             Item {
                 transform: Transform { matrix: animatedTag.transform }
                 Rectangle {
@@ -149,6 +162,21 @@ Window {
                     width: 20; height: 20
                     visible: animatedTag.visible
                     AnimatedImage { id: animatedHao; source: "qrc:/hao.gif"; asynchronous: true; width: parent.width; height: parent.height }
+                }
+            }
+            //Character pronuntiation
+            Item {
+                transform: Transform { matrix: soundTag.transform }
+                Rectangle {
+                    color: "white"
+                    width: 20; height: 20
+                    visible: soundTag.visible
+                    //TODO: We need some chilitags-based event that fires playHao.play()
+                    //TODO: For some reason, it only plays once, and can never be replayed!
+                    Audio {
+                            id: playHao
+                            source: "qrc:/hao.mp3"
+                        }
                 }
             }
 
@@ -464,5 +492,23 @@ Window {
             onClicked: Qt.quit()
         }
     }
+
+    Rectangle {
+        color: "#ffffff"
+        id:soundButton
+        width: 50
+        height: 20
+        anchors.left: quitButton.right
+        anchors.top: quitButton.top
+        Text {
+            text: "sound"
+            anchors.centerIn: parent
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { playHao.play() }
+        }
+    }
+
 
 }
