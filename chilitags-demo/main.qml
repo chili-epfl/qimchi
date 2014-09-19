@@ -31,6 +31,15 @@ Window {
         // Define here tagCenter as the center of a 20x20 (mm) tag
         property vector3d tagCenter : Qt.vector3d(10,10,0)
 
+        //A tag to test the animated gifs
+          ChilitagsObject {
+              id: animatedTag
+              name: "tag_1023"
+              // Add a property that is computed as a the 3D position of the
+              // center of this tag
+              property vector3d center : transform.times(parent.tagCenter)
+          }
+
         // Declare two 3D objects that are used in this demo
         ChilitagsObject {
             id: redTag
@@ -131,6 +140,18 @@ Window {
         Item {
             // It uses the projection matrix from Chilitags
             transform: Transform { matrix: detection.projectionMatrix }
+
+
+            Item {
+                transform: Transform { matrix: animatedTag.transform }
+                Rectangle {
+                    color: "white"
+                    width: 20; height: 20
+                    visible: animatedTag.visible
+                    AnimatedImage { id: animatedHao; source: "qrc:/hao.gif"; asynchronous: true; width: parent.width; height: parent.height }
+                }
+            }
+
 
             // This item is a container for graphic elements attached to
             // one of the tags
