@@ -8,20 +8,23 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)	#Otherwise installed executables/libs 
 
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Qml REQUIRED)
+find_package(Qt5Multimedia REQUIRED)
 
 include_directories(${Qt5Quick_INCLUDES})
 include_directories(${Qt5Qml_INCLUDES})
+include_directories(${Qt5Multimedia_INCLUDES})
 
 add_definitions(-std=c++11)
 add_definitions(${Qt5Quick_DEFINITIONS})
 add_definitions(${Qt5Qml_DEFINITIONS})
+add_definitions(${Qt5Multimedia_DEFINITIONS})
 
-set(CMAKE_CXX_FLAGS "${Qt5Quick_EXECUTABLE_COMPILE_FLAGS} ${Qt5Qml_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${Qt5Quick_EXECUTABLE_COMPILE_FLAGS} ${Qt5Qml_EXECUTABLE_COMPILE_FLAGS} ${Qt5Multimedia_EXECUTABLE_COMPILE_FLAGS}")
 
 qt5_add_resources(UI_RESOURCES qml.qrc)	#Compiles qrc files
 
 add_executable(chilitags-demo main.cpp ${UI_RESOURCES})
-target_link_libraries(chilitags-demo Qt5::Quick Qt5::Qml)
+target_link_libraries(chilitags-demo Qt5::Quick Qt5::Qml Qt5::Multimedia)
 
 install(TARGETS chilitags-demo RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
 

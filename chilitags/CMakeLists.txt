@@ -9,10 +9,17 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)	#Otherwise installed executables/libs 
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Qml REQUIRED)
 find_package(Qt5Multimedia REQUIRED)
+find_package(OpenCV REQUIRED)
+message(STATUS "OpenCV version: ${OpenCV_VERSION}")
+
+if(${OpenCV_VERSION} VERSION_GREATER 2.9.0)
+    add_definitions(-DOPENCV3)
+endif()
 
 include_directories(${Qt5Quick_INCLUDES})
 include_directories(${Qt5Qml_INCLUDES})
 include_directories(${Qt5Multimedia_INCLUDES})
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_definitions(-std=c++11)
 add_definitions(${Qt5Quick_DEFINITIONS})
