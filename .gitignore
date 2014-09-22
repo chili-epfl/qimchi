@@ -7,3 +7,6 @@ Makefile
 *.app
 .directory
 *.log
+build*/
+/imports/
+
