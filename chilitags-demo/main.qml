@@ -43,9 +43,14 @@ Window {
               id: soundTag
               name: "tag_31"
               property vector3d center : transform.times(parent.tagCenter)
-              //onVisibleChanged: {
-              //    if(soundTag.visible) playHao.play();
-              //}
+              onVisibilityChanged: {
+                  if(soundTag.visible){
+                      playHao.play()
+                      textPlay.text="playing sound"
+                  }else{ //This will actually never be seen
+                      textPlay.text="not playing"
+                  }
+              }
           }
 
 
@@ -168,15 +173,20 @@ Window {
             Item {
                 transform: Transform { matrix: soundTag.transform }
                 Rectangle {
+                    z: 1
                     color: "white"
                     width: 20; height: 20
                     visible: soundTag.visible
-                    //TODO: We need some chilitags-based event that fires playHao.play()
-                    //TODO: For some reason, it only plays once, and can never be replayed!
-                    Audio {
+                    SoundEffect { //We could use Audio element, but it only plays once. Apparently, SoundEffect only accepts wavs
                             id: playHao
-                            source: "qrc:/hao.mp3"
+                            source: "qrc:/hao.wav"
+                            onPlayingChanged: if(!playHao.playing) textPlay.text="stopped"
                         }
+                    Text {
+                        z: 1
+                        id: textPlay
+                        text: "0"
+                    }
                 }
             }
 
@@ -490,23 +500,6 @@ Window {
         MouseArea {
             anchors.fill: parent
             onClicked: Qt.quit()
-        }
-    }
-
-    Rectangle {
-        color: "#ffffff"
-        id:soundButton
-        width: 50
-        height: 20
-        anchors.left: quitButton.right
-        anchors.top: quitButton.top
-        Text {
-            text: "sound"
-            anchors.centerIn: parent
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: { playHao.play() }
         }
     }
 

@@ -3,6 +3,6 @@
         <file>main.qml</file>
         <file>qt-logo.png</file>
         <file>hao.gif</file>
-        <file>hao.mp3</file>
+        <file>hao.wav</file>
     </qresource>
 </RCC>
