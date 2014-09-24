@@ -49,6 +49,82 @@ ApplicationWindow {
         // Define here tagCenter as the center of a 20x20 (mm) tag
         property vector3d tagCenter : Qt.vector3d(10,10,0)
 
+<<<<<<< HEAD
+=======
+        //A tag to test the animated gifs
+          ChilitagsObject {
+              id: animatedTag
+              name: "tag_30"
+              property vector3d center : transform.times(parent.tagCenter)
+          }
+        //A tag to test the sound/speech
+        //For now we can get mp3s using: curl -A "Mozilla" "http://translate.google.com/translate_tts?ie=UTF-8&tl=zh&q=%E5%A5%BD" > hao.mp3
+          ChilitagsObject {
+              id: soundTag
+              name: "tag_31"
+              property vector3d center : transform.times(parent.tagCenter)
+              onVisibilityChanged: {
+                  if(soundTag.visible){
+                      playHao.play()
+                      textPlay.text="playing sound"
+                  }else{ //This will actually never be seen
+                      textPlay.text="not playing"
+                  }
+              }
+          }
+
+
+        // Declare two 3D objects that are used in this demo
+        ChilitagsObject {
+            id: redTag
+            name: "tag_4"
+            // Add a property that is computed as a the 3D position of the
+            // center of this tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: blueTag
+            name: "tag_5"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        // We declare tags for the action cards
+        ChilitagsObject {
+            id: deconstructCard
+            name: "tag_1"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: constructCard
+            name: "tag_0"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        // We declare tags for the action cards
+        ChilitagsObject {
+            id: pinyinCard
+            name: "tag_3"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: wordCombinationCard
+            name: "tag_2"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        // We declare tags for the components
+        ChilitagsObject {
+            id: correctSymbol
+            name: "tag_106"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: wrongSymbol
+            name: "tag_109"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+
+>>>>>>> aa620b0a5053be137a27b58adda9fe707ddf7ef0
         // We declare tags for the basic sheet
         ChilitagsObject {
             id: sheetTopLeft
@@ -90,6 +166,10 @@ ApplicationWindow {
             source: detection
         }
 
+
+
+
+
         // This item is a container for the 3D objects to be projected on
         // the video input image.
         // Inside this item, coodinates are in the world referential,
@@ -98,6 +178,45 @@ ApplicationWindow {
             // It uses the projection matrix from Chilitags
             transform: Transform { matrix: detection.projectionMatrix }
 
+<<<<<<< HEAD
+=======
+            //Character strokes animation
+            Item {
+                transform: Transform { matrix: animatedTag.transform }
+                Rectangle {
+                    color: "white"
+                    width: 20; height: 20
+                    visible: animatedTag.visible
+                    AnimatedImage { id: animatedHao; source: "qrc:/hao.gif"; asynchronous: true; width: parent.width; height: parent.height }
+                }
+            }
+            //Character pronuntiation
+            Item {
+                transform: Transform { matrix: soundTag.transform }
+                Rectangle {
+                    z: 1
+                    color: "white"
+                    width: 20; height: 20
+                    visible: soundTag.visible
+                    SoundEffect { //We could use Audio element, but it only plays once. Apparently, SoundEffect only accepts wavs
+                            id: playHao
+                            source: "qrc:/hao.wav"
+                            onPlayingChanged: if(!playHao.playing) textPlay.text="stopped"
+                        }
+                    Text {
+                        z: 1
+                        id: textPlay
+                        text: "0"
+                    }
+                }
+            }
+
+
+            // This item is a container for graphic elements attached to
+            // one of the tags
+            // Inside this item, coordinates are in the tag referential
+            // i.e. in mm, where 0,0,0 is the top left corner of the tag
+>>>>>>> aa620b0a5053be137a27b58adda9fe707ddf7ef0
             Item {
                 transform: Transform { matrix: sheetDownLeft.transform }
                 Rectangle {
@@ -318,5 +437,6 @@ ApplicationWindow {
 
 
     }
+
 
 }
