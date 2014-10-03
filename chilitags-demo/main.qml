@@ -3,6 +3,7 @@ import QtQuick.Window 2.1
 import Chilitags 1.0
 import QtMultimedia 5.0
 import QtQuick.Controls 1.2
+import "Global.js" as Global
 
 
 ApplicationWindow {
@@ -24,10 +25,6 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Stop")
                 onTriggered: camera.stop()
-            }
-            MenuItem {
-                text: qsTr("Debug")
-                onTriggered: debug.debugging = !debug.debugging
             }
             MenuItem {
                 text: qsTr("Exit")
@@ -62,54 +59,108 @@ ApplicationWindow {
         }
 
 
-        // We declare tags for the components
+        // We declare tags for the components (orange cards)
+        // We use the onVisibilityChanged method to change the display
         ChilitagsObject {
             id: component1
             name: "tag_104"
             property string character : "子"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component1.visible) {
+                    ch1.visible = true
+                    text_good.visible = true
+                    timer_good.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component2
             name: "tag_105"
             property string character : "生"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component2.visible) {
+                    ch2.visible = true
+                    text_good.visible = true
+                    timer_good.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component3
             name: "tag_106"
             property string character : "且"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component3.visible) {
+                    ch3.visible = true
+                    text_good.visible = true
+                    timer_good.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component4
             name: "tag_107"
             property string character : "也"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component4.visible) {
+                    ch4.visible = true
+                    text_good.visible = true
+                    timer_good.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component5
             name: "tag_108"
             property string character : "西"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component5.visible) {
+                    ch5.visible = true
+                    text_good.visible = true
+                    timer_good.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component6
             name: "tag_109"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component6.visible) {
+                    text_tryagain.visible = true
+                    timer_tryagain.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component7
             name: "tag_110"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component7.visible) {
+                    text_tryagain.visible = true
+                    timer_tryagain.start()
+                }
+            }
         }
         ChilitagsObject {
             id: component8
             name: "tag_111"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(component8.visible) {
+                    text_tryagain.visible = true
+                    timer_tryagain.start()
+                }
+            }
         }
 
 
@@ -127,12 +178,12 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
-            id: sheetDownRight
+            id: sheetBottomRight
             name: "tag_102"
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
-            id: sheetDownLeft
+            id: sheetBottomLeft
             name: "tag_103"
             property vector3d center : transform.times(parent.tagCenter)
         }
@@ -160,21 +211,70 @@ ApplicationWindow {
                 onClicked: {
                     console.log("click")
                     console.log("tl = (" + sheetTopLeft.center.x + "," + sheetTopLeft.center.y + "," + sheetTopLeft.center.z + ")")
-                    console.log("theta = " + mega_dot.theta)
                     console.log(detection.projectionMatrix)
+                }
+            }
+
+
+            //A text (GOOD) to be displayed when a good component appears.
+            //It stays on screen for three seconds
+            Item {
+                anchors.fill: parent
+                Timer {
+                    id: timer_good
+                    interval: 3000;repeat: false;running: false
+                    onTriggered: {
+                        console.log("timer ends")
+                        text_good.visible = false
+                    }
+                }
+
+                Text {
+                    id: text_good
+                    text: "GOOD";font.pointSize: 64;color: "green"
+                    visible: false
+                    anchors.centerIn: parent
+                }
+            }
+
+
+            //A text (COMPLETE) to be displayed when all five components have been found.
+            Item {
+                anchors.fill: parent
+                Text {
+                    text: "COMPLETE";font.pointSize: 64;color: "green"
+                    visible: ch1.visible & ch2.visible & ch3.visible & ch4.visible & ch5.visible & !text_good.visible
+                    anchors.centerIn: parent
+                }
+            }
+
+            //A text (TRY AGAIN) to be displayed when a bad component appears.
+            //It stays on screen for three seconds
+            Item {
+                anchors.fill: parent
+                Timer {
+                    id: timer_tryagain
+                    interval: 3000;repeat: false;running: false
+                    onTriggered: {
+                        console.log("timer ends")
+                        text_tryagain.visible = false
+                    }
+                }
+
+                Text {
+                    id: text_tryagain
+                    text: "TRY AGAIN";font.pointSize: 64;color: "red"
+                    visible: false
+                    anchors.centerIn: parent
                 }
             }
 
         }
 
 
-        Item {
-            id: debug
-            property bool debugging: true
-            property bool show_blue_rectangles: true
-            property bool show_yellows_corners: true
 
-        }
+
+
 
         // This item is a container for the 3D objects to be projected on
         // the video input image.
@@ -189,7 +289,7 @@ ApplicationWindow {
                 Rectangle {
                     color: "yellow"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & sheetTopLeft.visible
+                    visible: Global.debugging & Global.show_tags & sheetTopLeft.visible
                 }
             }
             Item {
@@ -197,82 +297,88 @@ ApplicationWindow {
                 Rectangle {
                     color: "yellow"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & sheetTopRight.visible
+                    visible: Global.debugging & Global.show_tags & sheetTopRight.visible
                 }
             }
             Item {
-                transform: Transform { matrix: sheetDownLeft.transform }
+                transform: Transform { matrix: sheetBottomLeft.transform }
                 Rectangle {
                     color: "yellow"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & sheetDownLeft.visible
+                    visible: Global.debugging & Global.show_tags & sheetBottomLeft.visible
                 }
             }
             Item {
-                transform: Transform { matrix: sheetDownRight.transform }
+                transform: Transform { matrix: sheetBottomRight.transform }
                 Rectangle {
                     color: "yellow"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & sheetDownRight.visible
+                    visible: Global.debugging & Global.show_tags & sheetBottomRight.visible
                 }
             }
             Item {
                 transform: Transform { matrix: component1.transform }
                 Rectangle {
-                    color: {
-                        return "orange"
-                    }
+                    color: "orange"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & component1.visible
+                    visible: Global.debugging & Global.show_tags & component1.visible
                 }
             }
             Item {
                 transform: Transform { matrix: component2.transform }
                 Rectangle {
-                    color: {
-                        return "orange"
-                    }
+                    color: "orange"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & component2.visible
+                    visible: Global.debugging & Global.show_tags & component2.visible
                 }
             }
             Item {
                 transform: Transform { matrix: component3.transform }
                 Rectangle {
-                    color: {
-                        return "orange"
-                    }
+                    color: "orange"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & component3.visible
+                    visible: Global.debugging & Global.show_tags & component3.visible
                 }
             }
             Item {
                 transform: Transform { matrix: component4.transform }
                 Rectangle {
-                    color: {
-                        ch4.visible = true
-                        return "orange"
-                    }
+                    color: "orange"
                     width: 20; height: 20
-                    visible: debug.debugging & debug.show_yellows_corners & component4.visible
+                    visible: Global.debugging & Global.show_tags & component4.visible
+                }
+            }
+            Item {
+                transform: Transform { matrix: component5.transform }
+                Rectangle {
+                    color: "orange"
+                    width: 20; height: 20
+                    visible: Global.debugging & Global.show_tags & component5.visible
                 }
             }
 
         }
 
+
+        //This Item just contains methods used to place elements on the sheet
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
         Item {
-            id: sc
+            id: coordinates
             property vector3d tl : sheetTopLeft.center
-            property vector3d dl : sheetDownLeft.center
+            property vector3d bl : sheetBottomLeft.center
             property vector3d tr : sheetTopRight.center
-            property vector3d dr : sheetDownRight.center
+            property vector3d br : sheetBottomRight.center
 
             function getX(h,v) {
                 return detection.projectionMatrix.times(
                                           tl
                                           .plus(tr.minus(tl).times(h).times(1-v))
-                                          .plus(dr.minus(dl).times(h).times(v))
-                                          .plus(dl.minus(tl).times(v))
+                                          .plus(br.minus(bl).times(h).times(v))
+                                          .plus(bl.minus(tl).times(v))
                                       ).x
             }
 
@@ -280,8 +386,8 @@ ApplicationWindow {
                 return detection.projectionMatrix.times(
                                           tl
                                           .plus(tr.minus(tl).times(h).times(1.-v))
-                                          .plus(dr.minus(dl).times(h).times(v))
-                                          .plus(dl.minus(tl).times(v))
+                                          .plus(br.minus(bl).times(h).times(v))
+                                          .plus(bl.minus(tl).times(v))
                                       ).y
             }
 
@@ -290,37 +396,45 @@ ApplicationWindow {
                                   detection.projectionMatrix.times(tr).x-detection.projectionMatrix.times(tl).x)*180.0/Math.PI;
             }
 
-            function getWidth(tlh,tlv,drh,drv) {
+            function getWidth(tlh,tlv,brh,brv) {
                 return Math.sqrt(
-                            (getX(tlh,tlv)-getX(drh,tlv))*(getX(tlh,tlv)-getX(drh,tlv))
+                            (getX(tlh,tlv)-getX(brh,tlv))*(getX(tlh,tlv)-getX(brh,tlv))
                             +
-                            (getY(tlh,tlv)-getY(drh,tlv))*(getY(tlh,tlv)-getY(drh,tlv))
+                            (getY(tlh,tlv)-getY(brh,tlv))*(getY(tlh,tlv)-getY(brh,tlv))
                             )
             }
 
-            function getHeight(tlh,tlv,drh,drv) {
+            function getHeight(tlh,tlv,brh,brv) {
                 return Math.sqrt(
-                            (getX(tlh,tlv)-getX(tlh,drv))*(getX(tlh,tlv)-getX(tlh,drv))
+                            (getX(tlh,tlv)-getX(tlh,brv))*(getX(tlh,tlv)-getX(tlh,brv))
                             +
-                            (getY(tlh,tlv)-getY(tlh,drv))*(getY(tlh,tlv)-getY(tlh,drv))
+                            (getY(tlh,tlv)-getY(tlh,brv))*(getY(tlh,tlv)-getY(tlh,brv))
                             )
             }
 
         }
 
+        //Title on the top of the sheet
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: titleText
             visible: true
 
             property double tlh: 0.
             property double tlv: -0.1
-            property double drh: 1.
-            property double drv: 0.
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 1.
+            property double brv: 0.
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -328,7 +442,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -347,18 +461,26 @@ ApplicationWindow {
 
         }
 
+        //Blue rectangle around the main character
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: mainCharacter
 
             property double tlh: 0.46
             property double tlv: -0.02
-            property double drh: 0.57
-            property double drv: 0.12
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.57
+            property double brv: 0.12
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -366,24 +488,32 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
         }
 
+        //The left half of the main character
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacter
             visible: deconstructionCard.visible
 
             property double tlh: 0.15
             property double tlv: 0.2
-            property double drh: 0.2
-            property double drv: 0.3
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.2
+            property double brv: 0.3
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -391,7 +521,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -404,20 +534,27 @@ ApplicationWindow {
         }
 
 
-
+        //The right half of the  main character
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: rightCharacter
             visible: deconstructionCard.visible
 
             property double tlh: 0.83
             property double tlv: 0.2
-            property double drh: 0.88
-            property double drv: 0.3
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.88
+            property double brv: 0.3
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -425,7 +562,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -437,18 +574,26 @@ ApplicationWindow {
 
         }
 
+        //A possible composition
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacterChild1
             visible: true
             property double tlh: -0.03
             property double tlv: 0.51
-            property double drh: 0.07
-            property double drv: 0.67
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.07
+            property double brv: 0.67
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -456,7 +601,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -470,18 +615,27 @@ ApplicationWindow {
 
         }
 
+
+        //A possible composition
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacterChild2
             visible: true
             property double tlh: 0.1
             property double tlv: 0.51
-            property double drh: 0.20
-            property double drv: 0.67
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.20
+            property double brv: 0.67
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -489,7 +643,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -503,18 +657,27 @@ ApplicationWindow {
 
         }
 
+
+        //A possible composition
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacterChild3
             visible: true
             property double tlh: 0.23
             property double tlv: 0.51
-            property double drh: 0.33
-            property double drv: 0.67
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.33
+            property double brv: 0.67
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -522,7 +685,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -536,18 +699,27 @@ ApplicationWindow {
 
         }
 
+
+        //A possible composition
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacterChild4
             visible: true
             property double tlh: 0.35
             property double tlv: 0.51
-            property double drh: 0.45
-            property double drv: 0.67
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.45
+            property double brv: 0.67
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
             Rectangle {
@@ -555,7 +727,7 @@ ApplicationWindow {
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -569,26 +741,35 @@ ApplicationWindow {
 
         }
 
+
+        //A possible composition
+        //
+        //The name of variables follow the rules :
+        //t = top           b = bottom
+        //l = left          r = right
+        //v = vertical      h = horizontal
+        //
+        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
             id: leftCharacterChild5
-            visible: true
             property double tlh: 0.47
             property double tlv: 0.51
-            property double drh: 0.57
-            property double drv: 0.67
-            x: sc.getX(tlh,tlv)
-            y: sc.getY(tlh,tlv)
-            width: sc.getWidth(tlh,tlv,drh,drv)
-            height: sc.getHeight(tlh,tlv,drh,drv)
-            rotation: sc.getRotation()
+            property double brh: 0.57
+            property double brv: 0.67
+            x: coordinates.getX(tlh,tlv)
+            y: coordinates.getY(tlh,tlv)
+            width: coordinates.getWidth(tlh,tlv,brh,brv)
+            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
+
 
             Rectangle {
                 color: "transparent"
                 border.color: "blue"
                 border.width: 4
                 anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
+                visible: Global.debugging & Global.show_blue_rectangles
             }
 
             Text {
@@ -600,35 +781,6 @@ ApplicationWindow {
                 visible: false
             }
 
-        }
-
-        Item {
-            id: dot
-
-            property vector3d tl : sheetTopLeft.center
-            property vector3d dl : sheetDownLeft.center
-            property vector3d tr : sheetTopRight.center
-            property vector3d dr : sheetDownRight.center
-
-            property double h: 0
-            property double v: 0.5
-
-            property vector3d e : detection.projectionMatrix.times(
-                                      tl
-                                      .plus(tr.minus(tl).times(h).times(1-v))
-                                      .plus(dr.minus(dl).times(h).times(v))
-                                      .plus(dl.minus(tl).times(v))
-                                  )
-            x: e.x
-            y: e.y
-            width: 10
-            height: 10
-
-            Rectangle {
-                color: "magenta"
-                anchors.fill: parent
-                visible: debug.debugging & debug.show_blue_rectangles
-            }
         }
 
     }
