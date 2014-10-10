@@ -27,6 +27,17 @@ ApplicationWindow {
                 onTriggered: camera.stop()
             }
             MenuItem {
+                text: qsTr("Reset")
+                onTriggered: {
+                    main.state = "INITIAL"
+                    ch1.visible = false
+                    ch2.visible = false
+                    ch3.visible = false
+                    ch4.visible = false
+                    ch5.visible = false
+            }
+            }
+            MenuItem {
                 text: qsTr("Exit")
                 onTriggered: Qt.quit();
             }
@@ -47,14 +58,65 @@ ApplicationWindow {
         property vector3d tagCenter : Qt.vector3d(10,10,0)
 
         // We declare tags for the function cards
+        // When this card appears we reveals the new constructions
+        // If the five possibilities have been found we change state to
+        //continue the exercise on the right side
         ChilitagsObject {
             id: constructionCard
             name: "tag_0"
             property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(main.state == "CONSTRUCTION_LEFT"){
+                    if(constructionCard.visible){
+                        console.log("constructionCard visible")
+                        if(selected_component.state == "CH1") {
+                            ch1.visible = true
+                        }
+                        if(selected_component.state == "CH2") {
+                            ch2.visible = true
+                        }
+                        if(selected_component.state == "CH3") {
+                            ch3.visible = true
+                        }
+                        if(selected_component.state == "CH4") {
+                            ch4.visible = true
+                        }
+                        if(selected_component.state == "CH5") {
+                            ch5.visible = true
+                        }
+
+                        if(ch1.visible &
+                                ch2.visible &
+                                ch3.visible &
+                                ch4.visible &
+                                ch5.visible) {
+                            main.state = "EXERCISE_1_COMPLETE"
+                        }
+                    }
+                }
+            }
         }
         ChilitagsObject {
             id: deconstructionCard
             name: "tag_1"
+            property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(main.state == "INITIAL"){
+                    if(deconstructionCard.visible){
+                        main.state = "CONSTRUCTION_LEFT"
+                        console.log("deconstructionCard visible")
+                    }
+                }
+            }
+        }
+        ChilitagsObject {
+            id: wordCombinationCard
+            name: "tag_2"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: pinyinCard
+            name: "tag_3"
             property vector3d center : transform.times(parent.tagCenter)
         }
 
@@ -66,103 +128,85 @@ ApplicationWindow {
             name: "tag_104"
             property string character : "子"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component1.visible) {
-                    ch1.visible = true
-                    text_good.visible = true
-                    timer_good.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component2
             name: "tag_105"
             property string character : "生"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component2.visible) {
-                    ch2.visible = true
-                    text_good.visible = true
-                    timer_good.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component3
             name: "tag_106"
             property string character : "且"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component3.visible) {
-                    ch3.visible = true
-                    text_good.visible = true
-                    timer_good.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component4
             name: "tag_107"
             property string character : "也"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component4.visible) {
-                    ch4.visible = true
-                    text_good.visible = true
-                    timer_good.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component5
             name: "tag_108"
             property string character : "西"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component5.visible) {
-                    ch5.visible = true
-                    text_good.visible = true
-                    timer_good.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component6
             name: "tag_109"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component6.visible) {
-                    text_tryagain.visible = true
-                    timer_tryagain.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component7
             name: "tag_110"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(component7.visible) {
-                    text_tryagain.visible = true
-                    timer_tryagain.start()
-                }
-            }
         }
         ChilitagsObject {
             id: component8
             name: "tag_111"
             property string character : ""
             property vector3d center : transform.times(parent.tagCenter)
+        }
+
+
+        //We declare the tags for the radicals selector
+        ChilitagsObject {
+            id: selectorTopLeft
+            name: "tag_167"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: selectorTopRight
+            name: "tag_168"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: selectorBottomLeft
+            name: "tag_170"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: selectorBottomRight
+            name: "tag_169"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: selectorCursor
+            name: "tag_171"
+            property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
-                if(component8.visible) {
-                    text_tryagain.visible = true
-                    timer_tryagain.start()
+                if(true) { //main.state == "INITIAL"){
+                    if(selectorCursor.visible){
+                        main.state = "CONSTRUCTION_RIGHT"
+                        console.log("selectorCursor visible")
+                    }
                 }
             }
         }
-
 
 
 
@@ -195,8 +239,81 @@ ApplicationWindow {
     // Inside this item, coordinates are in the input image referential,
     // i.e. in pixels, where 0,0 is the top left corner of the video
     Item {
+        id: main
+
         // Reduce everything inside to half size.
         transform: Scale {xScale: .5; yScale:.5}
+
+
+        state: "INITIAL"
+
+
+
+
+        //We define states for the exercise
+        states: [
+            State {
+                name: "INITIAL"
+                PropertyChanges {
+                    target: titleText
+                    text: "Deconstruct the character"
+                }
+            },
+            State {
+                name: "CONSTRUCTION_LEFT"
+                PropertyChanges {
+                    target: titleText
+                    text: "Find which components go whith 女"
+                }
+                PropertyChanges {
+                    target: leftCharacter
+                    visible:true
+                    color: "blue"
+                    font.pointSize: 64
+                }
+                PropertyChanges {
+                    target: rightCharacter
+                    visible:true
+                }
+            },
+            State {
+                name: "EXERCISE_1_COMPLETE"
+                PropertyChanges {
+                    target: titleText
+                    text: "You have completed the first exercise"
+                }
+                PropertyChanges {
+                    target: rightCharacter
+                    visible:true
+                }
+                PropertyChanges {
+                    target: leftCharacter
+                    visible:true
+                }
+            },
+            State {
+                name: "CONSTRUCTION_RIGHT"
+                PropertyChanges {
+                    target: titleText
+                    text: "Find which radicals go whith 马"
+                }
+                PropertyChanges {
+                    target: rightCharacter
+                    visible:true
+                    color: "blue"
+                    font.pointSize: 64
+                }
+                PropertyChanges {
+                    target: leftCharacter
+                    visible:true
+                }
+            }
+        ]
+
+
+
+
+
 
         // A video feedback of the camera
         VideoOutput {
@@ -206,75 +323,8 @@ ApplicationWindow {
             // cameras expect to have only one output surface
             source: detection
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    console.log("click")
-                    console.log("tl = (" + sheetTopLeft.center.x + "," + sheetTopLeft.center.y + "," + sheetTopLeft.center.z + ")")
-                    console.log(detection.projectionMatrix)
-                }
-            }
-
-
-            //A text (GOOD) to be displayed when a good component appears.
-            //It stays on screen for three seconds
-            Item {
-                anchors.fill: parent
-                Timer {
-                    id: timer_good
-                    interval: 3000;repeat: false;running: false
-                    onTriggered: {
-                        console.log("timer ends")
-                        text_good.visible = false
-                    }
-                }
-
-                Text {
-                    id: text_good
-                    text: "GOOD";font.pointSize: 64;color: "green"
-                    visible: false
-                    anchors.centerIn: parent
-                }
-            }
-
-
-            //A text (COMPLETE) to be displayed when all five components have been found.
-            Item {
-                anchors.fill: parent
-                Text {
-                    text: "COMPLETE";font.pointSize: 64;color: "green"
-                    visible: ch1.visible & ch2.visible & ch3.visible & ch4.visible & ch5.visible & !text_good.visible
-                    anchors.centerIn: parent
-                }
-            }
-
-            //A text (TRY AGAIN) to be displayed when a bad component appears.
-            //It stays on screen for three seconds
-            Item {
-                anchors.fill: parent
-                Timer {
-                    id: timer_tryagain
-                    interval: 3000;repeat: false;running: false
-                    onTriggered: {
-                        console.log("timer ends")
-                        text_tryagain.visible = false
-                    }
-                }
-
-                Text {
-                    id: text_tryagain
-                    text: "TRY AGAIN";font.pointSize: 64;color: "red"
-                    visible: false
-                    anchors.centerIn: parent
-                }
-            }
 
         }
-
-
-
-
-
 
         // This item is a container for the 3D objects to be projected on
         // the video input image.
@@ -316,48 +366,179 @@ ApplicationWindow {
                     visible: Global.debugging & Global.show_tags & sheetBottomRight.visible
                 }
             }
-            Item {
-                transform: Transform { matrix: component1.transform }
-                Rectangle {
-                    color: "orange"
-                    width: 20; height: 20
-                    visible: Global.debugging & Global.show_tags & component1.visible
-                }
-            }
-            Item {
-                transform: Transform { matrix: component2.transform }
-                Rectangle {
-                    color: "orange"
-                    width: 20; height: 20
-                    visible: Global.debugging & Global.show_tags & component2.visible
-                }
-            }
-            Item {
-                transform: Transform { matrix: component3.transform }
-                Rectangle {
-                    color: "orange"
-                    width: 20; height: 20
-                    visible: Global.debugging & Global.show_tags & component3.visible
-                }
-            }
-            Item {
-                transform: Transform { matrix: component4.transform }
-                Rectangle {
-                    color: "orange"
-                    width: 20; height: 20
-                    visible: Global.debugging & Global.show_tags & component4.visible
-                }
-            }
-            Item {
-                transform: Transform { matrix: component5.transform }
-                Rectangle {
-                    color: "orange"
-                    width: 20; height: 20
-                    visible: Global.debugging & Global.show_tags & component5.visible
-                }
+
+            Text {
+                id: text_pinyin
+                visible: pinyinCard.visible
+                transform: Transform { matrix: pinyinCard.transform }
+                x:0; y:20
+                text: ""
+
             }
 
+
+
+
+            //This text displays "ready" on one of the visible component card
+            //Only the component card with ready on it will be activated by the function cards
+            //When two are visible at the same time the selected one will be the smallest rank
+            //
+            //This item also makes the character of the selected component appear green
+            //and manages the right text on pinyinCards and wordCombinationCard
+            Text {
+                id: selected_component
+                visible: main.state == "CONSTRUCTION_LEFT"
+                text: "ready"
+                color: "blue"
+                font.pointSize: 8
+                x: 0; y: 20
+                state: "NORMAL"
+                transform: Transform {
+                    id: selected_component_transform
+                }
+
+                states: [
+                    State {
+                        name: "NORMAL"
+                        PropertyChanges{
+                            target: selected_component
+                            visible: false
+                        }
+                    },
+                    State {
+                        name: "CH1"
+                        when: component1.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component1.transform
+                        }
+                        PropertyChanges {
+                            target: ch1
+                            color: "green"
+                        }
+                        PropertyChanges {
+                            target: text_pinyin
+                            text: "hao (3)"
+                        }
+                    },
+                    State {
+                        name: "CH2"
+                        when: component2.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component2.transform
+                        }
+                        PropertyChanges {
+                            target: ch2
+                            color: "green"
+                        }
+                        PropertyChanges {
+                            target: text_pinyin
+                            text: "xing (4)"
+                        }
+                    },
+                    State {
+                        name: "CH3"
+                        when: component3.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component3.transform
+                        }
+                        PropertyChanges {
+                            target: ch3
+                            color: "green"
+                        }
+                        PropertyChanges {
+                            target: text_pinyin
+                            text: "jie (3)"
+                        }
+                    },
+                    State {
+                        name: "CH4"
+                        when: component4.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component4.transform
+                        }
+                        PropertyChanges {
+                            target: ch4
+                            color: "green"
+                        }
+                        PropertyChanges {
+                            target: text_pinyin
+                            text: "ta (1)"
+                        }
+                    },
+                    State {
+                        name: "CH5"
+                        when: component5.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component5.transform
+                        }
+                        PropertyChanges {
+                            target: ch5
+                            color: "green"
+                        }
+                        PropertyChanges {
+                            target: text_pinyin
+                            text: "yao (4)"
+                        }
+                    },
+                    State {
+                        name: "CH6"
+                        when: component6.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component5.transform
+                        }
+                    },
+                    State {
+                        name: "CH7"
+                        when: component7.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component5.transform
+                        }
+                    },
+                    State {
+                        name: "CH8"
+                        when: component8.visible
+                        PropertyChanges {
+                            target: selected_component_transform
+                            matrix: component5.transform
+                        }
+                    }
+                ]
+            }
+
+            Text {
+                id: selected_radical
+                color: "blue"
+                visible: selectorCursor.visible
+
+                property vector3d stl: selectorTopLeft.center
+                property vector3d str: selectorTopRight.center
+                property vector3d cursor: selectorCursor.center
+
+                function f(){
+                    return ((cursor.minus(stl)).dotProduct(str.minus(stl))/(str.minus(stl)).length())
+                }
+
+
+                text: {
+                    //Compute position of the cursor
+
+                    //console.log("cursor : " + f())
+
+                    return "X"
+                }
+                transform: Transform { matrix: selectorTopLeft.transform }
+                x:50; y:0
+            }
         }
+
+
 
 
         //This Item just contains methods used to place elements on the sheet
@@ -423,7 +604,6 @@ ApplicationWindow {
         //
         //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
-            id: titleText
             visible: true
 
             property double tlh: 0.
@@ -446,17 +626,11 @@ ApplicationWindow {
             }
 
             Text {
-                font.pointSize: 24
-                text: "Deconstruct the character"
+                id: titleText
+                color: "blue"
+                font.pointSize: 32
+                text: ""
                 anchors.centerIn: parent
-                visible: !deconstructionCard.visible
-            }
-
-            Text {
-                font.pointSize: 24
-                text: "Find which components go whith 女"
-                anchors.centerIn: parent
-                visible: deconstructionCard.visible
             }
 
         }
@@ -502,9 +676,6 @@ ApplicationWindow {
         //
         //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
-            id: leftCharacter
-            visible: deconstructionCard.visible
-
             property double tlh: 0.15
             property double tlv: 0.2
             property double brh: 0.2
@@ -525,10 +696,11 @@ ApplicationWindow {
             }
 
             Text {
+                id: leftCharacter
                 font.pointSize: 42
                 text: "女"
                 anchors.centerIn: parent
-                visible: parent.visible
+                visible: false
             }
 
         }
@@ -543,9 +715,6 @@ ApplicationWindow {
         //
         //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
         Item {
-            id: rightCharacter
-            visible: deconstructionCard.visible
-
             property double tlh: 0.83
             property double tlv: 0.2
             property double brh: 0.88
@@ -566,10 +735,11 @@ ApplicationWindow {
             }
 
             Text {
+                id: rightCharacter
                 font.pointSize: 42
                 text: "马"
                 anchors.centerIn: parent
-                visible: parent.visible
+                visible: false
             }
 
         }
@@ -606,7 +776,6 @@ ApplicationWindow {
 
             Text {
                 id: ch1
-                color: "green"
                 font.pointSize: 64
                 text: "好"
                 anchors.centerIn: parent
@@ -648,9 +817,8 @@ ApplicationWindow {
 
             Text {
                 id: ch2
-                color: "green"
                 font.pointSize: 64
-                text: "姐"
+                text: "姓"
                 anchors.centerIn: parent
                 visible: false
             }
@@ -690,9 +858,8 @@ ApplicationWindow {
 
             Text {
                 id: ch3
-                color: "green"
                 font.pointSize: 64
-                text: "她"
+                text: "姐"
                 anchors.centerIn: parent
                 visible: false
             }
@@ -732,9 +899,8 @@ ApplicationWindow {
 
             Text {
                 id: ch4
-                color: "green"
                 font.pointSize: 64
-                text: "姓"
+                text: "她"
                 anchors.centerIn: parent
                 visible: false
             }
@@ -774,7 +940,6 @@ ApplicationWindow {
 
             Text {
                 id: ch5
-                color: "green"
                 font.pointSize: 64
                 text: "要"
                 anchors.centerIn: parent
