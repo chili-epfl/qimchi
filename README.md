@@ -1,30 +1,59 @@
 Qimchi
-=======
+======
 
-Qimchi is a QML based framework for CHILI lab's projects in augmented reality
-and robotics.
+Qimchi is a QML based framework for CHILI lab's projects in augmented reality, robotics and tangible interfaces that works on desktop and Android.
+
+Qimchi currently requires:
+
+- Ubuntu 14.04 host
+- Qt 5.3.2
 
 Content
---------
+-------
 
-The global QtCreator project references the following modules:
+Qimchi is composed of various modules that are actually QML plugins and a number of samples. These modules are contained under `modules/` as git submodules and can also function independently.
 
-* qmlchilitags: integration of [Chilitags](https://github.com/chili-epfl/chilitags)
-  in QML
-* qmlchilitags-demo: demonstration of how to use qmlchilitags for "regular" AR,
-  i.e. displaying virtual element on a camera feed
-* qmlchilitags-projection: demonstration of how to use qmlchilitags in a
-  camera+projector setting
+Current modules are:
 
-Documentation
+- **CVCamera:** Fast OpenCV camera access
+
+  Dependencies:
+
+  - OpenCV `3.0.0-alpha1`
+
+- **Chilitags:** Fiducial marker tracker
+
+  Dependencies:
+
+  - CVCamera
+  - OpenCV `3.0.0-alpha1`
+  - Chilitags
+  - Optionally Qt3D
+
+- **Qt3D:** Qt's 3D engine
+
+Desktop Build
 -------------
 
-Qimchi requires Qt 5, and is developped using Qt Creator.
-It has been tested with Qt 5.3 on Ubuntu 14.04, and would probably not work
-with lower than 5.3 due to 
-https://bugreports.qt-project.org/browse/QTBUG-34736?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel.
-For more details, each module contains a specific README.
+
+
+Build instructions coming soon...
+
+For building individual modules, each module contains a specific README.
+
+Android Build
+-------------
+
+Build instructions coming soon...
+
+For building individual modules, each module contains a specific README.
+
+Running Samples
+---------------
+
+Samples are located under [samples](samples). Once the modules are in place, building and running the samples should be as simple as opening them in Qt Creator and clicking the `Run` button. See [samples/README.md](samples/README.md) for more detailed information.
 
 License
 -------
-Qimchi is licensed under the GPLv3 License
+Qimchi is licensed under the GPLv3 License.
+
