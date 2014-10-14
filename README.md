@@ -19,6 +19,7 @@ Current modules are:
 
   Dependencies:
 
+  - libv4l
   - OpenCV `3.0.0-alpha1`
 
 - **Chilitags:** Fiducial marker tracker
