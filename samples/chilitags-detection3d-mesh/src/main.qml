@@ -28,20 +28,15 @@ Window {
         //The tag center stuff below are not necessary but a bug prevents the window from launching if they are not present
         property vector3d tagCenter : Qt.vector3d(10,10,0)
         ChilitagsObject{
-            id: redTag
+            id: tag
             name: "tag_0"
-            property vector3d center : transform.times(parent.tagCenter)
-        }
-        ChilitagsObject{
-            id: blueTag
-            name: "tag_1"
             property vector3d center : transform.times(parent.tagCenter)
         }
     }
 
     //Set up visual output
     VideoOutput{
-        id: visual
+        id: output
         source: camera //"Background" is the camera image
 
         //This item is necessary for drawing with Qt3D
@@ -51,7 +46,7 @@ Window {
             height: parent.height
             navigation: false //Disable turning the camera by clicking and dragging
 
-            //Our default camera conforms to the Chilitags frame
+             //Our default camera conforms to the Chilitags frame
             camera: Camera {
                 eye:        Qt.vector3d(0, 0,0) //Camera position
                 center:     Qt.vector3d(0, 0,1) //Camera looks towards this position
@@ -65,32 +60,12 @@ Window {
                 direction: Qt.vector3d(0,0,-1) //There's something wrong here, this should point towards +Z, but doesn't work like that
             }
 
-            //Draw a red cube
-            Cube{
-                id: redCube
-                visible: redTag.visible //This doesn't work somehow
-                scale: 20               //Default tag size
-                effect: Effect { color: "red" }
-                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: redTag.transform }] //We can center the cube like this
-            }
-        }
-
-        //This item describes the camera frame, hence its transform is the camera matrix, i.e the projection matrix
-        //Its children will have transform relative to this frame, so we can give them transforms coming directly from Chilitags
-        //We could have put this outside the VideoOutput but this is semantically more elegant
-        //We put regular QML items here, i.e "2D items"
-        Item{
-            id: twoDItems
-            transform: MatrixTransform{ matrix: chilitags.projectionMatrix }
-
-            // Same for the other tag
-            Rectangle{
-                id: blueRectangle
-                color: "blue"
-                width: 20
-                height: 20
-                transform: MatrixTransform{ matrix: blueTag.transform }
-                visible: blueTag.visible
+            //Draw our 3D model
+            Item3D{
+                id: suzanne
+                mesh: Mesh{ source: "/models/suzanne.dae" }
+                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag.transform }] //We can center the mesh like this
+                visible: tag.visible
             }
         }
     }
