@@ -4,6 +4,7 @@ import Chilitags 1.0
 import QtMultimedia 5.0
 import QtQuick.Controls 1.2
 import "Global.js" as Global
+import "Coordinates.js" as Coordinates
 
 
 ApplicationWindow {
@@ -199,7 +200,7 @@ ApplicationWindow {
             name: "tag_171"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
-                if(true) { //main.state == "INITIAL"){
+                if(main.state == "INITIAL"){//<- To be replaced with EXERCISE_1_COMPLETE
                     if(selectorCursor.visible){
                         main.state = "CONSTRUCTION_RIGHT"
                         console.log("selectorCursor visible")
@@ -255,56 +256,56 @@ ApplicationWindow {
             State {
                 name: "INITIAL"
                 PropertyChanges {
-                    target: titleText
+                    target: maintitle
                     text: "Deconstruct the character"
                 }
             },
             State {
                 name: "CONSTRUCTION_LEFT"
                 PropertyChanges {
-                    target: titleText
+                    target: maintitle
                     text: "Find which components go whith 女"
                 }
                 PropertyChanges {
-                    target: leftCharacter
+                    target: chleft
                     visible:true
                     color: "blue"
                     font.pointSize: 64
                 }
                 PropertyChanges {
-                    target: rightCharacter
+                    target: chright
                     visible:true
                 }
             },
             State {
                 name: "EXERCISE_1_COMPLETE"
                 PropertyChanges {
-                    target: titleText
+                    target: maintitle
                     text: "You have completed the first exercise"
                 }
                 PropertyChanges {
-                    target: rightCharacter
+                    target: chright
                     visible:true
                 }
                 PropertyChanges {
-                    target: leftCharacter
+                    target: chleft
                     visible:true
                 }
             },
             State {
                 name: "CONSTRUCTION_RIGHT"
                 PropertyChanges {
-                    target: titleText
+                    target: maintitle
                     text: "Find which radicals go whith 马"
                 }
                 PropertyChanges {
-                    target: rightCharacter
+                    target: chright
                     visible:true
                     color: "blue"
                     font.pointSize: 64
                 }
                 PropertyChanges {
-                    target: leftCharacter
+                    target: chleft
                     visible:true
                 }
             }
@@ -517,20 +518,24 @@ ApplicationWindow {
                 color: "blue"
                 visible: selectorCursor.visible
 
-                property vector3d stl: selectorTopLeft.center
-                property vector3d str: selectorTopRight.center
-                property vector3d cursor: selectorCursor.center
+                property vector3d stl: detection.projectionMatrix.times(selectorTopLeft.center)
+                property vector3d str: detection.projectionMatrix.times(selectorTopRight.center)
+                property vector3d cursor: detection.projectionMatrix.times(selectorCursor.center)
 
                 function f(){
-                    return ((cursor.minus(stl)).dotProduct(str.minus(stl))/(str.minus(stl)).length())
+                    var totalLength = str.minus(stl).length()
+                    var selectedLength = cursor.minus(stl).length()
+                    var projectedLength = (str.minus(stl)).dotProduct(cursor.minus(stl))/(totalLength*totalLength)
+
+                    console.log("total :"+totalLength+"  selected :"+ selectedLength +  "   projected : " + projectedLength)
+
+                    return projectedLength
                 }
 
 
                 text: {
                     //Compute position of the cursor
-
-                    //console.log("cursor : " + f())
-
+                    f()
                     return "X"
                 }
                 transform: Transform { matrix: selectorTopLeft.transform }
@@ -554,7 +559,9 @@ ApplicationWindow {
             property vector3d tr : sheetTopRight.center
             property vector3d br : sheetBottomRight.center
 
-            function getX(h,v) {
+            function getX(x_cm,y_cm) {
+                var h = x_cm / Coordinates.horizontal_length
+                var v = y_cm / Coordinates.vertical_length
                 return detection.projectionMatrix.times(
                                           tl
                                           .plus(tr.minus(tl).times(h).times(1-v))
@@ -563,7 +570,9 @@ ApplicationWindow {
                                       ).x
             }
 
-            function getY(h,v) {
+            function getY(x_cm,y_cm) {
+                var h = x_cm / Coordinates.horizontal_length
+                var v = y_cm / Coordinates.vertical_length
                 return detection.projectionMatrix.times(
                                           tl
                                           .plus(tr.minus(tl).times(h).times(1.-v))
@@ -577,56 +586,26 @@ ApplicationWindow {
                                   detection.projectionMatrix.times(tr).x-detection.projectionMatrix.times(tl).x)*180.0/Math.PI;
             }
 
-            function getWidth(tlh,tlv,brh,brv) {
-                return Math.sqrt(
-                            (getX(tlh,tlv)-getX(brh,tlv))*(getX(tlh,tlv)-getX(brh,tlv))
-                            +
-                            (getY(tlh,tlv)-getY(brh,tlv))*(getY(tlh,tlv)-getY(brh,tlv))
-                            )
-            }
-
-            function getHeight(tlh,tlv,brh,brv) {
-                return Math.sqrt(
-                            (getX(tlh,tlv)-getX(tlh,brv))*(getX(tlh,tlv)-getX(tlh,brv))
-                            +
-                            (getY(tlh,tlv)-getY(tlh,brv))*(getY(tlh,tlv)-getY(tlh,brv))
-                            )
-            }
-
         }
 
-        //Title on the top of the sheet
+        //mainTitle is the text at the top of the sheet
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
             visible: true
-
-            property double tlh: 0.
-            property double tlv: -0.1
-            property double brh: 1.
-            property double brv: 0.
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.maintitle_X
+            property double y_cm: Coordinates.maintitle_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
-
             Text {
-                id: titleText
+                id: maintitle
                 color: "blue"
                 font.pointSize: 32
                 text: ""
@@ -635,144 +614,70 @@ ApplicationWindow {
 
         }
 
-        //Blue rectangle around the main character
+        //chleft is the left part of the main character
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: mainCharacter
-
-            property double tlh: 0.46
-            property double tlv: -0.02
-            property double brh: 0.57
-            property double brv: 0.12
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.chleft_X
+            property double y_cm: Coordinates.chleft_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
-
-        }
-
-        //The left half of the main character
-        //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
-        //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
-        Item {
-            property double tlh: 0.15
-            property double tlv: 0.2
-            property double brh: 0.2
-            property double brv: 0.3
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
-                id: leftCharacter
+                id: chleft
                 font.pointSize: 42
                 text: "女"
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
 
-        //The right half of the  main character
+        //chright is the right part of the main character
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            property double tlh: 0.83
-            property double tlv: 0.2
-            property double brh: 0.88
-            property double brv: 0.3
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.chright_X
+            property double y_cm: Coordinates.chright_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
 
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
-
             Text {
-                id: rightCharacter
+                id: chright
                 font.pointSize: 42
                 text: "马"
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
-        //A possible composition
+        //Ch1 is the composition of character 女 with component 子
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: leftCharacterChild1
             visible: true
-            property double tlh: -0.03
-            property double tlv: 0.51
-            property double brh: 0.07
-            property double brv: 0.67
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.ch1_X
+            property double y_cm: Coordinates.ch1_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
                 id: ch1
@@ -781,39 +686,24 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
 
-        //A possible composition
+        //ch2 is the composition of character 女 with component 生
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: leftCharacterChild2
             visible: true
-            property double tlh: 0.1
-            property double tlv: 0.51
-            property double brh: 0.20
-            property double brv: 0.67
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.ch2_X
+            property double y_cm: Coordinates.ch2_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
                 id: ch2
@@ -822,39 +712,23 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
-
-        //A possible composition
+        //ch3 is the composition of character 女 with component 且
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: leftCharacterChild3
             visible: true
-            property double tlh: 0.23
-            property double tlv: 0.51
-            property double brh: 0.33
-            property double brv: 0.67
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.ch3_X
+            property double y_cm: Coordinates.ch3_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
                 id: ch3
@@ -863,39 +737,24 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
 
-        //A possible composition
+        //ch4 is the composition of character 女 with component 也
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: leftCharacterChild4
             visible: true
-            property double tlh: 0.35
-            property double tlv: 0.51
-            property double brh: 0.45
-            property double brv: 0.67
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.ch4_X
+            property double y_cm: Coordinates.ch4_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
                 id: ch4
@@ -904,39 +763,23 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: false
             }
-
         }
 
 
-        //A possible composition
+        //ch5 is the composition of character 女 with component 西
         //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
+        //x_cm and y_cm are the coordinates on the sheet in cm.
+        //The values are set in the file Coordinates.js
+        //We then computes the coordinates onn the screen in pixels.
         //
-        //The item is placed by giving the horizontal and vertical coordinates of top left corner and bottom right corner
+        //Item is a very small rectangle with a bigger character Text in its center
         Item {
-            id: leftCharacterChild5
-            property double tlh: 0.47
-            property double tlv: 0.51
-            property double brh: 0.57
-            property double brv: 0.67
-            x: coordinates.getX(tlh,tlv)
-            y: coordinates.getY(tlh,tlv)
-            width: coordinates.getWidth(tlh,tlv,brh,brv)
-            height: coordinates.getHeight(tlh,tlv,brh,brv)
+            property double x_cm: Coordinates.ch5_X
+            property double y_cm: Coordinates.ch5_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
             rotation: coordinates.getRotation()
             transformOrigin: Item.TopLeft
-
-
-            Rectangle {
-                color: "transparent"
-                border.color: "blue"
-                border.width: 4
-                anchors.fill: parent
-                visible: Global.debugging & Global.show_blue_rectangles
-            }
 
             Text {
                 id: ch5
@@ -945,7 +788,41 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: false
             }
+        }
 
+
+        Item {
+            property double x_cm: Coordinates.ch6_X
+            property double y_cm: Coordinates.ch6_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
+            rotation: coordinates.getRotation()
+            transformOrigin: Item.TopLeft
+
+            Text {
+                id: ch6
+                font.pointSize: 64
+                text: "吗"
+                anchors.centerIn: parent
+                visible: true
+            }
+        }
+
+        Item {
+            property double x_cm: Coordinates.ch7_X
+            property double y_cm: Coordinates.ch7_Y
+            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
+            width: 1; height: 1
+            rotation: coordinates.getRotation()
+            transformOrigin: Item.TopLeft
+
+            Text {
+                id: ch7
+                font.pointSize: 64
+                text: "码"
+                anchors.centerIn: parent
+                visible: true
+            }
         }
 
     }
