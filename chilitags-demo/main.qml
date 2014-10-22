@@ -6,6 +6,11 @@ import QtQuick.Controls 1.2
 import "Global.js" as Global
 import "Coordinates.js" as Coordinates
 
+//We decide which language to use
+import "StringFr.js" as Str
+//import "StringEn.js" as Str
+
+
 
 ApplicationWindow {
     visible: true
@@ -18,17 +23,17 @@ ApplicationWindow {
 
     menuBar: MenuBar {
         Menu {
-            title: qsTr("File")
+            title: qsTr(Str.file)
             MenuItem {
-                text: qsTr("Start")
+                text: qsTr(Str.start)
                 onTriggered: camera.start()
             }
             MenuItem {
-                text: qsTr("Stop")
+                text: qsTr(Str.stop)
                 onTriggered: camera.stop()
             }
             MenuItem {
-                text: qsTr("Reset")
+                text: qsTr(Str.reset)
                 onTriggered: {
                     main.state = "INITIAL"
                     ch1.visible = false
@@ -36,10 +41,12 @@ ApplicationWindow {
                     ch3.visible = false
                     ch4.visible = false
                     ch5.visible = false
+                    ch6.visible = false
+                    ch7.visible = false
             }
             }
             MenuItem {
-                text: qsTr("Exit")
+                text: qsTr(Str.exit)
                 onTriggered: Qt.quit();
             }
         }
@@ -69,7 +76,6 @@ ApplicationWindow {
             onVisibilityChanged: {
                 if(main.state == "CONSTRUCTION_LEFT"){
                     if(constructionCard.visible){
-                        console.log("constructionCard visible")
                         if(selected_component.state == "CH1") {
                             ch1.visible = true
                         }
@@ -91,7 +97,20 @@ ApplicationWindow {
                                 ch3.visible &
                                 ch4.visible &
                                 ch5.visible) {
-                            main.state = "EXERCISE_1_COMPLETE"
+                            main.state = "LEFT_COMPLETED"
+                        }
+                    }
+                }
+                if(main.state == "CONSTRUCTION_RIGHT"){
+                    if(constructionCard.visible){
+                        if(selected_radical.state == "RADICAL3") {
+                            ch6.visible = true
+                        }
+                        if(selected_radical.state == "RADICAL8") {
+                            ch7.visible = true
+                        }
+                        if(ch6.visible & ch7.visible) {
+                            main.state = "RIGHT_COMPLETED"
                         }
                     }
                 }
@@ -200,7 +219,7 @@ ApplicationWindow {
             name: "tag_171"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
-                if(main.state == "INITIAL"){//<- To be replaced with EXERCISE_1_COMPLETE
+                if(main.state == "LEFT_COMPLETED"){
                     if(selectorCursor.visible){
                         main.state = "CONSTRUCTION_RIGHT"
                         console.log("selectorCursor visible")
@@ -245,76 +264,63 @@ ApplicationWindow {
         // Reduce everything inside to half size.
         transform: Scale {xScale: .5; yScale:.5}
 
-
         state: "INITIAL"
 
-
-
-
-        //We define states for the exercise
+        //We define states for the different parts of the exercise
+        //In chronological order :
+        //  INITIAL
+        //  CONSTRUCTION_LEFT
+        //  LEFT_COMPLETED
+        //  CONSTRUCTION_RIGHT
+        //  RIGHT_COMPLETED
         states: [
             State {
                 name: "INITIAL"
                 PropertyChanges {
-                    target: maintitle
-                    text: "Deconstruct the character"
+                    target: maintitle.child; text: Str.maintitle_initial
+                }
+                PropertyChanges {
+                    target: chright; visible:false
+                }
+                PropertyChanges {
+                    target: chleft; visible:false
                 }
             },
             State {
                 name: "CONSTRUCTION_LEFT"
                 PropertyChanges {
-                    target: maintitle
-                    text: "Find which components go whith 女"
+                    target: maintitle.child; text: Str.maintitle_construction_left
                 }
                 PropertyChanges {
-                    target: chleft
-                    visible:true
+                    target: chleft.child
                     color: "blue"
                     font.pointSize: 64
                 }
-                PropertyChanges {
-                    target: chright
-                    visible:true
-                }
             },
             State {
-                name: "EXERCISE_1_COMPLETE"
+                name: "LEFT_COMPLETED"
                 PropertyChanges {
-                    target: maintitle
-                    text: "You have completed the first exercise"
-                }
-                PropertyChanges {
-                    target: chright
-                    visible:true
-                }
-                PropertyChanges {
-                    target: chleft
-                    visible:true
+                    target: maintitle.child; text: Str.maintitle_left_completed
                 }
             },
             State {
                 name: "CONSTRUCTION_RIGHT"
                 PropertyChanges {
-                    target: maintitle
-                    text: "Find which radicals go whith 马"
+                    target: maintitle.child; text: Str.maintitle_construction_right
                 }
                 PropertyChanges {
-                    target: chright
-                    visible:true
+                    target: chright.child
                     color: "blue"
                     font.pointSize: 64
                 }
+            },
+            State {
+                name: "RIGHT_COMPLETED"
                 PropertyChanges {
-                    target: chleft
-                    visible:true
+                    target: maintitle.child; text: Str.maintitle_right_completed
                 }
             }
         ]
-
-
-
-
-
 
         // A video feedback of the camera
         VideoOutput {
@@ -324,92 +330,11 @@ ApplicationWindow {
             // cameras expect to have only one output surface
             source: detection
 
-            Text {
+
+            RadicalSelection {
                 id: selected_radical
-                color: "blue"
-                font.pixelSize: 64
-
-                property vector3d stl: detection.projectionMatrix.times(selectorTopLeft.center)
-                property vector3d str: detection.projectionMatrix.times(selectorTopRight.center)
-                property vector3d cursor: detection.projectionMatrix.times(selectorCursor.center)
-
-                function getRatio(){
-                    //We compute the length from top left corner to top right corner (using the center of the tags)
-                    var totalLength = str.minus(stl).length()
-                    //We compute the length from top left corner to moving selector
-                    var selectedLength = cursor.minus(stl).length()
-                    //We compute the ratio of the projected length over the total length
-                    //We use dotproduct because x.y = cos(t)|x||y|
-                    //where cos(t)|x| is exactly the projected length of x on y
-                    var ratio = (str.minus(stl)).dotProduct(cursor.minus(stl))/(totalLength*totalLength)
-
-                    //Uncomment for debugging
-                    //console.log("total :"+totalLength+"  selected :"+ selectedLength +  "   ratio : " + ratio + " state : " + selected_radical.state)
-
-                    return ratio
-                }
-
-                property double ratio: getRatio()
-
-                state: "NORMAL"
-
-                states: [
-                    State {
-                        name: "NORMAL"
-                        PropertyChanges{
-                            target: selected_radical
-                            //visible: false
-                        }
-                    },
-                    State {
-                        name: "RADICAL1"
-                        when: (selected_radical.ratio < 0.25)
-                    },
-                    State {
-                        name: "RADICAL2"
-                        when: (selected_radical.ratio < 0.35)
-                    },
-                    State {
-                        name: "RADICAL3"
-                        when: (selected_radical.ratio < 0.45)
-                    },
-                    State {
-                        name: "RADICAL4"
-                        when: selected_radical.ratio < 0.55
-                    },
-                    State {
-                        name: "RADICAL5"
-                        when: selected_radical.ratio < 0.65
-                    },
-                    State {
-                        name: "RADICAL6"
-                        when: selected_radical.ratio < 0.75
-                    },
-                    State {
-                        name: "RADICAL7"
-                        when: selected_radical.ratio < 0.85
-                    },
-                    State {
-                        name: "RADICAL8"
-                        when: selected_radical.ratio < 0.95
-                    }
-                ]
-
-                text: {
-                    var r = getRatio()
-                    return (r<0.25)?"夕":
-                           (r<0.35)?"车":
-                           (r<0.45)?"口":
-                           (r<0.55)?"女":
-                           (r<0.65)?"木":
-                           (r<0.75)?"心":
-                           (r<0.85)?"父":
-                           (r<0.95)?"石":"X"
-                }
-                //transform: Transform { matrix: selectorTopLeft.transform }
-                anchors.centerIn: parent
-                x:42; y:0
             }
+
 
         }
 
@@ -421,7 +346,6 @@ ApplicationWindow {
             // It uses the projection matrix from Chilitags
             transform: Transform { matrix: detection.projectionMatrix }
 
-
             //This text displays the pinyin prononciation of the character
             //built with the current selected radical/component
             Text {
@@ -430,429 +354,109 @@ ApplicationWindow {
                 transform: Transform { matrix: pinyinCard.transform }
                 x:0; y:20
                 text: ""
-
             }
 
-            //This text displays "ready" on one of the visible component card
-            //Only the component card with ready on it will be activated by the function cards
-            //When two are visible at the same time the selected one will be the smallest rank
-            //
-            //This item also makes the character of the selected component appear green
-            //and manages the right text on pinyinCards and wordCombinationCard
-            Text {
+            ComponentSelection {
                 id: selected_component
-                visible: main.state == "CONSTRUCTION_LEFT"
-                text: "ready"
-                color: "blue"
-                font.pointSize: 8
-                x: 0; y: 20
-                state: "NORMAL"
-                transform: Transform {
-                    id: selected_component_transform
-                }
-
-                states: [
-                    State {
-                        name: "NORMAL"
-                        PropertyChanges{
-                            target: selected_component
-                            visible: false
-                        }
-                    },
-                    State {
-                        name: "CH1"
-                        when: component1.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component1.transform
-                        }
-                        PropertyChanges {
-                            target: ch1
-                            color: "green"
-                        }
-                        PropertyChanges {
-                            target: text_pinyin
-                            text: "hao (3)"
-                        }
-                    },
-                    State {
-                        name: "CH2"
-                        when: component2.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component2.transform
-                        }
-                        PropertyChanges {
-                            target: ch2
-                            color: "green"
-                        }
-                        PropertyChanges {
-                            target: text_pinyin
-                            text: "xing (4)"
-                        }
-                    },
-                    State {
-                        name: "CH3"
-                        when: component3.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component3.transform
-                        }
-                        PropertyChanges {
-                            target: ch3
-                            color: "green"
-                        }
-                        PropertyChanges {
-                            target: text_pinyin
-                            text: "jie (3)"
-                        }
-                    },
-                    State {
-                        name: "CH4"
-                        when: component4.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component4.transform
-                        }
-                        PropertyChanges {
-                            target: ch4
-                            color: "green"
-                        }
-                        PropertyChanges {
-                            target: text_pinyin
-                            text: "ta (1)"
-                        }
-                    },
-                    State {
-                        name: "CH5"
-                        when: component5.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component5.transform
-                        }
-                        PropertyChanges {
-                            target: ch5
-                            color: "green"
-                        }
-                        PropertyChanges {
-                            target: text_pinyin
-                            text: "yao (4)"
-                        }
-                    },
-                    State {
-                        name: "CH6"
-                        when: component6.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component5.transform
-                        }
-                    },
-                    State {
-                        name: "CH7"
-                        when: component7.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component5.transform
-                        }
-                    },
-                    State {
-                        name: "CH8"
-                        when: component8.visible
-                        PropertyChanges {
-                            target: selected_component_transform
-                            matrix: component5.transform
-                        }
-                    }
-                ]
             }
-
 
 
         }
 
-
-
-
-        //This Item just contains methods used to place elements on the sheet
-        //
-        //The name of variables follow the rules :
-        //t = top           b = bottom
-        //l = left          r = right
-        //v = vertical      h = horizontal
-        Item {
-            id: coordinates
-            property vector3d tl : sheetTopLeft.center
-            property vector3d bl : sheetBottomLeft.center
-            property vector3d tr : sheetTopRight.center
-            property vector3d br : sheetBottomRight.center
-
-            function getX(x_cm,y_cm) {
-                var h = x_cm / Coordinates.horizontal_length
-                var v = y_cm / Coordinates.vertical_length
-                return detection.projectionMatrix.times(
-                                          tl
-                                          .plus(tr.minus(tl).times(h).times(1-v))
-                                          .plus(br.minus(bl).times(h).times(v))
-                                          .plus(bl.minus(tl).times(v))
-                                      ).x
-            }
-
-            function getY(x_cm,y_cm) {
-                var h = x_cm / Coordinates.horizontal_length
-                var v = y_cm / Coordinates.vertical_length
-                return detection.projectionMatrix.times(
-                                          tl
-                                          .plus(tr.minus(tl).times(h).times(1.-v))
-                                          .plus(br.minus(bl).times(h).times(v))
-                                          .plus(bl.minus(tl).times(v))
-                                      ).y
-            }
-
-            function getRotation() {
-                return Math.atan2(detection.projectionMatrix.times(tr).y-detection.projectionMatrix.times(tl).y,
-                                  detection.projectionMatrix.times(tr).x-detection.projectionMatrix.times(tl).x)*180.0/Math.PI;
-            }
-
-        }
 
         //mainTitle is the text at the top of the sheet
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
+        MyItem {
+            id: maintitle
             visible: true
-            property double x_cm: Coordinates.maintitle_X
-            property double y_cm: Coordinates.maintitle_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: maintitle
-                color: "blue"
-                font.pointSize: 32
-                text: ""
-                anchors.centerIn: parent
-            }
-
+            x_cm: Coordinates.maintitle_X
+            y_cm: Coordinates.maintitle_Y
+            child.color: "blue"
+            child.font.pointSize: 32
         }
 
         //chleft is the left part of the main character
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            property double x_cm: Coordinates.chleft_X
-            property double y_cm: Coordinates.chleft_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: chleft
-                font.pointSize: 42
-                text: "女"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: chleft
+            visible: true
+            x_cm: Coordinates.chleft_X
+            y_cm: Coordinates.chleft_Y
+            child.font.pointSize: 42
+            child.text: "女"
         }
 
 
         //chright is the right part of the main character
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            property double x_cm: Coordinates.chright_X
-            property double y_cm: Coordinates.chright_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: chright
-                font.pointSize: 42
-                text: "马"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: chright
+            visible: true
+            x_cm: Coordinates.chright_X
+            y_cm: Coordinates.chright_Y
+            child.font.pointSize: 42
+            child.text: "马"
         }
 
         //Ch1 is the composition of character 女 with component 子
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            visible: true
-            property double x_cm: Coordinates.ch1_X
-            property double y_cm: Coordinates.ch1_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch1
-                font.pointSize: 64
-                text: "好"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: ch1
+            x_cm: Coordinates.ch1_X
+            y_cm: Coordinates.ch1_Y
+            child.text: "好"
         }
 
 
         //ch2 is the composition of character 女 with component 生
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            visible: true
-            property double x_cm: Coordinates.ch2_X
-            property double y_cm: Coordinates.ch2_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch2
-                font.pointSize: 64
-                text: "姓"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: ch2
+            x_cm: Coordinates.ch2_X
+            y_cm: Coordinates.ch2_Y
+            child.text: "姓"
         }
 
         //ch3 is the composition of character 女 with component 且
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            visible: true
-            property double x_cm: Coordinates.ch3_X
-            property double y_cm: Coordinates.ch3_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch3
-                font.pointSize: 64
-                text: "姐"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: ch3
+            x_cm: Coordinates.ch3_X
+            y_cm: Coordinates.ch3_Y
+            child.text: "姐"
         }
 
 
         //ch4 is the composition of character 女 with component 也
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            visible: true
-            property double x_cm: Coordinates.ch4_X
-            property double y_cm: Coordinates.ch4_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch4
-                font.pointSize: 64
-                text: "她"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: ch4
+            x_cm: Coordinates.ch4_X
+            y_cm: Coordinates.ch4_Y
+            child.text: "她"
         }
 
 
         //ch5 is the composition of character 女 with component 西
-        //
-        //x_cm and y_cm are the coordinates on the sheet in cm.
-        //The values are set in the file Coordinates.js
-        //We then computes the coordinates onn the screen in pixels.
-        //
-        //Item is a very small rectangle with a bigger character Text in its center
-        Item {
-            property double x_cm: Coordinates.ch5_X
-            property double y_cm: Coordinates.ch5_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch5
-                font.pointSize: 64
-                text: "要"
-                anchors.centerIn: parent
-                visible: false
-            }
+        MyItem {
+            id: ch5
+            x_cm: Coordinates.ch5_X
+            y_cm: Coordinates.ch5_Y
+            child.text: "要"
         }
 
-
-        Item {
-            property double x_cm: Coordinates.ch6_X
-            property double y_cm: Coordinates.ch6_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch6
-                font.pointSize: 64
-                text: "吗"
-                anchors.centerIn: parent
-                visible: true
-            }
+        //ch5 is the composition of character 马 with component 口
+        MyItem {
+            id: ch6
+            x_cm: Coordinates.ch6_X
+            y_cm: Coordinates.ch6_Y
+            child.text: "吗"
         }
 
-        Item {
-            property double x_cm: Coordinates.ch7_X
-            property double y_cm: Coordinates.ch7_Y
-            x: coordinates.getX(x_cm,y_cm); y: coordinates.getY(x_cm,y_cm)
-            width: 1; height: 1
-            rotation: coordinates.getRotation()
-            transformOrigin: Item.TopLeft
-
-            Text {
-                id: ch7
-                font.pointSize: 64
-                text: "码"
-                anchors.centerIn: parent
-                visible: true
-            }
+        //ch5 is the composition of character 马 with component 石
+        MyItem{
+            id: ch7
+            x_cm: Coordinates.ch7_X
+            y_cm: Coordinates.ch7_Y
+            child.text: "码"
         }
+
 
     }
+
 
 
 }

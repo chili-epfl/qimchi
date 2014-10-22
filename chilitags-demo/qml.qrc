@@ -6,5 +6,10 @@
         <file>hao.wav</file>
         <file>Global.js</file>
         <file>Coordinates.js</file>
+        <file>MyItem.qml</file>
+        <file>StringFr.js</file>
+        <file>StringEn.js</file>
+        <file>ComponentSelection.qml</file>
+        <file>RadicalSelection.qml</file>
     </qresource>
 </RCC>
