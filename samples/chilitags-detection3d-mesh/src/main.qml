@@ -20,17 +20,14 @@ Window {
         size: "640x480"
     }
 
-    // Set up chilitags detection
+    //Set up chilitags detection
     Chilitags{
         id: chilitags
         sourceImage: camera.cvImage
 
-        //The tag center stuff below are not necessary but a bug prevents the window from launching if they are not present
-        property vector3d tagCenter : Qt.vector3d(10,10,0)
         ChilitagsObject{
             id: tag
             name: "tag_0"
-            property vector3d center : transform.times(parent.tagCenter)
         }
     }
 

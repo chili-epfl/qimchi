@@ -25,17 +25,13 @@ Window {
         id: chilitags
         sourceImage: camera.cvImage
 
-        //The tag center stuff below are not necessary but a bug prevents the window from launching if they are not present
-        property vector3d tagCenter : Qt.vector3d(10,10,0)
         ChilitagsObject{
             id: redTag
             name: "tag_0"
-            property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject{
             id: blueTag
             name: "tag_1"
-            property vector3d center : transform.times(parent.tagCenter)
         }
     }
 
