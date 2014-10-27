@@ -331,9 +331,6 @@ ApplicationWindow {
             source: detection
 
 
-            RadicalSelection {
-                id: selected_radical
-            }
 
 
         }
@@ -346,20 +343,47 @@ ApplicationWindow {
             // It uses the projection matrix from Chilitags
             transform: Transform { matrix: detection.projectionMatrix }
 
+            //This text only use is to solve the issue :
+            //https://github.com/chili-epfl/qimchi/issues/9
+            //The result is that this transparent text doesn't appear correctly
+            Text {
+                color: "transparent"
+                text: "Nobody reads me"
+                z:0
+            }
+
+            //This text displays a word using the character
+            //built with the current selected radical/component
+            Text {
+                id: text_word
+                visible: wordCombinationCard.visible
+                transform: Transform { matrix: wordCombinationCard.transform }
+                x:0; y:20; z:1
+                text: ""
+            }
+
             //This text displays the pinyin prononciation of the character
             //built with the current selected radical/component
             Text {
                 id: text_pinyin
                 visible: pinyinCard.visible
                 transform: Transform { matrix: pinyinCard.transform }
-                x:0; y:20
+                x:0; y:20; z:1
                 text: ""
             }
 
+
+            //This text displays "Ready" on the current selected component
             ComponentSelection {
                 id: selected_component
+                z:1
             }
 
+            //This text displays the current selected radical
+            RadicalSelection {
+                id: selected_radical
+                z:1
+            }
 
         }
 

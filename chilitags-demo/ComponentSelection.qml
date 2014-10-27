@@ -16,7 +16,7 @@ Text {
     text: "ready"
     color: "blue"
     font.pointSize: 8
-    x: 0; y: 20
+    x: 0; y: 20; z:1
     state: "NORMAL"
     transform: Transform {
         id: selected_component_transform
@@ -42,8 +42,14 @@ Text {
                 color: "green"
             }
             PropertyChanges {
+                visible: ch1.visible
                 target: text_pinyin
                 text: "hao (3)"
+            }
+            PropertyChanges {
+                visible: ch1.visible
+                target: text_word
+                text: "你好"
             }
         },
         State {
@@ -58,8 +64,14 @@ Text {
                 color: "green"
             }
             PropertyChanges {
+                visible: ch2.visible
                 target: text_pinyin
                 text: "xing (4)"
+            }
+            PropertyChanges {
+                visible: ch2.visible
+                target: text_word
+                text: "姓名"
             }
         },
         State {
@@ -74,8 +86,14 @@ Text {
                 color: "green"
             }
             PropertyChanges {
+                visible: ch3.visible
                 target: text_pinyin
                 text: "jie (3)"
+            }
+            PropertyChanges {
+                visible: ch3.visible
+                target: text_word
+                text: "姐姐"
             }
         },
         State {
@@ -90,8 +108,14 @@ Text {
                 color: "green"
             }
             PropertyChanges {
+                visible: ch4.visible
                 target: text_pinyin
                 text: "ta (1)"
+            }
+            PropertyChanges {
+                visible: ch4.visible
+                target: text_word
+                text: "她们"
             }
         },
         State {
@@ -106,8 +130,14 @@ Text {
                 color: "green"
             }
             PropertyChanges {
+                visible: ch5.visible
                 target: text_pinyin
                 text: "yao (4)"
+            }
+            PropertyChanges {
+                visible: ch5.visible
+                target: text_word
+                text: "不要"
             }
         },
         State {

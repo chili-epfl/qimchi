@@ -1,8 +1,26 @@
-import QtQuick 2.0
+import QtQuick 2.3
+import QtQuick.Window 2.1
+import Chilitags 1.0
+import QtMultimedia 5.0
+import QtQuick.Controls 1.2
 
 Text {
+    visible: true
     color: "blue"
-    font.pixelSize: 64
+    text: {
+        var r = getRatio()
+        return (r<0.25)?"夕":
+               (r<0.35)?"车":
+               (r<0.45)?"口":
+               (r<0.55)?"女":
+               (r<0.65)?"木":
+               (r<0.75)?"心":
+               (r<0.85)?"父":
+               (r<0.95)?"石":"?"
+    }
+    font.pointSize: 8
+    x: 30; y: 0; z:1
+    transform: Transform { matrix: selectorCursor.transform }
 
     property vector3d stl: detection.projectionMatrix.times(selectorTopLeft.center)
     property vector3d str: detection.projectionMatrix.times(selectorTopRight.center)
@@ -47,6 +65,20 @@ Text {
         State {
             name: "RADICAL3"
             when: (selected_radical.ratio < 0.45)
+            PropertyChanges {
+                target: text_pinyin
+                visible: ch6.visible
+                text: "Ma"
+            }
+            PropertyChanges {
+                target: text_word
+                visible: ch6.visible
+                text: "好吗"
+            }
+            PropertyChanges {
+                target: ch6.child
+                color: "green"
+            }
         },
         State {
             name: "RADICAL4"
@@ -67,21 +99,20 @@ Text {
         State {
             name: "RADICAL8"
             when: selected_radical.ratio < 0.95
+            PropertyChanges {
+                target: text_pinyin
+                visible: ch7.visible
+                text: "Ma (3)"
+            }
+            PropertyChanges {
+                target: text_word
+                visible: ch7.visible
+                text: "号码"
+            }
+            PropertyChanges {
+                target: ch7.child
+                color: "green"
+            }
         }
     ]
-
-    text: {
-        var r = getRatio()
-        return (r<0.25)?"夕":
-               (r<0.35)?"车":
-               (r<0.45)?"口":
-               (r<0.55)?"女":
-               (r<0.65)?"木":
-               (r<0.75)?"心":
-               (r<0.85)?"父":
-               (r<0.95)?"石":"X"
-    }
-    //transform: Transform { matrix: selectorTopLeft.transform }
-    anchors.centerIn: parent
-    x:42; y:0
 }
