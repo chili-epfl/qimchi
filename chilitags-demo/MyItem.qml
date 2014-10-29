@@ -49,7 +49,7 @@ Item {
     property vector3d tr : sheetTopRight.center
     property vector3d br : sheetBottomRight.center
 
-    function getX(x_cm,y_cm) {
+    function getCenter(x_cm,y_cm) {
         var h = x_cm / Coordinates.horizontal_length
         var v = y_cm / Coordinates.vertical_length
         return detection.projectionMatrix.times(
@@ -57,19 +57,12 @@ Item {
                                   .plus(tr.minus(tl).times(h).times(1-v))
                                   .plus(br.minus(bl).times(h).times(v))
                                   .plus(bl.minus(tl).times(v))
-                              ).x
+                              )
     }
 
-    function getY(x_cm,y_cm) {
-        var h = x_cm / Coordinates.horizontal_length
-        var v = y_cm / Coordinates.vertical_length
-        return detection.projectionMatrix.times(
-                                  tl
-                                  .plus(tr.minus(tl).times(h).times(1.-v))
-                                  .plus(br.minus(bl).times(h).times(v))
-                                  .plus(bl.minus(tl).times(v))
-                              ).y
-    }
+    function getX(x_cm,y_cm) { return getCenter(x_cm,y_cm).x }
+
+    function getY(x_cm,y_cm) { return getCenter(x_cm,y_cm).y }
 
     function getRotation() {
         return Math.atan2(detection.projectionMatrix.times(tr).y-detection.projectionMatrix.times(tl).y,

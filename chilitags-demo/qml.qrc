@@ -9,7 +9,9 @@
         <file>MyItem.qml</file>
         <file>StringFr.js</file>
         <file>StringEn.js</file>
-        <file>ComponentSelection.qml</file>
+        <file>ComponentBox.qml</file>
         <file>RadicalSelection.qml</file>
+        <file>CardBox.qml</file>
+        <file>ConstructionBox.qml</file>
     </qresource>
 </RCC>

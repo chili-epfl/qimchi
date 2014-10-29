@@ -1,16 +1,14 @@
 import QtQuick 2.3
-import QtQuick.Window 2.1
+import QtQuick.Window 2.0
+import QtMultimedia 5.1
+import QtQuick.Controls 1.0
 import Chilitags 1.0
-import QtMultimedia 5.0
-import QtQuick.Controls 1.2
 import "Global.js" as Global
 import "Coordinates.js" as Coordinates
 
 //We decide which language to use
 import "StringFr.js" as Str
 //import "StringEn.js" as Str
-
-
 
 ApplicationWindow {
     visible: true
@@ -21,19 +19,23 @@ ApplicationWindow {
     height: 960
     title: qsTr("Hello World")
 
+
+    //There is a display problem with this menubar that sometimes doesn't show anything
+    //I don't understand where it comes from
     menuBar: MenuBar {
         Menu {
             title: qsTr(Str.file)
+            //*
             MenuItem {
-                text: qsTr(Str.start)
+                text: Str.start
                 onTriggered: camera.start()
             }
             MenuItem {
-                text: qsTr(Str.stop)
+                text: Str.stop
                 onTriggered: camera.stop()
             }
             MenuItem {
-                text: qsTr(Str.reset)
+                text: Str.reset
                 onTriggered: {
                     main.state = "INITIAL"
                     ch1.visible = false
@@ -45,8 +47,10 @@ ApplicationWindow {
                     ch7.visible = false
             }
             }
+            //*/
             MenuItem {
-                text: qsTr(Str.exit)
+                text: Str.exit
+                visible:true
                 onTriggered: Qt.quit();
             }
         }
@@ -75,7 +79,7 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(main.state == "CONSTRUCTION_LEFT"){
-                    if(constructionCard.visible){
+                    /*if(constructionCard.visible){
                         if(selected_component.state == "CH1") {
                             ch1.visible = true
                         }
@@ -99,7 +103,7 @@ ApplicationWindow {
                                 ch5.visible) {
                             main.state = "LEFT_COMPLETED"
                         }
-                    }
+                    }*/
                 }
                 if(main.state == "CONSTRUCTION_RIGHT"){
                     if(constructionCard.visible){
@@ -373,11 +377,7 @@ ApplicationWindow {
             }
 
 
-            //This text displays "Ready" on the current selected component
-            ComponentSelection {
-                id: selected_component
-                z:1
-            }
+
 
             //This text displays the current selected radical
             RadicalSelection {
@@ -385,8 +385,17 @@ ApplicationWindow {
                 z:1
             }
 
+
         }
 
+        //This text displays "Ready" on the current selected component
+        ComponentBox {
+            id: componentbox
+        }
+
+        ConstructionBox {
+            id: construction_box
+        }
 
         //mainTitle is the text at the top of the sheet
         MyItem {
