@@ -20,15 +20,15 @@ var vertical_length = 17.7
 
 //maintitle is the above text that explains the exercise
 var maintitle_X = 13.7
-var maintitle_Y = -1
+var maintitle_Y = -1.2
 
 //chleft is the left part of the main character
 var chleft_X = 4.5
-var chleft_Y = 4.9
+var chleft_Y = 4
 
 //chright is the right part of the main character
-var chright_X = 22.6
-var chright_Y = 4.9
+var chright_X = 22.4
+var chright_Y = 4
 
 //ch1...5 are the possible combination of 女 with components cards
 var ch1_X = 0.7

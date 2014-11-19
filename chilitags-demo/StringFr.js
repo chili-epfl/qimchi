@@ -18,7 +18,7 @@ var exit = "Quitter"
 
 
 //Texts for maintitle
-var maintitle_initial = "Déconstruire le charactère"
+var maintitle_initial = "Utiliser la carte Start pour commencer"
 var maintitle_construction_left = "Trouver quels composants vont avec 女"
 var maintitle_left_completed = "Tu as reussi l'exercice 1"
 var maintitle_construction_right = "Trouver quels radicals vont avec 马"

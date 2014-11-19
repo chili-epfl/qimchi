@@ -7,8 +7,8 @@ import "Global.js" as Global
 import "Coordinates.js" as Coordinates
 
 //We decide which language to use
-import "StringFr.js" as Str
-//import "StringEn.js" as Str
+//import "StringFr.js" as Str
+import "StringEn.js" as Str
 
 ApplicationWindow {
     visible: true
@@ -74,65 +74,36 @@ ApplicationWindow {
         // If the five possibilities have been found we change state to
         // continue the exercise on the right side
         ChilitagsObject {
-            id: constructionCard
+            id: constructionCardRecto
             name: "tag_0"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
-                if(main.state == "CONSTRUCTION_LEFT"){
-                    /*if(constructionCard.visible){
-                        if(selected_component.state == "CH1") {
-                            ch1.visible = true
-                        }
-                        if(selected_component.state == "CH2") {
-                            ch2.visible = true
-                        }
-                        if(selected_component.state == "CH3") {
-                            ch3.visible = true
-                        }
-                        if(selected_component.state == "CH4") {
-                            ch4.visible = true
-                        }
-                        if(selected_component.state == "CH5") {
-                            ch5.visible = true
-                        }
-
-                        if(ch1.visible &
-                                ch2.visible &
-                                ch3.visible &
-                                ch4.visible &
-                                ch5.visible) {
-                            main.state = "LEFT_COMPLETED"
-                        }
-                    }*/
-                }
-                if(main.state == "CONSTRUCTION_RIGHT"){
-                    if(constructionCard.visible){
-                        if(selected_radical.state == "RADICAL3") {
-                            ch6.visible = true
-                        }
-                        if(selected_radical.state == "RADICAL8") {
-                            ch7.visible = true
-                        }
-                        if(ch6.visible & ch7.visible) {
-                            main.state = "RIGHT_COMPLETED"
-                        }
+                if(constructionCardVerso.visible & constructionCardRecto.visible){
+                    if(main.state === "CONSTRUCTION_LEFT"){
+                        componentbox.flip()
+                    }
+                    if(main.state === "CONSTRUCTION_RIGHT"){
+                        radicalbox.flip()
                     }
                 }
             }
         }
         ChilitagsObject {
-            id: deconstructionCard
+            id: constructionCardVerso
             name: "tag_1"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
-                if(main.state == "INITIAL"){
-                    if(deconstructionCard.visible){
-                        main.state = "CONSTRUCTION_LEFT"
-                        console.log("deconstructionCard visible")
+                if(constructionCardVerso.visible & constructionCardRecto.visible){
+                    if(main.state === "CONSTRUCTION_LEFT"){
+                        componentbox.flip()
+                    }
+                    if(main.state === "CONSTRUCTION_RIGHT"){
+                        radicalbox.flip()
                     }
                 }
             }
         }
+
         ChilitagsObject {
             id: wordCombinationCard
             name: "tag_2"
@@ -143,7 +114,77 @@ ApplicationWindow {
             name: "tag_3"
             property vector3d center : transform.times(parent.tagCenter)
         }
+        ChilitagsObject {
+            id: startCard
+            name: "tag_5"
+            property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(main.state == "INITIAL"){
+                    if(startCard.visible){
+                        main.state = "CONSTRUCTION_LEFT"
+                    }
+                }
+            }
+        }
+        ChilitagsObject {
+            id: resetCard
+            name: "tag_6"
+            property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(resetCard.visible){
+                    main.state = "INITIAL"
+                    ch1.visible = false
+                    ch2.visible = false
+                    ch3.visible = false
+                    ch4.visible = false
+                    ch5.visible = false
+                    ch6.visible = false
+                    ch7.visible = false
+                    componentbox.component1_constructed = false
+                    componentbox.component2_constructed = false
+                    componentbox.component3_constructed = false
+                    componentbox.component4_constructed = false
+                    componentbox.component5_constructed = false
+                    componentbox.component6_constructed = false
+                    componentbox.component7_constructed = false
+                    componentbox.component8_constructed = false
+                    radicalbox.radical1_constructed = false
+                    radicalbox.radical2_constructed = false
+                    radicalbox.radical3_constructed = false
+                    radicalbox.radical4_constructed = false
+                    radicalbox.radical5_constructed = false
+                    radicalbox.radical6_constructed = false
+                    radicalbox.radical7_constructed = false
+                    radicalbox.radical8_constructed = false
+                    mistakes.count = 0
+                }
+            }
+        }
+        ChilitagsObject {
+            id: switchToComponent
+            name: "tag_7"
+            property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(main.state == "CONSTRUCTION_RIGHT"){
+                    if(switchToComponent.visible){
+                        main.state = "CONSTRUCTION_LEFT"
+                    }
+                }
+            }
+        }
 
+        ChilitagsObject {
+            id: switchToRadicals
+            name: "tag_8"
+            property vector3d center : transform.times(parent.tagCenter)
+            onVisibilityChanged: {
+                if(main.state == "CONSTRUCTION_LEFT"){
+                    if(switchToRadicals.visible){
+                        main.state = "CONSTRUCTION_RIGHT"
+                    }
+                }
+            }
+        }
 
         // We declare tags for the components (orange cards)
         // We use the onVisibilityChanged method to change the display
@@ -293,7 +334,11 @@ ApplicationWindow {
             State {
                 name: "CONSTRUCTION_LEFT"
                 PropertyChanges {
-                    target: maintitle.child; text: Str.maintitle_construction_left
+                    target: maintitle.child; text: {
+                        (ch1.visible & ch2.visible & ch3.visible & ch4.visible & ch5.visible)?
+                            "Good ! You found all the components. \nChange exercise or use reset card.":
+                            Str.maintitle_construction_left
+                    }
                 }
                 PropertyChanges {
                     target: chleft.child
@@ -310,7 +355,12 @@ ApplicationWindow {
             State {
                 name: "CONSTRUCTION_RIGHT"
                 PropertyChanges {
-                    target: maintitle.child; text: Str.maintitle_construction_right
+                    target: maintitle.child;
+                    text: {
+                        (ch6.visible & ch7.visible)?
+                            "Good ! You found all the radicals. \nChange exercise or use reset card.":
+                            Str.maintitle_construction_right
+                    }
                 }
                 PropertyChanges {
                     target: chright.child
@@ -376,16 +426,6 @@ ApplicationWindow {
                 text: ""
             }
 
-
-
-
-            //This text displays the current selected radical
-            RadicalSelection {
-                id: selected_radical
-                z:1
-            }
-
-
         }
 
         //This text displays "Ready" on the current selected component
@@ -393,8 +433,12 @@ ApplicationWindow {
             id: componentbox
         }
 
-        ConstructionBox {
-            id: construction_box
+        RadicalBox {
+            id : radicalbox
+        }
+
+        HintBox {
+            id: hintbox
         }
 
         //mainTitle is the text at the top of the sheet
@@ -434,6 +478,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch1_X
             y_cm: Coordinates.ch1_Y
             child.text: "好"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
 
@@ -443,6 +492,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch2_X
             y_cm: Coordinates.ch2_Y
             child.text: "姓"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
         //ch3 is the composition of character 女 with component 且
@@ -451,6 +505,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch3_X
             y_cm: Coordinates.ch3_Y
             child.text: "姐"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
 
@@ -460,6 +519,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch4_X
             y_cm: Coordinates.ch4_Y
             child.text: "她"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
 
@@ -469,6 +533,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch5_X
             y_cm: Coordinates.ch5_Y
             child.text: "要"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
         //ch5 is the composition of character 马 with component 口
@@ -477,6 +546,11 @@ ApplicationWindow {
             x_cm: Coordinates.ch6_X
             y_cm: Coordinates.ch6_Y
             child.text: "吗"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
         }
 
         //ch5 is the composition of character 马 with component 石
@@ -485,6 +559,56 @@ ApplicationWindow {
             x_cm: Coordinates.ch7_X
             y_cm: Coordinates.ch7_Y
             child.text: "码"
+            Image {
+                anchors.centerIn: parent
+                source: "frame.png"
+                z:-1
+            }
+        }
+
+
+        MyItem {
+            id: success
+            visible:true
+            x_cm: 6
+            y_cm: 20
+            property int count:{
+                var c = 0;
+                ch1.visible?c++:0
+                ch2.visible?c++:0
+                ch3.visible?c++:0
+                ch4.visible?c++:0
+                ch5.visible?c++:0
+                ch6.visible?c++:0
+                ch7.visible?c++:0
+                return c
+            }
+            child.text: "success : " + count
+            child.font.pointSize: 32
+            child.color: "green"
+        }
+
+        MyItem {
+            id: mistakes
+            visible:true
+            x_cm:14
+            y_cm:20
+            property int count:0
+            child.text: "mistakes : " + count
+            child.font.pointSize: 32
+            child.color: "red"
+        }
+
+        MyItem {
+            visible:true
+            x_cm:22
+            y_cm:20
+            property int rate : 100 * (success.count+2) / (2+success.count+mistakes.count)
+            child.text: "rate : " + rate + "%"
+            child.font.pointSize: 32
+            child.color: {
+                return rate<30?"red":rate<60?"orange":rate<80?"yellow":"green"
+            }
         }
 
 

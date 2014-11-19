@@ -13,21 +13,40 @@ CardBox {
     boxtext.text: {
         state==="NONE"?"Choose a component":
         state==="TOOMUCH"?"Too much components in the box":
-        state==="COMPONENT1"?"Component : 子":
-        state==="COMPONENT2"?"Component : 生":
-        state==="COMPONENT3"?"Component : 且":
-        state==="COMPONENT4"?"Component : 也":
-        state==="COMPONENT5"?"Component : 西":
-        state==="COMPONENT6"?"Component : 反":
-        state==="COMPONENT7"?"Component : 彡":
-        state==="COMPONENT8"?"Component : 库":""
+        state==="WRONG"?"wrong":
+        state==="COMPONENT1"?component1_constructed?"Good ! Use hint cards now.":"Component : 子":
+        state==="COMPONENT2"?component2_constructed?"Good ! Use hint cards now.":"Component : 生":
+        state==="COMPONENT3"?component3_constructed?"Good ! Use hint cards now.":"Component : 且":
+        state==="COMPONENT4"?component4_constructed?"Good ! Use hint cards now.":"Component : 也":
+        state==="COMPONENT5"?component5_constructed?"Good ! Use hint cards now.":"Component : 西":
+        state==="COMPONENT6"?component6_constructed?"Wrong":"Component : 反":
+        state==="COMPONENT7"?component7_constructed?"Wrong":"Component : 彡":
+        state==="COMPONENT8"?component8_constructed?"Wrong":"Component : 库":""
     }
 
+    property bool component1_constructed : false
+    property bool component2_constructed : false
+    property bool component3_constructed : false
+    property bool component4_constructed : false
+    property bool component5_constructed : false
+    property bool component6_constructed : false
+    property bool component7_constructed : false
+    property bool component8_constructed : false
 
 
     boxrectangle.border.color: {
-        state=="NONE"?"yellow":state=="TOOMUCH"?"red":"green"
+        state==="NONE"?"yellow":
+        state==="TOOMUCH"?"red":
+        state==="COMPONENT1"?"green":
+        state==="COMPONENT2"?"green":
+        state==="COMPONENT3"?"green":
+        state==="COMPONENT4"?"green":
+        state==="COMPONENT5"?"green":
+        state==="COMPONENT6"?component6_constructed?"red":"green":
+        state==="COMPONENT7"?component7_constructed?"red":"green":
+        state==="COMPONENT8"?component8_constructed?"red":"green":""
     }
+
     x_cm: -8
     y_cm: 4
     height_cm: 8
@@ -58,86 +77,100 @@ CardBox {
 
     }
 
+    function flip(){
+        if(hintbox.state=="CONSTRUCTION"){
+            if(state=="COMPONENT1"){ch1.visible=true; component1_constructed = true}
+            if(state=="COMPONENT2"){ch2.visible=true; component2_constructed = true}
+            if(state=="COMPONENT3"){ch3.visible=true; component3_constructed = true}
+            if(state=="COMPONENT4"){ch4.visible=true; component4_constructed = true}
+            if(state=="COMPONENT5"){ch5.visible=true; component5_constructed = true}
+            if(state=="COMPONENT6"){mistakes.count += 1; component6_constructed = true}
+            if(state=="COMPONENT7"){mistakes.count += 1; component7_constructed = true}
+            if(state=="COMPONENT8"){mistakes.count += 1; component8_constructed = true}
+        }
+    }
+
+    function alreadyConstructed(){
+        if(state==="COMPONENT1"){return component1_constructed}
+        if(state==="COMPONENT2"){return component2_constructed}
+        if(state==="COMPONENT3"){return component3_constructed}
+        if(state==="COMPONENT4"){return component4_constructed}
+        if(state==="COMPONENT5"){return component5_constructed}
+        if(state==="COMPONENT6"){return component6_constructed}
+        if(state==="COMPONENT7"){return component7_constructed}
+        if(state==="COMPONENT8"){return component8_constructed}
+        return false
+    }
+
+    function notEmpty(){
+        return (state != "NONE" & state != "TOOMUCH")
+    }
+
+    function isCorrect(){
+        if(state==="COMPONENT1"){return component1_constructed}
+        if(state==="COMPONENT2"){return component2_constructed}
+        if(state==="COMPONENT3"){return component3_constructed}
+        if(state==="COMPONENT4"){return component4_constructed}
+        if(state==="COMPONENT5"){return component5_constructed}
+        return false
+    }
+
+    function getPinyin(){
+        if(state==="COMPONENT1"){return "hao (3)"}
+        if(state==="COMPONENT2"){return "xing (4)"}
+        if(state==="COMPONENT3"){return "jie (3)"}
+        if(state==="COMPONENT4"){return "ta (1)"}
+        if(state==="COMPONENT5"){return "yao (4)"}
+    }
+
+    function getWord(){
+        if(state==="COMPONENT1"){return "你好"}
+        if(state==="COMPONENT2"){return "姓名"}
+        if(state==="COMPONENT3"){return "姐姐"}
+        if(state==="COMPONENT4"){return "她们"}
+        if(state==="COMPONENT5"){return "不要"}
+    }
+
     states: [
-        State {
-            name: "NONE"
-        },
-        State {
-            name: "TOOMUCH"
-        },
+        State {name: "NONE"},
+        State {name: "TOOMUCH"},
         State {
             name: "COMPONENT1"
             PropertyChanges {
-                visible: ch1.visible & pinyinCard.visible
-                target: text_pinyin
-                text: "hao (3)"
-            }
-            PropertyChanges {
-                visible: ch1.visible & wordCombinationCard.visible
-                target: text_word
-                text: "你好"
+                target: ch1.child
+                color:"green"
             }
         },
         State {
             name: "COMPONENT2"
             PropertyChanges {
-                visible: ch2.visible & pinyinCard.visible
-                target: text_pinyin
-                text: "xing (4)"
-            }
-            PropertyChanges {
-                visible: ch2.visible & wordCombinationCard.visible
-                target: text_word
-                text: "姓名"
+                target: ch2.child
+                color:"green"
             }
         },
         State {
             name: "COMPONENT3"
             PropertyChanges {
-                visible: ch3.visible & pinyinCard.visible
-                target: text_pinyin
-                text: "jie (3)"
-            }
-            PropertyChanges {
-                visible: ch3.visible & wordCombinationCard.visible
-                target: text_word
-                text: "姐姐"
+                target: ch3.child
+                color:"green"
             }
         },
         State {
             name: "COMPONENT4"
             PropertyChanges {
-                visible: ch4.visible & pinyinCard.visible
-                target: text_pinyin
-                text: "ta (1)"
-            }
-            PropertyChanges {
-                visible: ch4.visible & wordCombinationCard.visible
-                target: text_word
-                text: "她们"
+                target: ch4.child
+                color: "green"
             }
         },
         State {
             name: "COMPONENT5"
             PropertyChanges {
-                visible: ch5.visible & pinyinCard.visible
-                target: text_pinyin
-                text: "yao (4)"
-            }
-            PropertyChanges {
-                visible: ch5.visible & wordCombinationCard.visible
-                target: text_word
-                text: "不要"
+                target: ch5.child
+                color:"green"
             }
         },
-        State {
-            name: "COMPONENT6"
-        },
-        State {
-            name: "COMPONENT7"
-        },
-        State {
-            name: "COMPONENT8"
-        }
+        State {name: "COMPONENT6"},
+        State {name: "COMPONENT7"},
+        State {name: "COMPONENT8"}
     ]
 }

@@ -18,7 +18,7 @@ var exit = "Exit"
 
 
 //Texts for maintitle
-var maintitle_initial = "Deconstruct the character"
+var maintitle_initial = "Use Start card to begin the exercise"
 var maintitle_construction_left = "Find which components go whith 女"
 var maintitle_left_completed = "You have completed the first exercise"
 var maintitle_construction_right = "Find which radicals go whith 马"

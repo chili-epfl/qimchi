@@ -30,7 +30,7 @@ Item {
 
     Text {
         id: asdf
-        font.pointSize: 64
+        font.pointSize: 60
         text: ""
         anchors.centerIn: parent
         visible: true

@@ -10,8 +10,9 @@
         <file>StringFr.js</file>
         <file>StringEn.js</file>
         <file>ComponentBox.qml</file>
-        <file>RadicalSelection.qml</file>
         <file>CardBox.qml</file>
-        <file>ConstructionBox.qml</file>
+        <file>frame.png</file>
+        <file>HintBox.qml</file>
+        <file>RadicalBox.qml</file>
     </qresource>
 </RCC>
