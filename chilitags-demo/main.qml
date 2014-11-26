@@ -12,19 +12,71 @@ import "StringEn.js" as Str
 
 ApplicationWindow {
     visible: true
+    id:app
     //visibility: "FullScreen"
     color: "black"
     //Settings for a "normal" window
     width: 1280
     height: 960
-    title: qsTr("Hello World")
+
+    ExerciseSelector{
+        id:exercise
+    }
+
+    title: exercise.getCurrent().main_character
+
+    function reset(){
+        main.state = "INITIAL"
+        characters.component1.visible = false
+        characters.component2.visible = false
+        characters.component3.visible = false
+        characters.component4.visible = false
+        characters.component5.visible = false
+        characters.component6.visible = false
+        characters.component7.visible = false
+        characters.component8.visible = false
+        characters.component9.visible = false
+        characters.component10.visible = false
+        characters.component11.visible = false
+        characters.component12.visible = false
+        characters.radical1.visible = false
+        characters.radical2.visible = false
+        characters.radical3.visible = false
+        characters.radical4.visible = false
+        characters.radical5.visible = false
+        characters.radical6.visible = false
+        characters.radical7.visible = false
+        characters.radical8.visible = false
+        componentbox.component1_constructed = false
+        componentbox.component2_constructed = false
+        componentbox.component3_constructed = false
+        componentbox.component4_constructed = false
+        componentbox.component5_constructed = false
+        componentbox.component6_constructed = false
+        componentbox.component7_constructed = false
+        componentbox.component8_constructed = false
+        componentbox.component9_constructed = false
+        componentbox.component10_constructed = false
+        componentbox.component11_constructed = false
+        componentbox.component12_constructed = false
+        radicalbox.radical1_constructed = false
+        radicalbox.radical2_constructed = false
+        radicalbox.radical3_constructed = false
+        radicalbox.radical4_constructed = false
+        radicalbox.radical5_constructed = false
+        radicalbox.radical6_constructed = false
+        radicalbox.radical7_constructed = false
+        radicalbox.radical8_constructed = false
+        mistakes.count = 0
+        success.count = 0
+    }
 
 
     //There is a display problem with this menubar that sometimes doesn't show anything
     //I don't understand where it comes from
     menuBar: MenuBar {
         Menu {
-            title: qsTr(Str.file)
+            title: Str.file
             //*
             MenuItem {
                 text: Str.start
@@ -36,16 +88,7 @@ ApplicationWindow {
             }
             MenuItem {
                 text: Str.reset
-                onTriggered: {
-                    main.state = "INITIAL"
-                    ch1.visible = false
-                    ch2.visible = false
-                    ch3.visible = false
-                    ch4.visible = false
-                    ch5.visible = false
-                    ch6.visible = false
-                    ch7.visible = false
-            }
+                onTriggered: {reset()}
             }
             //*/
             MenuItem {
@@ -69,6 +112,31 @@ ApplicationWindow {
         // Define here tagCenter as the center of a 20x20 (mm) tag
         property vector3d tagCenter : Qt.vector3d(10,10,0)
 
+
+
+        ChilitagsObject {
+            id: red1_top_left
+            name: exercise.red1.top_left_tag
+            onVisibilityChanged: {if(red1_top_left.visible){exercise.state="RED1"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        ChilitagsObject {
+            id: red2_top_left
+            name: exercise.red2.top_left_tag
+            onVisibilityChanged: {if(red2_top_left.visible){exercise.state="RED2"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        ChilitagsObject {
+            id: red3_top_left
+            name: exercise.red3.top_left_tag
+            onVisibilityChanged: {if(red3_top_left.visible){exercise.state="RED3"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+
+
         // We declare tags for the function cards
         // When this card appears we reveals the new constructions
         // If the five possibilities have been found we change state to
@@ -79,12 +147,8 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(constructionCardVerso.visible & constructionCardRecto.visible){
-                    if(main.state === "CONSTRUCTION_LEFT"){
-                        componentbox.flip()
-                    }
-                    if(main.state === "CONSTRUCTION_RIGHT"){
-                        radicalbox.flip()
-                    }
+                    if(main.state === "CONSTRUCTION_LEFT"){componentbox.flip()}
+                    if(main.state === "CONSTRUCTION_RIGHT"){radicalbox.flip()}
                 }
             }
         }
@@ -115,6 +179,11 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
+            id: strokeOrderCard
+            name: "tag_9"
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
             id: startCard
             name: "tag_5"
             property vector3d center : transform.times(parent.tagCenter)
@@ -132,34 +201,11 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(resetCard.visible){
-                    main.state = "INITIAL"
-                    ch1.visible = false
-                    ch2.visible = false
-                    ch3.visible = false
-                    ch4.visible = false
-                    ch5.visible = false
-                    ch6.visible = false
-                    ch7.visible = false
-                    componentbox.component1_constructed = false
-                    componentbox.component2_constructed = false
-                    componentbox.component3_constructed = false
-                    componentbox.component4_constructed = false
-                    componentbox.component5_constructed = false
-                    componentbox.component6_constructed = false
-                    componentbox.component7_constructed = false
-                    componentbox.component8_constructed = false
-                    radicalbox.radical1_constructed = false
-                    radicalbox.radical2_constructed = false
-                    radicalbox.radical3_constructed = false
-                    radicalbox.radical4_constructed = false
-                    radicalbox.radical5_constructed = false
-                    radicalbox.radical6_constructed = false
-                    radicalbox.radical7_constructed = false
-                    radicalbox.radical8_constructed = false
-                    mistakes.count = 0
+                    reset()
                 }
             }
         }
+
         ChilitagsObject {
             id: switchToComponent
             name: "tag_7"
@@ -187,53 +233,64 @@ ApplicationWindow {
         }
 
         // We declare tags for the components (orange cards)
-        // We use the onVisibilityChanged method to change the display
         ChilitagsObject {
             id: component1
-            name: "tag_104"
-            property string character : "子"
+            name: exercise.getCurrent().component1_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component2
-            name: "tag_105"
-            property string character : "生"
+            name: exercise.getCurrent().component2_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component3
-            name: "tag_106"
-            property string character : "且"
+            name: exercise.getCurrent().component3_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component4
-            name: "tag_107"
-            property string character : "也"
+            name: exercise.getCurrent().component4_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component5
-            name: "tag_108"
-            property string character : "西"
+            name: exercise.getCurrent().component5_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component6
-            name: "tag_109"
-            property string character : ""
+            name: exercise.getCurrent().component6_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component7
-            name: "tag_110"
-            property string character : ""
+            name: exercise.getCurrent().component7_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component8
-            name: "tag_111"
-            property string character : ""
+            name: exercise.getCurrent().component8_tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: component9
+            name: exercise.getCurrent().component9_tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: component10
+            name: exercise.getCurrent().component10_tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: component11
+            name: exercise.getCurrent().component11_tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: component12
+            name: exercise.getCurrent().component12_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
 
@@ -278,22 +335,22 @@ ApplicationWindow {
         // We declare tags for the basic sheet
         ChilitagsObject {
             id: sheetTopLeft
-            name: "tag_100"
+            name: exercise.getCurrent().top_left_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: sheetTopRight
-            name: "tag_101"
+            name: exercise.getCurrent().top_right_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: sheetBottomRight
-            name: "tag_102"
+            name: exercise.getCurrent().bottom_right_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: sheetBottomLeft
-            name: "tag_103"
+            name: exercise.getCurrent().bottom_left_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
 
@@ -305,7 +362,8 @@ ApplicationWindow {
     // i.e. in pixels, where 0,0 is the top left corner of the video
     Item {
         id: main
-
+        anchors.fill:parent
+        visible:true
         // Reduce everything inside to half size.
         transform: Scale {xScale: .5; yScale:.5}
 
@@ -335,7 +393,7 @@ ApplicationWindow {
                 name: "CONSTRUCTION_LEFT"
                 PropertyChanges {
                     target: maintitle.child; text: {
-                        (ch1.visible & ch2.visible & ch3.visible & ch4.visible & ch5.visible)?
+                        (characters.component1.visible & characters.component2.visible & characters.component3.visible & characters.component4.visible & characters.component5.visible)?
                             "Good ! You found all the components. \nChange exercise or use reset card.":
                             Str.maintitle_construction_left
                     }
@@ -357,7 +415,7 @@ ApplicationWindow {
                 PropertyChanges {
                     target: maintitle.child;
                     text: {
-                        (ch6.visible & ch7.visible)?
+                        (characters.component6.visible & characters.component7.visible)?
                             "Good ! You found all the radicals. \nChange exercise or use reset card.":
                             Str.maintitle_construction_right
                     }
@@ -378,66 +436,28 @@ ApplicationWindow {
 
         // A video feedback of the camera
         VideoOutput {
+            visible: true
             anchors.top: parent.top
             anchors.left: parent.left
             // The feedback has to be forwarded by the detection, because
             // cameras expect to have only one output surface
             source: detection
-
-
-
-
         }
 
-        // This item is a container for the 3D objects to be projected on
-        // the video input image.
-        // Inside this item, coodinates are in the world referential,
-        // i.e. in mm, where 0,0,0 is the position of the camera in the real world
-        Item {
-            // It uses the projection matrix from Chilitags
-            transform: Transform { matrix: detection.projectionMatrix }
-
-            //This text only use is to solve the issue :
-            //https://github.com/chili-epfl/qimchi/issues/9
-            //The result is that this transparent text doesn't appear correctly
-            Text {
-                color: "transparent"
-                text: "Nobody reads me"
-                z:0
-            }
-
-            //This text displays a word using the character
-            //built with the current selected radical/component
-            Text {
-                id: text_word
-                visible: wordCombinationCard.visible
-                transform: Transform { matrix: wordCombinationCard.transform }
-                x:0; y:20; z:1
-                text: ""
-            }
-
-            //This text displays the pinyin prononciation of the character
-            //built with the current selected radical/component
-            Text {
-                id: text_pinyin
-                visible: pinyinCard.visible
-                transform: Transform { matrix: pinyinCard.transform }
-                x:0; y:20; z:1
-                text: ""
-            }
-
-        }
 
         //This text displays "Ready" on the current selected component
         ComponentBox {
+            visible: false
             id: componentbox
         }
 
         RadicalBox {
+            visible: false
             id : radicalbox
         }
 
         HintBox {
+            visible: false
             id: hintbox
         }
 
@@ -455,10 +475,10 @@ ApplicationWindow {
         MyItem {
             id: chleft
             visible: true
-            x_cm: Coordinates.chleft_X
-            y_cm: Coordinates.chleft_Y
+            x_cm: exercise.getCurrent().left_part_X
+            y_cm: exercise.getCurrent().left_part_Y
             child.font.pointSize: 42
-            child.text: "女"
+            child.text: exercise.getCurrent().left_part_character
         }
 
 
@@ -466,123 +486,65 @@ ApplicationWindow {
         MyItem {
             id: chright
             visible: true
-            x_cm: Coordinates.chright_X
-            y_cm: Coordinates.chright_Y
+            x_cm: exercise.getCurrent().right_part_X
+            y_cm: exercise.getCurrent().right_part_Y
             child.font.pointSize: 42
-            child.text: "马"
+            child.text: exercise.getCurrent().right_part_character
         }
 
-        //Ch1 is the composition of character 女 with component 子
+        Characters {
+            id : characters
+        }
+
         MyItem {
-            id: ch1
-            x_cm: Coordinates.ch1_X
-            y_cm: Coordinates.ch1_Y
-            child.text: "好"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
+            id: display
+            visible:true
+            x_cm: 9.5
+            y_cm: 11.5
+            height: 250; width: 250
+            child.text:{
+                main.state=="CONSTRUCTION_LEFT"?
+                    componentbox.state=="NONE"?"<- Use a component card":
+                    componentbox.state=="TOOMUCH"?"<- Chose only one component":
+                    hintbox.state=="WAITING_HINT"?"Good ! \nUse an hint card ->\nor\n<- change component":
+                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction card ->":
+                    hintbox.state=="CONSTRUCTION"?"Flip the card to construct ->":
+                    hintbox.state=="PINYIN_PRONUNCIATION"?componentbox.getPinyin():
+                    hintbox.state=="WORD_COMBINATION"?componentbox.getWord():
+                    hintbox.state=="STROKE_ORDER"?"":
+                "Wrong":
+                main.state=="CONSTRUCTION_RIGHT"?
+                    radicalbox.state=="NO_SELECTOR"?"Use the radical selector":
+                    hintbox.state=="WAITING_HINT"?"Good ! \nUse an hint card ->\nor\n<- change component":
+                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction card ->":
+                    hintbox.state=="CONSTRUCTION"?"Flip the card to construct ->":
+                    hintbox.state=="PINYIN_PRONUNCIATION"?radicalbox.getPinyin():
+                    hintbox.state=="WORD_COMBINATION"?radicalbox.getWord():
+                    hintbox.state=="STROKE_ORDER"?"":
+                "Wrong":
+                "Welcome"
+            }
+            child.font.pointSize:24
+            AnimatedImage {
+                source: {
+                    hintbox.state=="STROKE_ORDER"?
+                    main.state=="CONSTRUCTION_LEFT"?
+                        componentbox.getStrokes():
+                        radicalbox.getStrokes():
+                    ""
+                }
+                visible: hintbox.state==="STROKE_ORDER"
+                asynchronous: true
+                anchors.fill: parent
             }
         }
-
-
-        //ch2 is the composition of character 女 with component 生
-        MyItem {
-            id: ch2
-            x_cm: Coordinates.ch2_X
-            y_cm: Coordinates.ch2_Y
-            child.text: "姓"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
-        //ch3 is the composition of character 女 with component 且
-        MyItem {
-            id: ch3
-            x_cm: Coordinates.ch3_X
-            y_cm: Coordinates.ch3_Y
-            child.text: "姐"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
-
-        //ch4 is the composition of character 女 with component 也
-        MyItem {
-            id: ch4
-            x_cm: Coordinates.ch4_X
-            y_cm: Coordinates.ch4_Y
-            child.text: "她"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
-
-        //ch5 is the composition of character 女 with component 西
-        MyItem {
-            id: ch5
-            x_cm: Coordinates.ch5_X
-            y_cm: Coordinates.ch5_Y
-            child.text: "要"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
-        //ch5 is the composition of character 马 with component 口
-        MyItem {
-            id: ch6
-            x_cm: Coordinates.ch6_X
-            y_cm: Coordinates.ch6_Y
-            child.text: "吗"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
-        //ch5 is the composition of character 马 with component 石
-        MyItem{
-            id: ch7
-            x_cm: Coordinates.ch7_X
-            y_cm: Coordinates.ch7_Y
-            child.text: "码"
-            Image {
-                anchors.centerIn: parent
-                source: "frame.png"
-                z:-1
-            }
-        }
-
 
         MyItem {
             id: success
             visible:true
-            x_cm: 6
-            y_cm: 20
-            property int count:{
-                var c = 0;
-                ch1.visible?c++:0
-                ch2.visible?c++:0
-                ch3.visible?c++:0
-                ch4.visible?c++:0
-                ch5.visible?c++:0
-                ch6.visible?c++:0
-                ch7.visible?c++:0
-                return c
-            }
+            x_cm: 32
+            y_cm: 3
+            property int count:0
             child.text: "success : " + count
             child.font.pointSize: 32
             child.color: "green"
@@ -591,8 +553,8 @@ ApplicationWindow {
         MyItem {
             id: mistakes
             visible:true
-            x_cm:14
-            y_cm:20
+            x_cm:32
+            y_cm:6
             property int count:0
             child.text: "mistakes : " + count
             child.font.pointSize: 32
@@ -601,8 +563,8 @@ ApplicationWindow {
 
         MyItem {
             visible:true
-            x_cm:22
-            y_cm:20
+            x_cm:32
+            y_cm:9
             property int rate : 100 * (success.count+2) / (2+success.count+mistakes.count)
             child.text: "rate : " + rate + "%"
             child.font.pointSize: 32

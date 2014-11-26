@@ -22,36 +22,8 @@ var vertical_length = 17.7
 var maintitle_X = 13.7
 var maintitle_Y = -1.2
 
-//chleft is the left part of the main character
-var chleft_X = 4.5
-var chleft_Y = 4
 
-//chright is the right part of the main character
-var chright_X = 22.4
-var chright_Y = 4
 
-//ch1...5 are the possible combination of 女 with components cards
-var ch1_X = 0.7
-var ch1_Y = 10
-
-var ch2_X = 4.1
-var ch2_Y = 10
-
-var ch3_X = 7.6
-var ch3_Y = 10
-
-var ch4_X = 11.1
-var ch4_Y = 10
-
-var ch5_X = 14.3
-var ch5_Y = 10
-
-//ch6 and ch7 are the possible combination of 马 with a radical
-var ch6_X = 21
-var ch6_Y = 10
-
-var ch7_X = 24.3
-var ch7_Y = 10
 
 
 

@@ -18,18 +18,22 @@ CardBox {
             main.state=="CONSTRUCTION_LEFT"?componentbox.getPinyin():radicalbox.getPinyin():
         state=="WORD_COMBINATION"?
             main.state=="CONSTRUCTION_LEFT"?componentbox.getWord():radicalbox.getWord():
-        ""
+        state=="STROKE_ORDER"?
+            main.state=="CONSTRUCTION_LEFT"?componentbox.getStrokes():radicalbox.getStrokes():
+        "Error"
     }
+    boxtext.visible: false
     boxrectangle.border.color: {
         state=="WAITING_HINT"?"yellow":
         state=="WAITING_CONSTRUCTION"?"yellow":
         "green"
     }
 
-    x_cm: -8
-    y_cm: 16
-    height_cm: 8
-    width_cm: 8
+    x_cm: 20.5
+    y_cm: 14
+    height_cm: 8.5
+    width_cm: 8.5
+
 
 
 
@@ -39,6 +43,7 @@ CardBox {
             componentbox.alreadyConstructed()?
                         isIn(pinyinCard)?"PINYIN_PRONUNCIATION":
                         isIn(wordCombinationCard)?"WORD_COMBINATION":
+                        isIn(strokeOrderCard)?"STROKE_ORDER":
                         componentbox.isCorrect()?"WAITING_HINT":
                         "WRONG":
             isIn(constructionCardVerso)?"CONSTRUCTION":
@@ -50,6 +55,7 @@ CardBox {
              radicalbox.alreadyConstructed()?
                                 isIn(pinyinCard)?"PINYIN_PRONUNCIATION":
                                 isIn(wordCombinationCard)?"WORD_COMBINATION":
+                                isIn(strokeOrderCard)?"STROKE_ORDER":
                                 radicalbox.isCorrect()?"WAITING_HINT":
                                 "WRONG":
              isIn(constructionCardVerso)?"CONSTRUCTION":
@@ -60,18 +66,10 @@ CardBox {
     }
 
     states: [
-        State {
-            name: "CONSTRUCTION"
-        },
-        State {
-            name: "PINYIN_PRONUNCIATION"
-        },
-        State {
-            name: "WORD_COMBINATION"
-        },
-        State {
-            name: "STROKE_ORDER"
-        },
+        State { name: "CONSTRUCTION" },
+        State { name: "PINYIN_PRONUNCIATION" },
+        State { name: "WORD_COMBINATION" },
+        State { name: "STROKE_ORDER" },
         State {
             name: "NONE"
             PropertyChanges {
@@ -79,12 +77,8 @@ CardBox {
                 visible: false
             }
         },
-        State {
-            name: "WAITING_HINT"
-        },
-        State {
-            name: "WAITING_CONSTRUCTION"
-        },
+        State { name: "WAITING_HINT" },
+        State { name: "WAITING_CONSTRUCTION" },
         State {
             name: "WRONG"
             PropertyChanges {

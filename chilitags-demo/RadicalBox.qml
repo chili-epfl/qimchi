@@ -1,5 +1,5 @@
 import QtQuick 2.0
-
+//import "test.js" as Exercise
 
 
 //This text displays "ready" on one of the visible component card
@@ -44,7 +44,7 @@ CardBox {
 
     state: {
         var r = getRatio()
-        isIn(selectorCursor)?
+        selectorCursor.visible?
         (r<0.25)?"RADICAL1":
         (r<0.35)?"RADICAL2":
         (r<0.45)?"RADICAL3":
@@ -80,14 +80,16 @@ CardBox {
 
     function flip(){
         if(hintbox.state=="CONSTRUCTION"){
-            if(state=="RADICAL1"){mistakes.count += 1; radical1_constructed = true}
-            if(state=="RADICAL2"){mistakes.count += 1; radical2_constructed = true}
-            if(state=="RADICAL3"){ch6.visible=true; radical3_constructed = true}
-            if(state=="RADICAL4"){mistakes.count += 1; radical4_constructed = true}
-            if(state=="RADICAL5"){mistakes.count += 1; radical5_constructed = true}
-            if(state=="RADICAL6"){mistakes.count += 1; radical6_constructed = true}
-            if(state=="RADICAL7"){mistakes.count += 1; radical7_constructed = true}
-            if(state=="RADICAL8"){ch7.visible=true; radical8_constructed = true}
+            if(state=="RADICAL1"){radical1_constructed = true; characters.radical1.visible = isCorrect()}
+            if(state=="RADICAL2"){radical2_constructed = true; characters.radical2.visible = isCorrect()}
+            if(state=="RADICAL3"){radical3_constructed = true; characters.radical3.visible = isCorrect()}
+            if(state=="RADICAL4"){radical4_constructed = true; characters.radical4.visible = isCorrect()}
+            if(state=="RADICAL5"){radical5_constructed = true; characters.radical5.visible = isCorrect()}
+            if(state=="RADICAL6"){radical6_constructed = true; characters.radical6.visible = isCorrect()}
+            if(state=="RADICAL7"){radical7_constructed = true; characters.radical7.visible = isCorrect()}
+            if(state=="RADICAL8"){radical8_constructed = true; characters.radical8.visible = isCorrect()}
+
+            if(isCorrect()){success.count += 1}else{mistakes.count += 1}
         }
     }
 
@@ -108,52 +110,72 @@ CardBox {
     }
 
     function isCorrect(){
-        if(state==="RADICAL3"){return radical3_constructed}
-        if(state==="RADICAL8"){return radical8_constructed}
+        if(state==="RADICAL1"){return radical1_constructed & exercise.getCurrent().radical1_correct}
+        if(state==="RADICAL2"){return radical2_constructed & exercise.getCurrent().radical2_correct}
+        if(state==="RADICAL3"){return radical3_constructed & exercise.getCurrent().radical3_correct}
+        if(state==="RADICAL4"){return radical4_constructed & exercise.getCurrent().radical4_correct}
+        if(state==="RADICAL5"){return radical5_constructed & exercise.getCurrent().radical5_correct}
+        if(state==="RADICAL6"){return radical6_constructed & exercise.getCurrent().radical6_correct}
+        if(state==="RADICAL7"){return radical7_constructed & exercise.getCurrent().radical7_correct}
+        if(state==="RADICAL8"){return radical8_constructed & exercise.getCurrent().radical8_correct}
         return false
     }
+
     function isWrong(){
-        if(state==="RADICAL1"){return radical1_constructed}
-        if(state==="RADICAL2"){return radical2_constructed}
-        if(state==="RADICAL4"){return radical4_constructed}
-        if(state==="RADICAL5"){return radical5_constructed}
-        if(state==="RADICAL6"){return radical6_constructed}
-        if(state==="RADICAL7"){return radical7_constructed}
+        if(state==="RADICAL1"){return radical1_constructed & exercise.getCurrent().radical1_correct}
+        if(state==="RADICAL2"){return radical2_constructed & exercise.getCurrent().radical2_correct}
+        if(state==="RADICAL3"){return radical3_constructed & exercise.getCurrent().radical3_correct}
+        if(state==="RADICAL4"){return radical4_constructed & exercise.getCurrent().radical4_correct}
+        if(state==="RADICAL5"){return radical5_constructed & exercise.getCurrent().radical5_correct}
+        if(state==="RADICAL6"){return radical6_constructed & exercise.getCurrent().radical6_correct}
+        if(state==="RADICAL7"){return radical7_constructed & exercise.getCurrent().radical7_correct}
+        if(state==="RADICAL8"){return radical8_constructed & exercise.getCurrent().radical8_correct}
         return false
     }
 
     function getPinyin(){
-        if(state==="RADICAL3"){return "Ma"}
-        if(state==="RADICAL8"){return "Ma (3)"}
+        if(state==="RADICAL1"){return exercise.getCurrent().radical1_pinyin}
+        if(state==="RADICAL2"){return exercise.getCurrent().radical2_pinyin}
+        if(state==="RADICAL3"){return exercise.getCurrent().radical3_pinyin}
+        if(state==="RADICAL4"){return exercise.getCurrent().radical4_pinyin}
+        if(state==="RADICAL5"){return exercise.getCurrent().radical5_pinyin}
+        if(state==="RADICAL6"){return exercise.getCurrent().radical6_pinyin}
+        if(state==="RADICAL7"){return exercise.getCurrent().radical7_pinyin}
+        if(state==="RADICAL8"){return exercise.getCurrent().radical8_pinyin}
     }
 
     function getWord(){
-        if(state==="RADICAL3"){return "好吗"}
-        if(state==="RADICAL8"){return "号码"}
+        if(state==="RADICAL1"){return exercise.getCurrent().radical1_word}
+        if(state==="RADICAL2"){return exercise.getCurrent().radical2_word}
+        if(state==="RADICAL3"){return exercise.getCurrent().radical3_word}
+        if(state==="RADICAL4"){return exercise.getCurrent().radical4_word}
+        if(state==="RADICAL5"){return exercise.getCurrent().radical5_word}
+        if(state==="RADICAL6"){return exercise.getCurrent().radical6_word}
+        if(state==="RADICAL7"){return exercise.getCurrent().radical7_word}
+        if(state==="RADICAL8"){return exercise.getCurrent().radical8_word}
+    }
+
+    function getStrokes(){
+        if(state==="RADICAL1"){return exercise.getCurrent().radical1_stroke}
+        if(state==="RADICAL2"){return exercise.getCurrent().radical2_stroke}
+        if(state==="RADICAL3"){return exercise.getCurrent().radical3_stroke}
+        if(state==="RADICAL4"){return exercise.getCurrent().radical4_stroke}
+        if(state==="RADICAL5"){return exercise.getCurrent().radical5_stroke}
+        if(state==="RADICAL6"){return exercise.getCurrent().radical6_stroke}
+        if(state==="RADICAL7"){return exercise.getCurrent().radical7_stroke}
+        if(state==="RADICAL8"){return exercise.getCurrent().radical8_stroke}
     }
 
     states: [
         State {name: "NO_SELECTOR"},
-        State {name: "RADICAL1"},
-        State {name: "RADICAL2"},
-        State {
-            name: "RADICAL3"
-            PropertyChanges {
-                target: ch6.child
-                color: "green"
-            }
-        },
-        State {name: "RADICAL4"},
-        State {name: "RADICAL5"},
-        State {name: "RADICAL6"},
-        State {name: "RADICAL7"},
-        State {
-            name: "RADICAL8"
-            PropertyChanges {
-                target: ch7.child
-                color: "green"
-            }
-        }
-]
+        State {name: "RADICAL1"; PropertyChanges {target: characters.radical1.child; color: "green"}},
+        State {name: "RADICAL2"; PropertyChanges {target: characters.radical2.child; color: "green"}},
+        State {name: "RADICAL3"; PropertyChanges {target: characters.radical3.child; color: "green"}},
+        State {name: "RADICAL4"; PropertyChanges {target: characters.radical4.child; color: "green"}},
+        State {name: "RADICAL5"; PropertyChanges {target: characters.radical5.child; color: "green"}},
+        State {name: "RADICAL6"; PropertyChanges {target: characters.radical6.child; color: "green"}},
+        State {name: "RADICAL7"; PropertyChanges {target: characters.radical7.child; color: "green"}},
+        State {name: "RADICAL8"; PropertyChanges {target: characters.radical8.child; color: "green"}}
+    ]
 }
 

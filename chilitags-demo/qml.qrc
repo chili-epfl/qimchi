@@ -14,5 +14,20 @@
         <file>frame.png</file>
         <file>HintBox.qml</file>
         <file>RadicalBox.qml</file>
+        <file>gifs/hao3.gif</file>
+        <file>gifs/jie3.gif</file>
+        <file>gifs/ma.gif</file>
+        <file>gifs/ta1.gif</file>
+        <file>gifs/xing4.gif</file>
+        <file>gifs/yao4.gif</file>
+        <file>Omnibox.qml</file>
+        <file>test.js</file>
+        <file>ExerciseRed1.qml</file>
+        <file>ExerciseRed2.qml</file>
+        <file>ExerciseEmptyTemplate.qml</file>
+        <file>ExerciseSelector.qml</file>
+        <file>Characters.qml</file>
+        <file>ExerciseRed3.qml</file>
+        <file>gifs/jiao4.gif</file>
     </qresource>
 </RCC>
