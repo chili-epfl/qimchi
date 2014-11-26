@@ -11,10 +11,22 @@ The global QtCreator project references the following modules:
 
 * qmlchilitags: integration of [Chilitags](https://github.com/chili-epfl/chilitags)
   in QML
-* qmlchilitags-demo: demonstration of how to use qmlchilitags for "regular" AR,
-  i.e. displaying virtual element on a camera feed
+* qmlchilitags-demo: A tangible application for learning Chinese using qmlchilitags.
 * qmlchilitags-projection: demonstration of how to use qmlchilitags in a
   camera+projector setting
+
+
+Build
+------
+
+/!\ This qimchi-based application doesn't use the latest qimchi framework.
+
+To build the project :
+
+- Install Chilitags from https://github.com/chili-epfl/chilitags
+
+- Clone the repository and open qimchi.pro project in Qt Creator. In the project Run Settings add the path to the chillitags library to LD_LIBRARY_PATH (for us usr/local/lib)
+
 
 Documentation
 -------------
