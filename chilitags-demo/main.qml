@@ -3,7 +3,6 @@ import QtQuick.Window 2.0
 import QtMultimedia 5.1
 import QtQuick.Controls 1.0
 import Chilitags 1.0
-import "Global.js" as Global
 import "Coordinates.js" as Coordinates
 
 //We decide which language to use
@@ -72,12 +71,9 @@ ApplicationWindow {
     }
 
 
-    //There is a display problem with this menubar that sometimes doesn't show anything
-    //I don't understand where it comes from
     menuBar: MenuBar {
         Menu {
             title: Str.file
-            //*
             MenuItem {
                 text: Str.start
                 onTriggered: camera.start()
@@ -90,7 +86,6 @@ ApplicationWindow {
                 text: Str.reset
                 onTriggered: {reset()}
             }
-            //*/
             MenuItem {
                 text: Str.exit
                 visible:true
@@ -112,8 +107,8 @@ ApplicationWindow {
         // Define here tagCenter as the center of a 20x20 (mm) tag
         property vector3d tagCenter : Qt.vector3d(10,10,0)
 
-
-
+        //We define Chilitags objects for the topleft corner of each different exercise
+        //with onVisibilityChanged function that changes the state of ExerciseSelector
         ChilitagsObject {
             id: red1_top_left
             name: exercise.red1.top_left_tag
@@ -138,9 +133,6 @@ ApplicationWindow {
 
 
         // We declare tags for the function cards
-        // When this card appears we reveals the new constructions
-        // If the five possibilities have been found we change state to
-        // continue the exercise on the right side
         ChilitagsObject {
             id: constructionCardRecto
             name: "tag_0"
@@ -158,16 +150,11 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(constructionCardVerso.visible & constructionCardRecto.visible){
-                    if(main.state === "CONSTRUCTION_LEFT"){
-                        componentbox.flip()
-                    }
-                    if(main.state === "CONSTRUCTION_RIGHT"){
-                        radicalbox.flip()
-                    }
+                    if(main.state === "CONSTRUCTION_LEFT"){componentbox.flip()}
+                    if(main.state === "CONSTRUCTION_RIGHT"){radicalbox.flip()}
                 }
             }
         }
-
         ChilitagsObject {
             id: wordCombinationCard
             name: "tag_2"
@@ -189,9 +176,7 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(main.state == "INITIAL"){
-                    if(startCard.visible){
-                        main.state = "CONSTRUCTION_LEFT"
-                    }
+                    if(startCard.visible){main.state = "CONSTRUCTION_LEFT"}
                 }
             }
         }
@@ -205,16 +190,13 @@ ApplicationWindow {
                 }
             }
         }
-
         ChilitagsObject {
             id: switchToComponent
             name: "tag_7"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(main.state == "CONSTRUCTION_RIGHT"){
-                    if(switchToComponent.visible){
-                        main.state = "CONSTRUCTION_LEFT"
-                    }
+                    if(switchToComponent.visible){main.state = "CONSTRUCTION_LEFT"}
                 }
             }
         }
@@ -225,14 +207,12 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(main.state == "CONSTRUCTION_LEFT"){
-                    if(switchToRadicals.visible){
-                        main.state = "CONSTRUCTION_RIGHT"
-                    }
+                    if(switchToRadicals.visible){main.state = "CONSTRUCTION_RIGHT"}
                 }
             }
         }
 
-        // We declare tags for the components (orange cards)
+        // We declare tags for the at most 12 components (orange cards)
         ChilitagsObject {
             id: component1
             name: exercise.getCurrent().component1_tag
@@ -320,16 +300,7 @@ ApplicationWindow {
             id: selectorCursor
             name: "tag_171"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                if(main.state == "LEFT_COMPLETED"){
-                    if(selectorCursor.visible){
-                        main.state = "CONSTRUCTION_RIGHT"
-                        console.log("selectorCursor visible")
-                    }
-                }
-            }
         }
-
 
 
         // We declare tags for the basic sheet
@@ -353,7 +324,6 @@ ApplicationWindow {
             name: exercise.getCurrent().bottom_left_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
-
 
     }
 
@@ -539,11 +509,12 @@ ApplicationWindow {
             }
         }
 
+
+        //We define three texts to show #success, #mistakes and %rate
         MyItem {
-            id: success
             visible:true
-            x_cm: 32
-            y_cm: 3
+            id: success
+            x_cm: 32;y_cm: 3
             property int count:0
             child.text: "success : " + count
             child.font.pointSize: 32
@@ -551,10 +522,9 @@ ApplicationWindow {
         }
 
         MyItem {
-            id: mistakes
             visible:true
-            x_cm:32
-            y_cm:6
+            id: mistakes
+            x_cm:32;y_cm:6
             property int count:0
             child.text: "mistakes : " + count
             child.font.pointSize: 32
@@ -563,19 +533,13 @@ ApplicationWindow {
 
         MyItem {
             visible:true
-            x_cm:32
-            y_cm:9
+            x_cm:32; y_cm:9
             property int rate : 100 * (success.count+2) / (2+success.count+mistakes.count)
             child.text: "rate : " + rate + "%"
             child.font.pointSize: 32
-            child.color: {
-                return rate<30?"red":rate<60?"orange":rate<80?"yellow":"green"
-            }
+            child.color: {return rate<30?"red":rate<60?"orange":rate<80?"yellow":"green"}
         }
 
-
     }
-
-
 
 }

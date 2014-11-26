@@ -3,7 +3,7 @@
 //You can use this file with an import in main.qml:
 //      import "StringFr.js" as Str
 //and then
-//      Str.maintitle_initial ===>gives you "Deconstruct the character"
+//      Str.maintitle_initial ===> gives you "Deconstruct the character"
 
 
 

@@ -15,9 +15,6 @@ var horizontal_length = 26.5
 //Distance between the two centers of TopLeft tag and BottomLeft tag
 var vertical_length = 17.7
 
-
-
-
 //maintitle is the above text that explains the exercise
 var maintitle_X = 13.7
 var maintitle_Y = -1.2

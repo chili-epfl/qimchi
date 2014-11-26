@@ -4,7 +4,6 @@
         <file>qt-logo.png</file>
         <file>hao.gif</file>
         <file>hao.wav</file>
-        <file>Global.js</file>
         <file>Coordinates.js</file>
         <file>MyItem.qml</file>
         <file>StringFr.js</file>
@@ -20,8 +19,6 @@
         <file>gifs/ta1.gif</file>
         <file>gifs/xing4.gif</file>
         <file>gifs/yao4.gif</file>
-        <file>Omnibox.qml</file>
-        <file>test.js</file>
         <file>ExerciseRed1.qml</file>
         <file>ExerciseRed2.qml</file>
         <file>ExerciseEmptyTemplate.qml</file>

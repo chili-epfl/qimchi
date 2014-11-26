@@ -2,6 +2,8 @@ import QtQuick 2.0
 
 Item {
 
+
+    //We implement the function giving the id of the current exercise
     function getCurrent(){
         if(state==="RED1"){return red1}
         if(state==="RED2"){return red2}
@@ -13,6 +15,8 @@ Item {
     property alias red2: red2
     property alias red3: red3
 
+    //We define a state to know which exercise is being used.
+    //The state changes when a new sheet appears
     state: "EMPTY"
 
     states: [

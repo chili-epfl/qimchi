@@ -2,6 +2,11 @@ import QtQuick 2.0
 
 Item {
 
+
+    //We define 12(component) + 8(radical) characters,
+    //but most of them will never become visible.
+
+    //When componentX is used and is correct the character called componentX will become visible
     property alias component1 : component1
     property alias component2 : component2
     property alias component3 : component3
@@ -29,11 +34,7 @@ Item {
         x_cm: exercise.getCurrent().component1_X
         y_cm: exercise.getCurrent().component1_Y
         child.text: exercise.getCurrent().component1_character
-        Image {
-            anchors.centerIn: parent
-            source: "frame.png"
-            z:-1
-        }
+        Image {anchors.centerIn: parent; source: "frame.png"; z:-1}
     }
 
     MyItem {

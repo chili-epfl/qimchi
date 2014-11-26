@@ -1,25 +1,30 @@
 import QtQuick 2.0
-
+//We describe all necessary elements for an exercise
 Item {
     visible:false
 
     property string name : "ExerciseRed1"
+
+    //The main character for the exercise
     property string main_character : "妈"
 
+    //The code of the four corners of the sheet
     property string top_left_tag: "tag_100"
     property string top_right_tag: "tag_101"
     property string bottom_right_tag: "tag_102"
     property string bottom_left_tag: "tag_103"
 
+    //The left part of the main caracter and its coordinates
     property string left_part_character: "女"
     property double left_part_X: 4.5
     property double left_part_Y: 4
 
+    //The right part of the main character and its coordinates
     property string right_part_character: "马"
     property double right_part_X: 22.4
     property double right_part_Y: 4
 
-    //COMPONENT1
+    //All necessary information about the result of constructing a character zwith component1
     property string component1 : "子"
     property bool component1_correct : true
     property string component1_character : "好"

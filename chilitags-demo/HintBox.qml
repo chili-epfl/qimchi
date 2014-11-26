@@ -9,33 +9,11 @@ import QtQuick 2.0
 //This item also makes the character of the selected component appear green
 //and manages the right text on pinyinCards and wordCombinationCard
 CardBox {
-    visible: main.state != "INITIAL"
-    boxtext.text: {
-        state=="WAITING_HINT"?"Use an hint card \nor change component":
-        state=="WAITING_CONSTRUCTION"?"Use the construction card":
-        state=="CONSTRUCTION"?"Flip the card to construct":
-        state=="PINYIN_PRONUNCIATION"?
-            main.state=="CONSTRUCTION_LEFT"?componentbox.getPinyin():radicalbox.getPinyin():
-        state=="WORD_COMBINATION"?
-            main.state=="CONSTRUCTION_LEFT"?componentbox.getWord():radicalbox.getWord():
-        state=="STROKE_ORDER"?
-            main.state=="CONSTRUCTION_LEFT"?componentbox.getStrokes():radicalbox.getStrokes():
-        "Error"
-    }
-    boxtext.visible: false
-    boxrectangle.border.color: {
-        state=="WAITING_HINT"?"yellow":
-        state=="WAITING_CONSTRUCTION"?"yellow":
-        "green"
-    }
 
     x_cm: 20.5
     y_cm: 14
     height_cm: 8.5
     width_cm: 8.5
-
-
-
 
     state: {
         main.state=="CONSTRUCTION_LEFT"?

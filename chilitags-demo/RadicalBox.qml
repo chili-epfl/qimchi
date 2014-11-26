@@ -10,19 +10,6 @@ import QtQuick 2.0
 //and manages the right text on pinyinCards and wordCombinationCard
 CardBox {
     visible: (main.state == "CONSTRUCTION_RIGHT")
-    boxtext.text: {
-        var r = getRatio()
-        isIn(selectorCursor)? +
-        (r<0.25)?radical1_constructed?"Wrong":"Radical : 夕":
-        (r<0.35)?radical2_constructed?"Wrong":"Radical : 车":
-        (r<0.45)?radical3_constructed?"Good ! Use hint cards now.":"Radical : 口":
-        (r<0.55)?radical4_constructed?"Wrong":"Radical : 女":
-        (r<0.65)?radical5_constructed?"Wrong":"Radical : 木":
-        (r<0.75)?radical6_constructed?"Wrong":"Radical : 心":
-        (r<0.85)?radical7_constructed?"Wrong":"Radical : 父":
-                 radical8_constructed?"Good ! Use hint cards now.":"Radical : 石":
-        "Use the radical selector"
-    }
 
     property bool radical1_constructed : false
     property bool radical2_constructed : false
@@ -32,10 +19,6 @@ CardBox {
     property bool radical6_constructed : false
     property bool radical7_constructed : false
     property bool radical8_constructed : false
-
-    boxrectangle.border.color: {
-        state=="NO_SELECTOR"?"yellow":isWrong()?"red":"green"
-    }
 
     x_cm: -10
     y_cm: 4

@@ -17,60 +17,6 @@ CardBox {
     height_cm: 8
     width_cm: 8
 
-    boxtext.text: {
-        state==="NONE"?"Choose a component":
-        state==="TOOMUCH"?"Too much components in the box":
-        state==="COMPONENT1"?
-            component1_constructed?
-            exercise.getCurrent().component1_correct?"Good":"Wrong":
-            exercise.getCurrent().component1:
-        state==="COMPONENT2"?
-            component2_constructed?
-            exercise.getCurrent().component2_correct?"Good":"Wrong":
-            exercise.getCurrent().component2:
-        state==="COMPONENT3"?
-            component3_constructed?
-            exercise.getCurrent().component3_correct?"Good":"Wrong":
-            exercise.getCurrent().component3:
-        state==="COMPONENT4"?
-            component4_constructed?
-            exercise.getCurrent().component4_correct?"Good":"Wrong":
-            exercise.getCurrent().component4:
-        state==="COMPONENT5"?
-            component5_constructed?
-            exercise.getCurrent().component5_correct?"Good":"Wrong":
-            exercise.getCurrent().component5:
-        state==="COMPONENT6"?
-            component6_constructed?
-            exercise.getCurrent().component6_correct?"Good":"Wrong":
-            exercise.getCurrent().component6:
-        state==="COMPONENT7"?
-            component7_constructed?
-            exercise.getCurrent().component7_correct?"Good":"Wrong":
-            exercise.getCurrent().component7:
-        state==="COMPONENT8"?
-            component8_constructed?
-            exercise.getCurrent().component8_correct?"Good":"Wrong":
-            exercise.getCurrent().component8:
-        state==="COMPONENT9"?
-            component9_constructed?
-            exercise.getCurrent().component9_correct?"Good":"Wrong":
-            exercise.getCurrent().component9:
-        state==="COMPONENT10"?
-            component10_constructed?
-            exercise.getCurrent().component10_correct?"Good":"Wrong":
-            exercise.getCurrent().component10:
-        state==="COMPONENT11"?
-            component11_constructed?
-            exercise.getCurrent().component11_correct?"Good":"Wrong":
-            exercise.getCurrent().component11:
-        state==="COMPONENT12"?
-            component12_constructed?
-            exercise.getCurrent().component12_correct?"Good":"Wrong":
-            exercise.getCurrent().component12:
-        ""
-    }
-
     property bool component1_constructed : false
     property bool component2_constructed : false
     property bool component3_constructed : false
@@ -84,55 +30,22 @@ CardBox {
     property bool component11_constructed : false
     property bool component12_constructed : false
 
-
-    boxrectangle.border.color: {
-        state==="NONE"?"yellow":
-        state==="TOOMUCH"?"red":
-        state==="COMPONENT1"?component1_constructed?exercise.getCurrent().component1_correct?"green":"red":"green":
-        state==="COMPONENT2"?component2_constructed?exercise.getCurrent().component2_correct?"green":"red":"green":
-        state==="COMPONENT3"?component3_constructed?exercise.getCurrent().component3_correct?"green":"red":"green":
-        state==="COMPONENT4"?component4_constructed?exercise.getCurrent().component4_correct?"green":"red":"green":
-        state==="COMPONENT5"?component5_constructed?exercise.getCurrent().component5_correct?"green":"red":"green":
-        state==="COMPONENT6"?component6_constructed?exercise.getCurrent().component6_correct?"green":"red":"green":
-        state==="COMPONENT7"?component7_constructed?exercise.getCurrent().component7_correct?"green":"red":"green":
-        state==="COMPONENT8"?component8_constructed?exercise.getCurrent().component8_correct?"green":"red":"green":
-        state==="COMPONENT9"?component9_constructed?exercise.getCurrent().component9_correct?"green":"red":"green":
-        state==="COMPONENT10"?component10_constructed?exercise.getCurrent().component10_correct?"green":"red":"green":
-        state==="COMPONENT11"?component11_constructed?exercise.getCurrent().component11_correct?"green":"red":"green":
-        state==="COMPONENT12"?component12_constructed?exercise.getCurrent().component12_correct?"green":"red":"green":""
-    }
-
     state: {
         var count = 0
         var new_state = "NONE"
-        isIn(component1)?count++:0
-        isIn(component2)?count++:0
-        isIn(component3)?count++:0
-        isIn(component4)?count++:0
-        isIn(component5)?count++:0
-        isIn(component6)?count++:0
-        isIn(component7)?count++:0
-        isIn(component8)?count++:0
-        isIn(component9)?count++:0
-        isIn(component10)?count++:0
-        isIn(component11)?count++:0
-        isIn(component12)?count++:0
-
-        isIn(component1)?new_state = "COMPONENT1":0
-        isIn(component2)?new_state = "COMPONENT2":0
-        isIn(component3)?new_state = "COMPONENT3":0
-        isIn(component4)?new_state = "COMPONENT4":0
-        isIn(component5)?new_state = "COMPONENT5":0
-        isIn(component6)?new_state = "COMPONENT6":0
-        isIn(component7)?new_state = "COMPONENT7":0
-        isIn(component8)?new_state = "COMPONENT8":0
-        isIn(component9)?new_state = "COMPONENT9":0
-        isIn(component10)?new_state = "COMPONENT10":0
-        isIn(component11)?new_state = "COMPONENT11":0
-        isIn(component12)?new_state = "COMPONENT12":0
-
+        if(isIn(component1)){new_state = "COMPONENT1";count++}
+        if(isIn(component2)){new_state = "COMPONENT2";count++}
+        if(isIn(component3)){new_state = "COMPONENT3";count++}
+        if(isIn(component4)){new_state = "COMPONENT4";count++}
+        if(isIn(component5)){new_state = "COMPONENT5";count++}
+        if(isIn(component6)){new_state = "COMPONENT6";count++}
+        if(isIn(component7)){new_state = "COMPONENT7";count++}
+        if(isIn(component8)){new_state = "COMPONENT8";count++}
+        if(isIn(component9)){new_state = "COMPONENT9";count++}
+        if(isIn(component10)){new_state = "COMPONENT10";count++}
+        if(isIn(component11)){new_state = "COMPONENT11";count++}
+        if(isIn(component12)){new_state = "COMPONENT12";count++}
         return count>1?"TOOMUCH":new_state
-
     }
 
     function flip(){
