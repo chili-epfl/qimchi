@@ -125,6 +125,25 @@ CardBox {
         if(state==="RADICAL6"){return exercise.getCurrent().radical6_pinyin}
         if(state==="RADICAL7"){return exercise.getCurrent().radical7_pinyin}
         if(state==="RADICAL8"){return exercise.getCurrent().radical8_pinyin}
+        return "NOPINYIN AVAILABLE"
+    }
+
+    function getSelection(){
+        if(isCorrect()){
+            return "Correct !"
+        }else if(isWrong()){
+            return "Wrong"
+        }else{
+            if(state==="RADICAL1"){return exercise.getCurrent().radical1}
+            if(state==="RADICAL2"){return exercise.getCurrent().radical2}
+            if(state==="RADICAL3"){return exercise.getCurrent().radical3}
+            if(state==="RADICAL4"){return exercise.getCurrent().radical4}
+            if(state==="RADICAL5"){return exercise.getCurrent().radical5}
+            if(state==="RADICAL6"){return exercise.getCurrent().radical6}
+            if(state==="RADICAL7"){return exercise.getCurrent().radical7}
+            if(state==="RADICAL8"){return exercise.getCurrent().radical8}
+        }
+        return ""
     }
 
     function getWord(){

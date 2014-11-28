@@ -75,6 +75,10 @@ CardBox {
         if(state==="COMPONENT6"){return component6_constructed}
         if(state==="COMPONENT7"){return component7_constructed}
         if(state==="COMPONENT8"){return component8_constructed}
+        if(state==="COMPONENT9"){return component9_constructed}
+        if(state==="COMPONENT10"){return component10_constructed}
+        if(state==="COMPONENT11"){return component11_constructed}
+        if(state==="COMPONENT12"){return component12_constructed}
         return false
     }
 
@@ -98,6 +102,22 @@ CardBox {
         return false
     }
 
+    function isWrong(){
+        if(state==="COMPONENT1"){return component1_constructed & !exercise.getCurrent().component1_correct}
+        if(state==="COMPONENT2"){return component2_constructed & !exercise.getCurrent().component2_correct}
+        if(state==="COMPONENT3"){return component3_constructed & !exercise.getCurrent().component3_correct}
+        if(state==="COMPONENT4"){return component4_constructed & !exercise.getCurrent().component4_correct}
+        if(state==="COMPONENT5"){return component5_constructed & !exercise.getCurrent().component5_correct}
+        if(state==="COMPONENT6"){return component6_constructed & !exercise.getCurrent().component6_correct}
+        if(state==="COMPONENT7"){return component7_constructed & !exercise.getCurrent().component7_correct}
+        if(state==="COMPONENT8"){return component8_constructed & !exercise.getCurrent().component8_correct}
+        if(state==="COMPONENT9"){return component9_constructed & !exercise.getCurrent().component9_correct}
+        if(state==="COMPONENT10"){return component10_constructed & !exercise.getCurrent().component10_correct}
+        if(state==="COMPONENT11"){return component11_constructed & !exercise.getCurrent().component11_correct}
+        if(state==="COMPONENT12"){return component12_constructed & !exercise.getCurrent().component12_correct}
+        return false
+    }
+
     function getPinyin(){
         if(state==="COMPONENT1"){return exercise.getCurrent().component1_pinyin}
         if(state==="COMPONENT2"){return exercise.getCurrent().component2_pinyin}
@@ -111,6 +131,29 @@ CardBox {
         if(state==="COMPONENT10"){return exercise.getCurrent().component10_pinyin}
         if(state==="COMPONENT11"){return exercise.getCurrent().component11_pinyin}
         if(state==="COMPONENT12"){return exercise.getCurrent().component12_pinyin}
+        return "NO PINYIN AVAILABLE"
+    }
+
+    function getSelection(){
+        if(isCorrect()){
+            return "Correct !"
+        }else if(isWrong()){
+            return "Wrong"
+        }else{
+            if(state==="COMPONENT1"){return exercise.getCurrent().component1}
+            if(state==="COMPONENT2"){return exercise.getCurrent().component2}
+            if(state==="COMPONENT3"){return exercise.getCurrent().component3}
+            if(state==="COMPONENT4"){return exercise.getCurrent().component4}
+            if(state==="COMPONENT5"){return exercise.getCurrent().component5}
+            if(state==="COMPONENT6"){return exercise.getCurrent().component6}
+            if(state==="COMPONENT7"){return exercise.getCurrent().component7}
+            if(state==="COMPONENT8"){return exercise.getCurrent().component8}
+            if(state==="COMPONENT9"){return exercise.getCurrent().component9}
+            if(state==="COMPONENT10"){return exercise.getCurrent().component10}
+            if(state==="COMPONENT11"){return exercise.getCurrent().component11}
+            if(state==="COMPONENT12"){return exercise.getCurrent().component12}
+        }
+        return ""
     }
 
     function getWord(){

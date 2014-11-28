@@ -138,6 +138,10 @@ ApplicationWindow {
             name: "tag_0"
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
+                //The detection of a filp uses the latency of the tag detection.
+                //We consider a flip occured when the two faces of the construction
+                //card are visible at the same time. As for now chilitags detection
+                //of disappearance is always slower.
                 if(constructionCardVerso.visible & constructionCardRecto.visible){
                     if(main.state === "CONSTRUCTION_LEFT"){componentbox.flip()}
                     if(main.state === "CONSTRUCTION_RIGHT"){radicalbox.flip()}
@@ -466,36 +470,73 @@ ApplicationWindow {
             id : characters
         }
 
+        //We give instruction about whih card to use at all time
         MyItem {
-            id: display
+            id: displayInstruction
             visible:true
-            x_cm: 9.5
+            x_cm: 9.2
             y_cm: 11.5
             height: 250; width: 250
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?
-                    componentbox.state=="NONE"?"<- Use a component card":
-                    componentbox.state=="TOOMUCH"?"<- Chose only one component":
-                    hintbox.state=="WAITING_HINT"?"Good ! \nUse an hint card ->\nor\n<- change component":
-                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction card ->":
-                    hintbox.state=="CONSTRUCTION"?"Flip the card to construct ->":
-                    hintbox.state=="PINYIN_PRONUNCIATION"?componentbox.getPinyin():
-                    hintbox.state=="WORD_COMBINATION"?componentbox.getWord():
-                    hintbox.state=="STROKE_ORDER"?"":
-                "Wrong":
+                    componentbox.state=="NONE"?"<- Use a component\ncard":
+                    componentbox.state=="TOOMUCH"?"<- Chose only one\ncomponent":
+                    hintbox.state=="WAITING_HINT"?"Use an hint card ->\nor\n<- change component":
+                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction\ncard ->":
+                    hintbox.state=="CONSTRUCTION"?"Flip the card\nto construct ->":
+                    hintbox.state=="WRONG"?"<- Try an other\ncomponent":
+                "":
                 main.state=="CONSTRUCTION_RIGHT"?
-                    radicalbox.state=="NO_SELECTOR"?"Use the radical selector":
-                    hintbox.state=="WAITING_HINT"?"Good ! \nUse an hint card ->\nor\n<- change component":
-                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction card ->":
-                    hintbox.state=="CONSTRUCTION"?"Flip the card to construct ->":
-                    hintbox.state=="PINYIN_PRONUNCIATION"?radicalbox.getPinyin():
-                    hintbox.state=="WORD_COMBINATION"?radicalbox.getWord():
-                    hintbox.state=="STROKE_ORDER"?"":
-                "Wrong":
+                    radicalbox.state=="NO_SELECTOR"?"Use the radical\nselector":
+                    hintbox.state=="WAITING_HINT"?"Use an hint card ->\nor\n<- change component":
+                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction\ncard ->":
+                    hintbox.state=="CONSTRUCTION"?"Flip the card\nto construct ->":
+                    hintbox.state=="WRONG"?"<- Try an other\ncomponent":
+                "":
                 "Welcome"
             }
             child.font.pointSize:24
+        }
+
+        //We give feedback about which component is selected for construction or
+        //whether the component is correct or not if already constructed
+        MyItem {
+            id: displaySelection
+            visible:true
+            x_cm: 9.2
+            y_cm: 9
+            height: 250; width: 250
+            child.text:{
+                main.state=="CONSTRUCTION_LEFT"?componentbox.getSelection():
+                main.state=="CONSTRUCTION_RIGHT"?radicalbox.getSelection():
+                ""
+            }
+            child.font.pointSize:42
+        }
+
+        //We display word combination, pinyin or stroke order when one of
+        //the hint card is used
+        MyItem {
+            id: displayHint
+            visible:true
+            x_cm: 9.2
+            y_cm: 11.5
+            height: 250; width: 250
+            child.text:{
+                main.state=="CONSTRUCTION_LEFT"?
+                    hintbox.state=="PINYIN_PRONUNCIATION"?componentbox.getPinyin():
+                    hintbox.state=="WORD_COMBINATION"?componentbox.getWord():
+                "":
+                main.state=="CONSTRUCTION_RIGHT"?
+                    hintbox.state=="PINYIN_PRONUNCIATION"?radicalbox.getPinyin():
+                    hintbox.state=="WORD_COMBINATION"?radicalbox.getWord():
+                "":
+                ""
+            }
+            child.font.pointSize:42
+            //We use Animated Image to display the stroke order with a gif file
             AnimatedImage {
+                z:2
                 source: {
                     hintbox.state=="STROKE_ORDER"?
                     main.state=="CONSTRUCTION_LEFT"?
@@ -508,7 +549,6 @@ ApplicationWindow {
                 anchors.fill: parent
             }
         }
-
 
         //We define three texts to show #success, #mistakes and %rate
         MyItem {

@@ -48,29 +48,11 @@ CardBox {
         State { name: "PINYIN_PRONUNCIATION" },
         State { name: "WORD_COMBINATION" },
         State { name: "STROKE_ORDER" },
-        State {
-            name: "NONE"
-            PropertyChanges {
-                target: hintbox
-                visible: false
-            }
-        },
+        State { name: "NONE" },
         State { name: "WAITING_HINT" },
         State { name: "WAITING_CONSTRUCTION" },
-        State {
-            name: "WRONG"
-            PropertyChanges {
-                target: hintbox
-                visible: false
-            }
-        },
-        State {
-            name: "NO_COMPONENT"
-            PropertyChanges {
-                target: hintbox
-                visible: false
-            }
-        }
+        State { name: "WRONG" },
+        State { name: "NO_COMPONENT" }
 
     ]
 }
