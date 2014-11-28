@@ -130,6 +130,27 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
         }
 
+        ChilitagsObject {
+            id: blue1_top_left
+            name: exercise.blue1.top_left_tag
+            onVisibilityChanged: {if(blue1_top_left.visible){exercise.state="BLUE1"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        ChilitagsObject {
+            id: blue2_top_left
+            name: exercise.blue2.top_left_tag
+            onVisibilityChanged: {if(blue2_top_left.visible){exercise.state="BLUE2"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
+        ChilitagsObject {
+            id: blue3_top_left
+            name: exercise.blue3.top_left_tag
+            onVisibilityChanged: {if(blue3_top_left.visible){exercise.state="BLUE3"}}
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+
 
 
         // We declare tags for the function cards

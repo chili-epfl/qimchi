@@ -26,5 +26,8 @@
         <file>Characters.qml</file>
         <file>ExerciseRed3.qml</file>
         <file>gifs/jiao4.gif</file>
+        <file>ExerciseBlue1.qml</file>
+        <file>ExerciseBlue2.qml</file>
+        <file>ExerciseBlue3.qml</file>
     </qresource>
 </RCC>
