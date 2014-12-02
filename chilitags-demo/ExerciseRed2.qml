@@ -5,20 +5,20 @@ import QtQuick 2.0
 Item {
     visible:false
 
-    property string name : "ExerciseRed２"
-    property string main_character : "衬"
+    property string name : "ExerciseRed2"
+    property string main_character : "因"
 
-    property string top_left_tag: "tag_112"
-    property string top_right_tag: "tag_113"
-    property string bottom_right_tag: "tag_114"
-    property string bottom_left_tag: "tag_115"
+    property string top_left_tag: "tag_124"
+    property string top_right_tag: "tag_125"
+    property string bottom_right_tag: "tag_126"
+    property string bottom_left_tag: "tag_127"
 
-    property string left_part_character: "衤"
-    property double left_part_X: 6
+    property string left_part_character: "口"
+    property double left_part_X: 5.9
     property double left_part_Y: 4.1
 
-    property string right_part_character: "寸"
-    property double right_part_X: 21.8
+    property string right_part_character: "大"
+    property double right_part_X: 21.5
     property double right_part_Y: 4.1
 
     //COMPONENT1
@@ -88,24 +88,24 @@ Item {
     property string component6_tag : "tag_109"
 
     //COMPONENT7
-    property string component7 : "彡"
+    property string component7 : "玉"
     property bool component7_correct : true
-    property string component7_character : "衫"
-    property string component7_pinyin : "Shan (1)"
-    property string component7_word : "衬衫"
+    property string component7_character : "国"
+    property string component7_pinyin : "Guo (2)"
+    property string component7_word : "国家"
     property string component7_stroke : ""
-    property double component7_X : 3.4
+    property double component7_X : 3.5
     property double component7_Y : 9.5
     property string component7_tag : "tag_110"
 
     //COMPONENT8
-    property string component8 : "库"
+    property string component8 : "冬"
     property bool component8_correct : true
-    property string component8_character : "裤"
-    property string component8_pinyin : "Ku (4)"
-    property string component8_word : "裤子"
+    property string component8_character : "图"
+    property string component8_pinyin : "Tu (2)"
+    property string component8_word : "地图"
     property string component8_stroke : ""
-    property double component8_X : 9
+    property double component8_X : 8.9
     property double component8_Y : 9.5
     property string component8_tag : "tag_111"
 

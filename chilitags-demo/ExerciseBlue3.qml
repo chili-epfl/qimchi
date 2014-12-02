@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     visible:false
 
-    property string name : "ExerciseBlue1"
+    property string name : "ExerciseBlue3"
     property string main_character : "还"
 
     property string top_left_tag: "tag_128"
@@ -54,7 +54,7 @@ Item {
 
     //COMPONENT4
     property string component4 : "那"
-    property bool component4_correct : false
+    property bool component4_correct : false10
     property string component4_character : ""
     property string component4_pinyin : ""
     property string component4_word : ""
@@ -108,7 +108,7 @@ Item {
     property string component8_tag : "tag_20"
 
     //COMPONENT9
-    property string component9 : "玉"
+    property string component9 : "彡"
     property bool component9_correct : false
     property string component9_character : ""
     property string component9_pinyin : ""
@@ -119,7 +119,7 @@ Item {
     property string component9_tag : "tag_139"
 
     //COMPONENT10
-    property string component10 : "冬"
+    property string component10 : "库"
     property bool component10_correct : false
     property string component10_character : ""
     property string component10_pinyin : ""

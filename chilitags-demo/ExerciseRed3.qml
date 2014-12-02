@@ -88,7 +88,7 @@ Item {
     property string component6_tag : "tag_109"
 
     //COMPONENT7
-    property string component7 : "彡"
+    property string component7 : "玉"
     property bool component7_correct : false
     property string component7_character : ""
     property string component7_pinyin : ""
@@ -99,7 +99,7 @@ Item {
     property string component7_tag : "tag_110"
 
     //COMPONENT8
-    property string component8 : "库"
+    property string component8 : "冬"
     property bool component8_correct : false
     property string component8_character : ""
     property string component8_pinyin : ""

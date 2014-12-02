@@ -22,7 +22,7 @@ ApplicationWindow {
         id:exercise
     }
 
-    title: exercise.getCurrent().main_character
+    title: { exercise.getCurrent().name + " : " + exercise.getCurrent().main_character }
 
     function reset(){
         main.state = "INITIAL"

@@ -3,21 +3,21 @@ import QtQuick 2.0
 Item {
     visible:false
 
-    property string name : "ExerciseBlue1"
-    property string main_character : "因"
+    property string name : "ExerciseBlue2"
+    property string main_character : "衬"
 
-    property string top_left_tag: "tag_124"
-    property string top_right_tag: "tag_125"
-    property string bottom_right_tag: "tag_126"
-    property string bottom_left_tag: "tag_127"
+    property string top_left_tag: "tag_112"
+    property string top_right_tag: "tag_113"
+    property string bottom_right_tag: "tag_114"
+    property string bottom_left_tag: "tag_115"
 
-    property string left_part_character: "口"
-    property double left_part_X: 0
-    property double left_part_Y: 0
+    property string left_part_character: "衤"
+    property double left_part_X: 6
+    property double left_part_Y: 4.1
 
-    property string right_part_character: "X"
-    property double right_part_X: 0
-    property double right_part_Y: 0
+    property string right_part_character: "寸"
+    property double right_part_X: 21.8
+    property double right_part_Y: 4.1
 
     //COMPONENT1
     property string component1 : "尼"
@@ -108,25 +108,25 @@ Item {
     property string component8_tag : "tag_20"
 
     //COMPONENT9
-    property string component9 : "玉"
+    property string component9 : "彡"
     property bool component9_correct : true
-    property string component9_character : "国"
-    property string component9_pinyin : "Guo (2)"
-    property string component9_word : "国家"
+    property string component9_character : "衫"
+    property string component9_pinyin : "Shan (1)"
+    property string component9_word : "衬衫"
     property string component9_stroke : ""
-    property double component9_X : 0
-    property double component9_Y : 0
+    property double component9_X : 3.4
+    property double component9_Y : 9.5
     property string component9_tag : "tag_139"
 
     //COMPONENT10
-    property string component10 : "冬"
+    property string component10 : "库"
     property bool component10_correct : true
-    property string component10_character : "图"
-    property string component10_pinyin : "Tu (2)"
-    property string component10_word : "地图"
+    property string component10_character : "裤"
+    property string component10_pinyin : "Ku (4)"
+    property string component10_word : "裤子"
     property string component10_stroke : ""
-    property double component10_X : 0
-    property double component10_Y : 0
+    property double component10_X : 9
+    property double component10_Y : 9.5
     property string component10_tag : "tag_140"
 
     //COMPONENT11
