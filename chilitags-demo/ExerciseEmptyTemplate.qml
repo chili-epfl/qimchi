@@ -151,6 +151,17 @@ Item {
     property double component12_Y : 0
     property string component12_tag : ""
 
+    //COMPONENT13
+    property string component13 : ""
+    property bool component13_correct : false
+    property string component13_character : ""
+    property string component13_pinyin : ""
+    property string component13_word : ""
+    property string component13_stroke : ""
+    property double component13_X : 0
+    property double component13_Y : 0
+    property string component13_tag : ""
+
     //RADICAL1
     property string radical1 : "夕"
     property bool radical1_correct : false

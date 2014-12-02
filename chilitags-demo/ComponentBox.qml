@@ -29,6 +29,7 @@ CardBox {
     property bool component10_constructed : false
     property bool component11_constructed : false
     property bool component12_constructed : false
+    property bool component13_constructed : false
 
     state: {
         var count = 0
@@ -45,6 +46,7 @@ CardBox {
         if(isIn(component10)){new_state = "COMPONENT10";count++}
         if(isIn(component11)){new_state = "COMPONENT11";count++}
         if(isIn(component12)){new_state = "COMPONENT12";count++}
+        if(isIn(component13)){new_state = "COMPONENT13";count++}
         return count>1?"TOOMUCH":new_state
     }
 
@@ -62,6 +64,7 @@ CardBox {
             if(state=="COMPONENT10"){component10_constructed = true;characters.component10.visible=isCorrect()}
             if(state=="COMPONENT11"){component11_constructed = true;characters.component11.visible=isCorrect()}
             if(state=="COMPONENT12"){component12_constructed = true;characters.component12.visible=isCorrect()}
+            if(state=="COMPONENT13"){component13_constructed = true;characters.component13.visible=isCorrect()}
             if(isCorrect()){success.count += 1}else{mistakes.count += 1}
         }
     }
@@ -79,6 +82,7 @@ CardBox {
         if(state==="COMPONENT10"){return component10_constructed}
         if(state==="COMPONENT11"){return component11_constructed}
         if(state==="COMPONENT12"){return component12_constructed}
+        if(state==="COMPONENT13"){return component13_constructed}
         return false
     }
 
@@ -99,6 +103,7 @@ CardBox {
         if(state==="COMPONENT10"){return component10_constructed & exercise.getCurrent().component10_correct}
         if(state==="COMPONENT11"){return component11_constructed & exercise.getCurrent().component11_correct}
         if(state==="COMPONENT12"){return component12_constructed & exercise.getCurrent().component12_correct}
+        if(state==="COMPONENT13"){return component13_constructed & exercise.getCurrent().component13_correct}
         return false
     }
 
@@ -115,6 +120,7 @@ CardBox {
         if(state==="COMPONENT10"){return component10_constructed & !exercise.getCurrent().component10_correct}
         if(state==="COMPONENT11"){return component11_constructed & !exercise.getCurrent().component11_correct}
         if(state==="COMPONENT12"){return component12_constructed & !exercise.getCurrent().component12_correct}
+        if(state==="COMPONENT13"){return component13_constructed & !exercise.getCurrent().component13_correct}
         return false
     }
 
@@ -131,6 +137,7 @@ CardBox {
         if(state==="COMPONENT10"){return exercise.getCurrent().component10_pinyin}
         if(state==="COMPONENT11"){return exercise.getCurrent().component11_pinyin}
         if(state==="COMPONENT12"){return exercise.getCurrent().component12_pinyin}
+        if(state==="COMPONENT13"){return exercise.getCurrent().component13_pinyin}
         return "NO PINYIN AVAILABLE"
     }
 
@@ -152,6 +159,7 @@ CardBox {
             if(state==="COMPONENT10"){return exercise.getCurrent().component10}
             if(state==="COMPONENT11"){return exercise.getCurrent().component11}
             if(state==="COMPONENT12"){return exercise.getCurrent().component12}
+            if(state==="COMPONENT13"){return exercise.getCurrent().component13}
         }
         return ""
     }
@@ -169,6 +177,7 @@ CardBox {
         if(state==="COMPONENT10"){return exercise.getCurrent().component10_word}
         if(state==="COMPONENT11"){return exercise.getCurrent().component11_word}
         if(state==="COMPONENT12"){return exercise.getCurrent().component12_word}
+        if(state==="COMPONENT13"){return exercise.getCurrent().component13_word}
     }
 
     function getStrokes(){
@@ -184,6 +193,7 @@ CardBox {
         if(state==="COMPONENT10"){return exercise.getCurrent().component10_stroke}
         if(state==="COMPONENT11"){return exercise.getCurrent().component11_stroke}
         if(state==="COMPONENT12"){return exercise.getCurrent().component12_stroke}
+        if(state==="COMPONENT13"){return exercise.getCurrent().component13_stroke}
     }
 
     states: [
@@ -200,6 +210,7 @@ CardBox {
         State {name: "COMPONENT9"; PropertyChanges { target: characters.component9.child; color:"green" }},
         State {name: "COMPONENT10"; PropertyChanges { target: characters.component10.child; color:"green" }},
         State {name: "COMPONENT11"; PropertyChanges { target: characters.component11.child; color:"green" }},
-        State {name: "COMPONENT12"; PropertyChanges { target: characters.component12.child; color:"green" }}
+        State {name: "COMPONENT12"; PropertyChanges { target: characters.component12.child; color:"green" }},
+        State {name: "COMPONENT13"; PropertyChanges { target: characters.component13.child; color:"green" }}
     ]
 }

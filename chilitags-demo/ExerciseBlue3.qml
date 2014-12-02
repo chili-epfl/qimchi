@@ -12,12 +12,12 @@ Item {
     property string bottom_left_tag: "tag_131"
 
     property string left_part_character: "辶"
-    property double left_part_X: 0
-    property double left_part_Y: 0
+    property double left_part_X: 3.8
+    property double left_part_Y: 4.2
 
-    property string right_part_character: "X"
-    property double right_part_X: 0
-    property double right_part_Y: 0
+    property string right_part_character: "不"
+    property double right_part_X: 20.3
+    property double right_part_Y: 4.2
 
     //COMPONENT1
     property string component1 : "尼"
@@ -54,7 +54,7 @@ Item {
 
     //COMPONENT4
     property string component4 : "那"
-    property bool component4_correct : false10
+    property bool component4_correct : false
     property string component4_character : ""
     property string component4_pinyin : ""
     property string component4_word : ""

@@ -19,6 +19,7 @@ Item {
     property alias component10 : component10
     property alias component11 : component11
     property alias component12 : component12
+    property alias component13 : component13
     property alias radical1 : radical1
     property alias radical2 : radical2
     property alias radical3 : radical3
@@ -169,7 +170,17 @@ Item {
         }
     }
 
-
+    MyItem {
+        id: component13
+        x_cm: exercise.getCurrent().component13_X
+        y_cm: exercise.getCurrent().component13_Y
+        child.text: exercise.getCurrent().component13_character
+        Image {
+            anchors.centerIn: parent
+            source: "frame.png"
+            z:-1
+        }
+    }
 
     MyItem {
         id: radical1

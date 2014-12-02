@@ -38,6 +38,7 @@ ApplicationWindow {
         characters.component10.visible = false
         characters.component11.visible = false
         characters.component12.visible = false
+        characters.component13.visible = false
         characters.radical1.visible = false
         characters.radical2.visible = false
         characters.radical3.visible = false
@@ -58,6 +59,7 @@ ApplicationWindow {
         componentbox.component10_constructed = false
         componentbox.component11_constructed = false
         componentbox.component12_constructed = false
+        componentbox.component13_constructed = false
         radicalbox.radical1_constructed = false
         radicalbox.radical2_constructed = false
         radicalbox.radical3_constructed = false
@@ -296,6 +298,11 @@ ApplicationWindow {
         ChilitagsObject {
             id: component12
             name: exercise.getCurrent().component12_tag
+            property vector3d center : transform.times(parent.tagCenter)
+        }
+        ChilitagsObject {
+            id: component13
+            name: exercise.getCurrent().component13_tag
             property vector3d center : transform.times(parent.tagCenter)
         }
 
