@@ -78,11 +78,7 @@ ApplicationWindow {
             title: Str.file
             MenuItem {
                 text: Str.start
-                onTriggered: camera.start()
-            }
-            MenuItem {
-                text: Str.stop
-                onTriggered: camera.stop()
+                onTriggered: { playSound.source = "qrc:/sound/test.wav"; playSound.play()}
             }
             MenuItem {
                 text: Str.reset
@@ -562,7 +558,20 @@ ApplicationWindow {
                 ""
             }
             child.font.pointSize:42
-            //We use Animated Image to display the stroke order with a gif file
+            //We use Audio to play the pronunciation of the characters
+            Audio {
+                id: playSound
+                source: {
+                    hintbox.state=="PINYIN_PRONUNCIATION"?
+                    main.state=="CONSTRUCTION_LEFT"?
+                        componentbox.getSound():
+                        radicalbox.getSound():
+                    ""
+                }
+                //onStopped: {source = ""}
+                autoPlay: true
+            }
+            //We use AnimatedImage to display the stroke order with a gif file
             AnimatedImage {
                 z:2
                 source: {

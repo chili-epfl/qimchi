@@ -141,6 +141,23 @@ CardBox {
         return "NO PINYIN AVAILABLE"
     }
 
+    function getSound(){
+        if(state==="COMPONENT1"){return exercise.getCurrent().component1_sound}
+        if(state==="COMPONENT2"){return exercise.getCurrent().component2_sound}
+        if(state==="COMPONENT3"){return exercise.getCurrent().component3_sound}
+        if(state==="COMPONENT4"){return exercise.getCurrent().component4_sound}
+        if(state==="COMPONENT5"){return exercise.getCurrent().component5_sound}
+        if(state==="COMPONENT6"){return exercise.getCurrent().component6_sound}
+        if(state==="COMPONENT7"){return exercise.getCurrent().component7_sound}
+        if(state==="COMPONENT8"){return exercise.getCurrent().component8_sound}
+        if(state==="COMPONENT9"){return exercise.getCurrent().component9_sound}
+        if(state==="COMPONENT10"){return exercise.getCurrent().component10_sound}
+        if(state==="COMPONENT11"){return exercise.getCurrent().component11_sound}
+        if(state==="COMPONENT12"){return exercise.getCurrent().component12_sound}
+        if(state==="COMPONENT13"){return exercise.getCurrent().component13_sound}
+        return "NO SOUND AVAILABLE"
+    }
+
     function getSelection(){
         if(isCorrect()){
             return "Correct !"

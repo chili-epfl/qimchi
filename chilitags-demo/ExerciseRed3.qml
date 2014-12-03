@@ -80,8 +80,10 @@ Item {
     property string component6 : "反"
     property bool component6_correct : true
     property string component6_character : "饭"
+
     property string component6_pinyin : "Fan (4)"
     property string component6_word : "饭店"
+
     property string component6_stroke : ""
     property double component6_X : 2.1
     property double component6_Y : 9.3

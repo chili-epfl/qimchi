@@ -128,6 +128,18 @@ CardBox {
         return "NOPINYIN AVAILABLE"
     }
 
+    function getSound(){
+        if(state==="RADICAL1"){return exercise.getCurrent().radical1_sound}
+        if(state==="RADICAL2"){return exercise.getCurrent().radical2_sound}
+        if(state==="RADICAL3"){return exercise.getCurrent().radical3_sound}
+        if(state==="RADICAL4"){return exercise.getCurrent().radical4_sound}
+        if(state==="RADICAL5"){return exercise.getCurrent().radical5_sound}
+        if(state==="RADICAL6"){return exercise.getCurrent().radical6_sound}
+        if(state==="RADICAL7"){return exercise.getCurrent().radical7_sound}
+        if(state==="RADICAL8"){return exercise.getCurrent().radical8_sound}
+        return "NO SOUND AVAILABLE"
+    }
+
     function getSelection(){
         if(isCorrect()){
             return "Correct !"

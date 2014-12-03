@@ -31,6 +31,7 @@ Item {
     property string component1_pinyin : "hao (3)"
     property string component1_word : "你好"
     property string component1_stroke : "qrc:/gifs/hao3.gif"
+    property string component1_sound : "qrc:/sound/translate_好.wav"
     property double component1_X : 0.7
     property double component1_Y : 9.5
     property string component1_tag : "tag_104"
@@ -42,6 +43,7 @@ Item {
     property string component2_pinyin : "xing (4)"
     property string component2_word : "姓名"
     property string component2_stroke : "qrc:/gifs/xing4.gif"
+    property string component2_sound : "qrc:/sound/translate_姓.wav"
     property double component2_X : 4.1
     property double component2_Y : 9.5
     property string component2_tag : "tag_105"
@@ -53,6 +55,7 @@ Item {
     property string component3_pinyin : "jie (3)"
     property string component3_word : "姐姐"
     property string component3_stroke : "qrc:/gifs/jie3.gif"
+    property string component3_sound : "qrc:/sound/translate_姐.wav"
     property double component3_X : 7.6
     property double component3_Y : 9.5
     property string component3_tag : "tag_106"
@@ -64,6 +67,7 @@ Item {
     property string component4_pinyin : "ta (1)"
     property string component4_word : "她们"
     property string component4_stroke : "qrc:/gifs/ta1.gif"
+    property string component4_sound : "qrc:/sound/translate_她.wav"
     property double component4_X : 11.1
     property double component4_Y : 9.5
     property string component4_tag : "tag_107"
@@ -75,6 +79,7 @@ Item {
     property string component5_pinyin : "yao (4)"
     property string component5_word : "不要"
     property string component5_stroke : "qrc:/gifs/yao4.gif"
+    property string component5_sound : "qrc:/sound/translate_要.wav"
     property double component5_X : 14.3
     property double component5_Y : 9.5
     property string component5_tag : "tag_108"
@@ -86,6 +91,7 @@ Item {
     property string component6_pinyin : ""
     property string component6_word : ""
     property string component6_stroke : ""
+    property string component6_sound : ""
     property double component6_X : 0
     property double component6_Y : 0
     property string component6_tag : "tag_109"
@@ -97,6 +103,7 @@ Item {
     property string component7_pinyin : ""
     property string component7_word : ""
     property string component7_stroke : ""
+    property string component7_sound : ""
     property double component7_X : 0
     property double component7_Y : 0
     property string component7_tag : "tag_110"
@@ -108,6 +115,7 @@ Item {
     property string component8_pinyin : ""
     property string component8_word : ""
     property string component8_stroke : ""
+    property string component8_sound : ""
     property double component8_X : 0
     property double component8_Y : 0
     property string component8_tag : "tag_111"
@@ -119,6 +127,7 @@ Item {
     property string component9_pinyin : ""
     property string component9_word : ""
     property string component9_stroke : ""
+    property string component9_sound : ""
     property double component9_X : 0
     property double component9_Y : 0
     property string component9_tag : ""
@@ -130,6 +139,7 @@ Item {
     property string component10_pinyin : ""
     property string component10_word : ""
     property string component10_stroke : ""
+    property string component10_sound : ""
     property double component10_X : 0
     property double component10_Y : 0
     property string component10_tag : ""
@@ -141,6 +151,7 @@ Item {
     property string component11_pinyin : ""
     property string component11_word : ""
     property string component11_stroke : ""
+    property string component11_sound : ""
     property double component11_X : 0
     property double component11_Y : 0
     property string component11_tag : ""
@@ -152,6 +163,7 @@ Item {
     property string component12_pinyin : ""
     property string component12_word : ""
     property string component12_stroke : ""
+    property string component12_sound : ""
     property double component12_X : 0
     property double component12_Y : 0
     property string component12_tag : ""
@@ -163,6 +175,7 @@ Item {
     property string component13_pinyin : ""
     property string component13_word : ""
     property string component13_stroke : ""
+    property string component13_sound : ""
     property double component13_X : 0
     property double component13_Y : 0
     property string component13_tag : ""
@@ -174,6 +187,7 @@ Item {
     property string radical1_pinyin : ""
     property string radical1_word : ""
     property string radical1_stroke : ""
+    property string radical1_sound : ""
     property double radical1_X : 0
     property double radical1_Y : 0
 
@@ -184,6 +198,7 @@ Item {
     property string radical2_pinyin : ""
     property string radical2_word : ""
     property string radical2_stroke : ""
+    property string radical2_sound : ""
     property double radical2_X : 0
     property double radical2_Y : 0
 
@@ -194,6 +209,7 @@ Item {
     property string radical3_pinyin : "Ma"
     property string radical3_word : "好吗"
     property string radical3_stroke : "qrc:/gifs/ma.gif"
+    property string radical3_sound : "qrc:/sound/translate_吗.wav"
     property double radical3_X : 21
     property double radical3_Y : 9.5
 
@@ -204,6 +220,7 @@ Item {
     property string radical4_pinyin : ""
     property string radical4_word : ""
     property string radical4_stroke : ""
+    property string radical4_sound : ""
     property double radical4_X : 0
     property double radical4_Y : 0
 
@@ -214,6 +231,7 @@ Item {
     property string radical5_pinyin : ""
     property string radical5_word : ""
     property string radical5_stroke : ""
+    property string radical5_sound : ""
     property double radical5_X : 0
     property double radical5_Y : 0
 
@@ -224,6 +242,7 @@ Item {
     property string radical6_pinyin : ""
     property string radical6_word : ""
     property string radical6_stroke : ""
+    property string radical6_sound : ""
     property double radical6_X : 0
     property double radical6_Y : 0
 
@@ -234,6 +253,7 @@ Item {
     property string radical7_pinyin : ""
     property string radical7_word : ""
     property string radical7_stroke : ""
+    property string radical7_sound : ""
     property double radical7_X : 0
     property double radical7_Y : 0
 
@@ -244,6 +264,7 @@ Item {
     property string radical8_pinyin : "Ma (3)"
     property string radical8_word : "号码"
     property string radical8_stroke : ""
+    property string radical8_sound : "qrc:/sound/translate_码.wav"
     property double radical8_X : 24.3
     property double radical8_Y : 9.5
 

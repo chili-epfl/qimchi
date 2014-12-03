@@ -29,5 +29,43 @@
         <file>ExerciseBlue1.qml</file>
         <file>ExerciseBlue2.qml</file>
         <file>ExerciseBlue3.qml</file>
+        <file>sound/translate_姐.wav</file>
+        <file>sound/translate_饭.wav</file>
+        <file>sound/translate_们.wav</file>
+        <file>sound/translate_你.wav</file>
+        <file>sound/translate_呢.wav</file>
+        <file>sound/translate_字.wav</file>
+        <file>sound/translate_怎.wav</file>
+        <file>sound/translate_码.wav</file>
+        <file>sound/translate_要.wav</file>
+        <file>sound/translate_便.wav</file>
+        <file>sound/translate_叫.wav</file>
+        <file>sound/translate_哪.wav</file>
+        <file>sound/translate_家.wav</file>
+        <file>sound/translate_这.wav</file>
+        <file>sound/translate_他.wav</file>
+        <file>sound/translate_件.wav</file>
+        <file>sound/translate_号.wav</file>
+        <file>sound/translate_吗.wav</file>
+        <file>sound/translate_喝.wav</file>
+        <file>sound/translate_她.wav</file>
+        <file>sound/translate_室.wav</file>
+        <file>sound/translate_爸.wav</file>
+        <file>sound/translate_进.wav</file>
+        <file>sound/translate_道.wav</file>
+        <file>sound/translate_什.wav</file>
+        <file>sound/translate_只.wav</file>
+        <file>sound/translate_吃.wav</file>
+        <file>sound/translate_名.wav</file>
+        <file>sound/translate_图.wav</file>
+        <file>sound/translate_多.wav</file>
+        <file>sound/translate_好.wav</file>
+        <file>sound/translate_姓.wav</file>
+        <file>sound/translate_校.wav</file>
+        <file>sound/translate_裤.wav</file>
+        <file>sound/translate_出.wav</file>
+        <file>sound/translate_国.wav</file>
+        <file>sound/translate_衫.wav</file>
+        <file>Component.qml</file>
     </qresource>
 </RCC>
