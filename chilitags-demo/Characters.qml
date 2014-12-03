@@ -32,17 +32,17 @@ Item {
 
     MyItem {
         id: component1
-        x_cm: exercise.getCurrent().component1_X
-        y_cm: exercise.getCurrent().component1_Y
-        child.text: exercise.getCurrent().component1_character
+        x_cm: exercise.getCurrent().component1.x_cm
+        y_cm: exercise.getCurrent().component1.y_cm
+        child.text: exercise.getCurrent().component1.character
         Image {anchors.centerIn: parent; source: "frame.png"; z:-1}
     }
 
     MyItem {
         id: component2
-        x_cm: exercise.getCurrent().component2_X
-        y_cm: exercise.getCurrent().component2_Y
-        child.text: exercise.getCurrent().component2_character
+        x_cm: exercise.getCurrent().component2.x_cm
+        y_cm: exercise.getCurrent().component2.y_cm
+        child.text: exercise.getCurrent().component2.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -52,9 +52,9 @@ Item {
 
     MyItem {
         id: component3
-        x_cm: exercise.getCurrent().component3_X
-        y_cm: exercise.getCurrent().component3_Y
-        child.text: exercise.getCurrent().component3_character
+        x_cm: exercise.getCurrent().component3.x_cm
+        y_cm: exercise.getCurrent().component3.y_cm
+        child.text: exercise.getCurrent().component3.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -64,9 +64,9 @@ Item {
 
     MyItem {
         id: component4
-        x_cm: exercise.getCurrent().component4_X
-        y_cm: exercise.getCurrent().component4_Y
-        child.text: exercise.getCurrent().component4_character
+        x_cm: exercise.getCurrent().component4.x_cm
+        y_cm: exercise.getCurrent().component4.y_cm
+        child.text: exercise.getCurrent().component4.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -76,9 +76,9 @@ Item {
 
     MyItem {
         id: component5
-        x_cm: exercise.getCurrent().component5_X
-        y_cm: exercise.getCurrent().component5_Y
-        child.text: exercise.getCurrent().component5_character
+        x_cm: exercise.getCurrent().component5.x_cm
+        y_cm: exercise.getCurrent().component5.y_cm
+        child.text: exercise.getCurrent().component5.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -88,9 +88,9 @@ Item {
 
     MyItem {
         id: component6
-        x_cm: exercise.getCurrent().component6_X
-        y_cm: exercise.getCurrent().component6_Y
-        child.text: exercise.getCurrent().component6_character
+        x_cm: exercise.getCurrent().component6.x_cm
+        y_cm: exercise.getCurrent().component6.y_cm
+        child.text: exercise.getCurrent().component6.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -100,9 +100,9 @@ Item {
 
     MyItem {
         id: component7
-        x_cm: exercise.getCurrent().component7_X
-        y_cm: exercise.getCurrent().component7_Y
-        child.text: exercise.getCurrent().component7_character
+        x_cm: exercise.getCurrent().component7.x_cm
+        y_cm: exercise.getCurrent().component7.y_cm
+        child.text: exercise.getCurrent().component7.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -112,9 +112,9 @@ Item {
 
     MyItem {
         id: component8
-        x_cm: exercise.getCurrent().component8_X
-        y_cm: exercise.getCurrent().component8_Y
-        child.text: exercise.getCurrent().component8_character
+        x_cm: exercise.getCurrent().component8.x_cm
+        y_cm: exercise.getCurrent().component8.y_cm
+        child.text: exercise.getCurrent().component8.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -124,9 +124,9 @@ Item {
 
     MyItem {
         id: component9
-        x_cm: exercise.getCurrent().component9_X
-        y_cm: exercise.getCurrent().component9_Y
-        child.text: exercise.getCurrent().component9_character
+        x_cm: exercise.getCurrent().component9.x_cm
+        y_cm: exercise.getCurrent().component9.y_cm
+        child.text: exercise.getCurrent().component9.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -136,9 +136,9 @@ Item {
 
     MyItem {
         id: component10
-        x_cm: exercise.getCurrent().component10_X
-        y_cm: exercise.getCurrent().component10_Y
-        child.text: exercise.getCurrent().component10_character
+        x_cm: exercise.getCurrent().component10.x_cm
+        y_cm: exercise.getCurrent().component10.y_cm
+        child.text: exercise.getCurrent().component10.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -148,9 +148,9 @@ Item {
 
     MyItem {
         id: component11
-        x_cm: exercise.getCurrent().component11_X
-        y_cm: exercise.getCurrent().component11_Y
-        child.text: exercise.getCurrent().component11_character
+        x_cm: exercise.getCurrent().component11.x_cm
+        y_cm: exercise.getCurrent().component11.y_cm
+        child.text: exercise.getCurrent().component11.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -160,9 +160,9 @@ Item {
 
     MyItem {
         id: component12
-        x_cm: exercise.getCurrent().component12_X
-        y_cm: exercise.getCurrent().component12_Y
-        child.text: exercise.getCurrent().component12_character
+        x_cm: exercise.getCurrent().component12.x_cm
+        y_cm: exercise.getCurrent().component12.y_cm
+        child.text: exercise.getCurrent().component12.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -172,9 +172,9 @@ Item {
 
     MyItem {
         id: component13
-        x_cm: exercise.getCurrent().component13_X
-        y_cm: exercise.getCurrent().component13_Y
-        child.text: exercise.getCurrent().component13_character
+        x_cm: exercise.getCurrent().component13.x_cm
+        y_cm: exercise.getCurrent().component13.y_cm
+        child.text: exercise.getCurrent().component13.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -184,9 +184,9 @@ Item {
 
     MyItem {
         id: radical1
-        x_cm: exercise.getCurrent().radical1_X
-        y_cm: exercise.getCurrent().radical1_Y
-        child.text: exercise.getCurrent().radical1_character
+        x_cm: exercise.getCurrent().radical1.x_cm
+        y_cm: exercise.getCurrent().radical1.y_cm
+        child.text: exercise.getCurrent().radical1.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -196,9 +196,9 @@ Item {
 
     MyItem {
         id: radical2
-        x_cm: exercise.getCurrent().radical2_X
-        y_cm: exercise.getCurrent().radical2_Y
-        child.text: exercise.getCurrent().radical2_character
+        x_cm: exercise.getCurrent().radical2.x_cm
+        y_cm: exercise.getCurrent().radical2.y_cm
+        child.text: exercise.getCurrent().radical2.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -208,9 +208,9 @@ Item {
 
     MyItem {
         id: radical3
-        x_cm: exercise.getCurrent().radical3_X
-        y_cm: exercise.getCurrent().radical3_Y
-        child.text: exercise.getCurrent().radical3_character
+        x_cm: exercise.getCurrent().radical3.x_cm
+        y_cm: exercise.getCurrent().radical3.y_cm
+        child.text: exercise.getCurrent().radical3.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -220,9 +220,9 @@ Item {
 
     MyItem {
         id: radical4
-        x_cm: exercise.getCurrent().radical4_X
-        y_cm: exercise.getCurrent().radical4_Y
-        child.text: exercise.getCurrent().radical4_character
+        x_cm: exercise.getCurrent().radical4.x_cm
+        y_cm: exercise.getCurrent().radical4.y_cm
+        child.text: exercise.getCurrent().radical4.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -232,9 +232,9 @@ Item {
 
     MyItem {
         id: radical5
-        x_cm: exercise.getCurrent().radical5_X
-        y_cm: exercise.getCurrent().radical5_Y
-        child.text: exercise.getCurrent().radical5_character
+        x_cm: exercise.getCurrent().radical5.x_cm
+        y_cm: exercise.getCurrent().radical5.y_cm
+        child.text: exercise.getCurrent().radical5.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -244,21 +244,21 @@ Item {
 
     MyItem {
         id: radical6
-        x_cm: exercise.getCurrent().radical6_X
-        y_cm: exercise.getCurrent().radical6_Y
-        child.text: exercise.getCurrent().radical6_character
+        x_cm: exercise.getCurrent().radical6.x_cm
+        y_cm: exercise.getCurrent().radical6.y_cm
+        child.text: exercise.getCurrent().radical6.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
-            z:-1
+            z:-1.
         }
     }
 
     MyItem {
         id: radical7
-        x_cm: exercise.getCurrent().radical7_X
-        y_cm: exercise.getCurrent().radical7_Y
-        child.text: exercise.getCurrent().radical7_character
+        x_cm: exercise.getCurrent().radical7.x_cm
+        y_cm: exercise.getCurrent().radical7.y_cm
+        child.text: exercise.getCurrent().radical7.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"
@@ -268,9 +268,9 @@ Item {
 
     MyItem {
         id: radical8
-        x_cm: exercise.getCurrent().radical8_X
-        y_cm: exercise.getCurrent().radical8_Y
-        child.text: exercise.getCurrent().radical8_character
+        x_cm: exercise.getCurrent().radical8.x_cm
+        y_cm: exercise.getCurrent().radical8.y_cm
+        child.text: exercise.getCurrent().radical8.character
         Image {
             anchors.centerIn: parent
             source: "frame.png"

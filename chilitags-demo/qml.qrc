@@ -66,6 +66,8 @@
         <file>sound/translate_出.wav</file>
         <file>sound/translate_国.wav</file>
         <file>sound/translate_衫.wav</file>
-        <file>Component.qml</file>
+        <file>MyComponent.qml</file>
+        <file>MyRadical.qml</file>
+        <file>sound/translate_较.wav</file>
     </qresource>
 </RCC>

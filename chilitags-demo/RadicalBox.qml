@@ -76,6 +76,8 @@ CardBox {
         }
     }
 
+
+
     function alreadyConstructed(){
         if(state==="RADICAL1"){return radical1_constructed}
         if(state==="RADICAL2"){return radical2_constructed}
@@ -92,92 +94,46 @@ CardBox {
         return (state != "NO_SELECTOR")
     }
 
+    function getRadical(){
+        if(state==="RADICAL1"){return exercise.getCurrent().radical1}
+        if(state==="RADICAL2"){return exercise.getCurrent().radical2}
+        if(state==="RADICAL3"){return exercise.getCurrent().radical3}
+        if(state==="RADICAL4"){return exercise.getCurrent().radical4}
+        if(state==="RADICAL5"){return exercise.getCurrent().radical5}
+        if(state==="RADICAL6"){return exercise.getCurrent().radical6}
+        if(state==="RADICAL7"){return exercise.getCurrent().radical7}
+        if(state==="RADICAL8"){return exercise.getCurrent().radical8}
+        return exercise.empty.radical1
+    }
+
     function isCorrect(){
-        if(state==="RADICAL1"){return radical1_constructed & exercise.getCurrent().radical1_correct}
-        if(state==="RADICAL2"){return radical2_constructed & exercise.getCurrent().radical2_correct}
-        if(state==="RADICAL3"){return radical3_constructed & exercise.getCurrent().radical3_correct}
-        if(state==="RADICAL4"){return radical4_constructed & exercise.getCurrent().radical4_correct}
-        if(state==="RADICAL5"){return radical5_constructed & exercise.getCurrent().radical5_correct}
-        if(state==="RADICAL6"){return radical6_constructed & exercise.getCurrent().radical6_correct}
-        if(state==="RADICAL7"){return radical7_constructed & exercise.getCurrent().radical7_correct}
-        if(state==="RADICAL8"){return radical8_constructed & exercise.getCurrent().radical8_correct}
-        return false
+        return alreadyConstructed() & getRadical().correct
     }
 
     function isWrong(){
-        if(state==="RADICAL1"){return radical1_constructed & exercise.getCurrent().radical1_correct}
-        if(state==="RADICAL2"){return radical2_constructed & exercise.getCurrent().radical2_correct}
-        if(state==="RADICAL3"){return radical3_constructed & exercise.getCurrent().radical3_correct}
-        if(state==="RADICAL4"){return radical4_constructed & exercise.getCurrent().radical4_correct}
-        if(state==="RADICAL5"){return radical5_constructed & exercise.getCurrent().radical5_correct}
-        if(state==="RADICAL6"){return radical6_constructed & exercise.getCurrent().radical6_correct}
-        if(state==="RADICAL7"){return radical7_constructed & exercise.getCurrent().radical7_correct}
-        if(state==="RADICAL8"){return radical8_constructed & exercise.getCurrent().radical8_correct}
-        return false
+        return alreadyConstructed() & !getRadical().correct
     }
 
     function getPinyin(){
-        if(state==="RADICAL1"){return exercise.getCurrent().radical1_pinyin}
-        if(state==="RADICAL2"){return exercise.getCurrent().radical2_pinyin}
-        if(state==="RADICAL3"){return exercise.getCurrent().radical3_pinyin}
-        if(state==="RADICAL4"){return exercise.getCurrent().radical4_pinyin}
-        if(state==="RADICAL5"){return exercise.getCurrent().radical5_pinyin}
-        if(state==="RADICAL6"){return exercise.getCurrent().radical6_pinyin}
-        if(state==="RADICAL7"){return exercise.getCurrent().radical7_pinyin}
-        if(state==="RADICAL8"){return exercise.getCurrent().radical8_pinyin}
-        return "NOPINYIN AVAILABLE"
+        return getRadical().pinyin
     }
 
     function getSound(){
-        if(state==="RADICAL1"){return exercise.getCurrent().radical1_sound}
-        if(state==="RADICAL2"){return exercise.getCurrent().radical2_sound}
-        if(state==="RADICAL3"){return exercise.getCurrent().radical3_sound}
-        if(state==="RADICAL4"){return exercise.getCurrent().radical4_sound}
-        if(state==="RADICAL5"){return exercise.getCurrent().radical5_sound}
-        if(state==="RADICAL6"){return exercise.getCurrent().radical6_sound}
-        if(state==="RADICAL7"){return exercise.getCurrent().radical7_sound}
-        if(state==="RADICAL8"){return exercise.getCurrent().radical8_sound}
-        return "NO SOUND AVAILABLE"
+        return getRadical().sound
     }
 
     function getSelection(){
-        if(isCorrect()){
-            return "Correct !"
-        }else if(isWrong()){
-            return "Wrong"
-        }else{
-            if(state==="RADICAL1"){return exercise.getCurrent().radical1}
-            if(state==="RADICAL2"){return exercise.getCurrent().radical2}
-            if(state==="RADICAL3"){return exercise.getCurrent().radical3}
-            if(state==="RADICAL4"){return exercise.getCurrent().radical4}
-            if(state==="RADICAL5"){return exercise.getCurrent().radical5}
-            if(state==="RADICAL6"){return exercise.getCurrent().radical6}
-            if(state==="RADICAL7"){return exercise.getCurrent().radical7}
-            if(state==="RADICAL8"){return exercise.getCurrent().radical8}
-        }
-        return ""
+        if(isCorrect()){return "Correct !"}
+        else if(isWrong()){return "Wrong"}
+        else{return getRadical().radical}
     }
 
     function getWord(){
-        if(state==="RADICAL1"){return exercise.getCurrent().radical1_word}
-        if(state==="RADICAL2"){return exercise.getCurrent().radical2_word}
-        if(state==="RADICAL3"){return exercise.getCurrent().radical3_word}
-        if(state==="RADICAL4"){return exercise.getCurrent().radical4_word}
-        if(state==="RADICAL5"){return exercise.getCurrent().radical5_word}
-        if(state==="RADICAL6"){return exercise.getCurrent().radical6_word}
-        if(state==="RADICAL7"){return exercise.getCurrent().radical7_word}
-        if(state==="RADICAL8"){return exercise.getCurrent().radical8_word}
+        return getRadical().word
     }
 
     function getStrokes(){
-        if(state==="RADICAL1"){return exercise.getCurrent().radical1_stroke}
-        if(state==="RADICAL2"){return exercise.getCurrent().radical2_stroke}
-        if(state==="RADICAL3"){return exercise.getCurrent().radical3_stroke}
-        if(state==="RADICAL4"){return exercise.getCurrent().radical4_stroke}
-        if(state==="RADICAL5"){return exercise.getCurrent().radical5_stroke}
-        if(state==="RADICAL6"){return exercise.getCurrent().radical6_stroke}
-        if(state==="RADICAL7"){return exercise.getCurrent().radical7_stroke}
-        if(state==="RADICAL8"){return exercise.getCurrent().radical8_stroke}
+        return getRadical().stroke
     }
 
     states: [

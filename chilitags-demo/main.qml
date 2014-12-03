@@ -238,67 +238,67 @@ ApplicationWindow {
         // We declare tags for the at most 12 components (orange cards)
         ChilitagsObject {
             id: component1
-            name: exercise.getCurrent().component1_tag
+            name: exercise.getCurrent().component1.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component2
-            name: exercise.getCurrent().component2_tag
+            name: exercise.getCurrent().component2.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component3
-            name: exercise.getCurrent().component3_tag
+            name: exercise.getCurrent().component3.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component4
-            name: exercise.getCurrent().component4_tag
+            name: exercise.getCurrent().component4.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component5
-            name: exercise.getCurrent().component5_tag
+            name: exercise.getCurrent().component5.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component6
-            name: exercise.getCurrent().component6_tag
+            name: exercise.getCurrent().component6.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component7
-            name: exercise.getCurrent().component7_tag
+            name: exercise.getCurrent().component7.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component8
-            name: exercise.getCurrent().component8_tag
+            name: exercise.getCurrent().component8.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component9
-            name: exercise.getCurrent().component9_tag
+            name: exercise.getCurrent().component9.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component10
-            name: exercise.getCurrent().component10_tag
+            name: exercise.getCurrent().component10.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component11
-            name: exercise.getCurrent().component11_tag
+            name: exercise.getCurrent().component11.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component12
-            name: exercise.getCurrent().component12_tag
+            name: exercise.getCurrent().component12.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
         ChilitagsObject {
             id: component13
-            name: exercise.getCurrent().component13_tag
+            name: exercise.getCurrent().component13.tag
             property vector3d center : transform.times(parent.tagCenter)
         }
 

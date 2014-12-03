@@ -13,6 +13,7 @@ Item {
         return empty
     }
 
+    property alias empty: empty
     property alias red1: red1
     property alias red2: red2
     property alias red3: red3

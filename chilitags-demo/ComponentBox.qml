@@ -53,18 +53,18 @@ CardBox {
     function flip(){
         if(hintbox.state=="CONSTRUCTION"){
             if(state=="COMPONENT1"){component1_constructed = true; characters.component1.visible=isCorrect()}
-            if(state=="COMPONENT2"){component2_constructed = true;characters.component2.visible=isCorrect()}
-            if(state=="COMPONENT3"){component3_constructed = true;characters.component3.visible=isCorrect()}
-            if(state=="COMPONENT4"){component4_constructed = true;characters.component4.visible=isCorrect()}
-            if(state=="COMPONENT5"){component5_constructed = true;characters.component5.visible=isCorrect()}
-            if(state=="COMPONENT6"){component6_constructed = true;characters.component6.visible=isCorrect()}
-            if(state=="COMPONENT7"){component7_constructed = true;characters.component7.visible=isCorrect()}
-            if(state=="COMPONENT8"){component8_constructed = true;characters.component8.visible=isCorrect()}
-            if(state=="COMPONENT9"){component9_constructed = true;characters.component9.visible=isCorrect()}
-            if(state=="COMPONENT10"){component10_constructed = true;characters.component10.visible=isCorrect()}
-            if(state=="COMPONENT11"){component11_constructed = true;characters.component11.visible=isCorrect()}
-            if(state=="COMPONENT12"){component12_constructed = true;characters.component12.visible=isCorrect()}
-            if(state=="COMPONENT13"){component13_constructed = true;characters.component13.visible=isCorrect()}
+            if(state=="COMPONENT2"){component2_constructed = true; characters.component2.visible=isCorrect()}
+            if(state=="COMPONENT3"){component3_constructed = true; characters.component3.visible=isCorrect()}
+            if(state=="COMPONENT4"){component4_constructed = true; characters.component4.visible=isCorrect()}
+            if(state=="COMPONENT5"){component5_constructed = true; characters.component5.visible=isCorrect()}
+            if(state=="COMPONENT6"){component6_constructed = true; characters.component6.visible=isCorrect()}
+            if(state=="COMPONENT7"){component7_constructed = true; characters.component7.visible=isCorrect()}
+            if(state=="COMPONENT8"){component8_constructed = true; characters.component8.visible=isCorrect()}
+            if(state=="COMPONENT9"){component9_constructed = true; characters.component9.visible=isCorrect()}
+            if(state=="COMPONENT10"){component10_constructed = true; characters.component10.visible=isCorrect()}
+            if(state=="COMPONENT11"){component11_constructed = true; characters.component11.visible=isCorrect()}
+            if(state=="COMPONENT12"){component12_constructed = true; characters.component12.visible=isCorrect()}
+            if(state=="COMPONENT13"){component13_constructed = true; characters.component13.visible=isCorrect()}
             if(isCorrect()){success.count += 1}else{mistakes.count += 1}
         }
     }
@@ -91,126 +91,50 @@ CardBox {
     }
 
     function isCorrect(){
-        if(state==="COMPONENT1"){return component1_constructed & exercise.getCurrent().component1_correct}
-        if(state==="COMPONENT2"){return component2_constructed & exercise.getCurrent().component2_correct}
-        if(state==="COMPONENT3"){return component3_constructed & exercise.getCurrent().component3_correct}
-        if(state==="COMPONENT4"){return component4_constructed & exercise.getCurrent().component4_correct}
-        if(state==="COMPONENT5"){return component5_constructed & exercise.getCurrent().component5_correct}
-        if(state==="COMPONENT6"){return component6_constructed & exercise.getCurrent().component6_correct}
-        if(state==="COMPONENT7"){return component7_constructed & exercise.getCurrent().component7_correct}
-        if(state==="COMPONENT8"){return component8_constructed & exercise.getCurrent().component8_correct}
-        if(state==="COMPONENT9"){return component9_constructed & exercise.getCurrent().component9_correct}
-        if(state==="COMPONENT10"){return component10_constructed & exercise.getCurrent().component10_correct}
-        if(state==="COMPONENT11"){return component11_constructed & exercise.getCurrent().component11_correct}
-        if(state==="COMPONENT12"){return component12_constructed & exercise.getCurrent().component12_correct}
-        if(state==="COMPONENT13"){return component13_constructed & exercise.getCurrent().component13_correct}
-        return false
+        return alreadyConstructed() & getComponent().correct
     }
 
     function isWrong(){
-        if(state==="COMPONENT1"){return component1_constructed & !exercise.getCurrent().component1_correct}
-        if(state==="COMPONENT2"){return component2_constructed & !exercise.getCurrent().component2_correct}
-        if(state==="COMPONENT3"){return component3_constructed & !exercise.getCurrent().component3_correct}
-        if(state==="COMPONENT4"){return component4_constructed & !exercise.getCurrent().component4_correct}
-        if(state==="COMPONENT5"){return component5_constructed & !exercise.getCurrent().component5_correct}
-        if(state==="COMPONENT6"){return component6_constructed & !exercise.getCurrent().component6_correct}
-        if(state==="COMPONENT7"){return component7_constructed & !exercise.getCurrent().component7_correct}
-        if(state==="COMPONENT8"){return component8_constructed & !exercise.getCurrent().component8_correct}
-        if(state==="COMPONENT9"){return component9_constructed & !exercise.getCurrent().component9_correct}
-        if(state==="COMPONENT10"){return component10_constructed & !exercise.getCurrent().component10_correct}
-        if(state==="COMPONENT11"){return component11_constructed & !exercise.getCurrent().component11_correct}
-        if(state==="COMPONENT12"){return component12_constructed & !exercise.getCurrent().component12_correct}
-        if(state==="COMPONENT13"){return component13_constructed & !exercise.getCurrent().component13_correct}
-        return false
+        return alreadyConstructed() & !getComponent().correct
+    }
+
+    function getComponent(){
+        if(state==="COMPONENT1"){return exercise.getCurrent().component1}
+        if(state==="COMPONENT2"){return exercise.getCurrent().component2}
+        if(state==="COMPONENT3"){return exercise.getCurrent().component3}
+        if(state==="COMPONENT4"){return exercise.getCurrent().component4}
+        if(state==="COMPONENT5"){return exercise.getCurrent().component5}
+        if(state==="COMPONENT6"){return exercise.getCurrent().component6}
+        if(state==="COMPONENT7"){return exercise.getCurrent().component7}
+        if(state==="COMPONENT8"){return exercise.getCurrent().component8}
+        if(state==="COMPONENT9"){return exercise.getCurrent().component9}
+        if(state==="COMPONENT10"){return exercise.getCurrent().component10}
+        if(state==="COMPONENT11"){return exercise.getCurrent().component11}
+        if(state==="COMPONENT12"){return exercise.getCurrent().component12}
+        if(state==="COMPONENT13"){return exercise.getCurrent().component13}
+        else return exercise.empty.component1
     }
 
     function getPinyin(){
-        if(state==="COMPONENT1"){return exercise.getCurrent().component1_pinyin}
-        if(state==="COMPONENT2"){return exercise.getCurrent().component2_pinyin}
-        if(state==="COMPONENT3"){return exercise.getCurrent().component3_pinyin}
-        if(state==="COMPONENT4"){return exercise.getCurrent().component4_pinyin}
-        if(state==="COMPONENT5"){return exercise.getCurrent().component5_pinyin}
-        if(state==="COMPONENT6"){return exercise.getCurrent().component6_pinyin}
-        if(state==="COMPONENT7"){return exercise.getCurrent().component7_pinyin}
-        if(state==="COMPONENT8"){return exercise.getCurrent().component8_pinyin}
-        if(state==="COMPONENT9"){return exercise.getCurrent().component9_pinyin}
-        if(state==="COMPONENT10"){return exercise.getCurrent().component10_pinyin}
-        if(state==="COMPONENT11"){return exercise.getCurrent().component11_pinyin}
-        if(state==="COMPONENT12"){return exercise.getCurrent().component12_pinyin}
-        if(state==="COMPONENT13"){return exercise.getCurrent().component13_pinyin}
-        return "NO PINYIN AVAILABLE"
+        return getComponent().pinyin
     }
 
     function getSound(){
-        if(state==="COMPONENT1"){return exercise.getCurrent().component1_sound}
-        if(state==="COMPONENT2"){return exercise.getCurrent().component2_sound}
-        if(state==="COMPONENT3"){return exercise.getCurrent().component3_sound}
-        if(state==="COMPONENT4"){return exercise.getCurrent().component4_sound}
-        if(state==="COMPONENT5"){return exercise.getCurrent().component5_sound}
-        if(state==="COMPONENT6"){return exercise.getCurrent().component6_sound}
-        if(state==="COMPONENT7"){return exercise.getCurrent().component7_sound}
-        if(state==="COMPONENT8"){return exercise.getCurrent().component8_sound}
-        if(state==="COMPONENT9"){return exercise.getCurrent().component9_sound}
-        if(state==="COMPONENT10"){return exercise.getCurrent().component10_sound}
-        if(state==="COMPONENT11"){return exercise.getCurrent().component11_sound}
-        if(state==="COMPONENT12"){return exercise.getCurrent().component12_sound}
-        if(state==="COMPONENT13"){return exercise.getCurrent().component13_sound}
-        return "NO SOUND AVAILABLE"
+        return getComponent().sound
     }
 
     function getSelection(){
-        if(isCorrect()){
-            return "Correct !"
-        }else if(isWrong()){
-            return "Wrong"
-        }else{
-            if(state==="COMPONENT1"){return exercise.getCurrent().component1}
-            if(state==="COMPONENT2"){return exercise.getCurrent().component2}
-            if(state==="COMPONENT3"){return exercise.getCurrent().component3}
-            if(state==="COMPONENT4"){return exercise.getCurrent().component4}
-            if(state==="COMPONENT5"){return exercise.getCurrent().component5}
-            if(state==="COMPONENT6"){return exercise.getCurrent().component6}
-            if(state==="COMPONENT7"){return exercise.getCurrent().component7}
-            if(state==="COMPONENT8"){return exercise.getCurrent().component8}
-            if(state==="COMPONENT9"){return exercise.getCurrent().component9}
-            if(state==="COMPONENT10"){return exercise.getCurrent().component10}
-            if(state==="COMPONENT11"){return exercise.getCurrent().component11}
-            if(state==="COMPONENT12"){return exercise.getCurrent().component12}
-            if(state==="COMPONENT13"){return exercise.getCurrent().component13}
-        }
-        return ""
+        if(isCorrect()){return "Correct !"}
+        else if(isWrong()){return "Wrong"}
+        else{return getComponent().component}
     }
 
     function getWord(){
-        if(state==="COMPONENT1"){return exercise.getCurrent().component1_word}
-        if(state==="COMPONENT2"){return exercise.getCurrent().component2_word}
-        if(state==="COMPONENT3"){return exercise.getCurrent().component3_word}
-        if(state==="COMPONENT4"){return exercise.getCurrent().component4_word}
-        if(state==="COMPONENT5"){return exercise.getCurrent().component5_word}
-        if(state==="COMPONENT6"){return exercise.getCurrent().component6_word}
-        if(state==="COMPONENT7"){return exercise.getCurrent().component7_word}
-        if(state==="COMPONENT8"){return exercise.getCurrent().component8_word}
-        if(state==="COMPONENT9"){return exercise.getCurrent().component9_word}
-        if(state==="COMPONENT10"){return exercise.getCurrent().component10_word}
-        if(state==="COMPONENT11"){return exercise.getCurrent().component11_word}
-        if(state==="COMPONENT12"){return exercise.getCurrent().component12_word}
-        if(state==="COMPONENT13"){return exercise.getCurrent().component13_word}
+        return getComponent().word
     }
 
     function getStrokes(){
-        if(state==="COMPONENT1"){return exercise.getCurrent().component1_stroke}
-        if(state==="COMPONENT2"){return exercise.getCurrent().component2_stroke}
-        if(state==="COMPONENT3"){return exercise.getCurrent().component3_stroke}
-        if(state==="COMPONENT4"){return exercise.getCurrent().component4_stroke}
-        if(state==="COMPONENT5"){return exercise.getCurrent().component5_stroke}
-        if(state==="COMPONENT6"){return exercise.getCurrent().component6_stroke}
-        if(state==="COMPONENT7"){return exercise.getCurrent().component7_stroke}
-        if(state==="COMPONENT8"){return exercise.getCurrent().component8_stroke}
-        if(state==="COMPONENT9"){return exercise.getCurrent().component9_stroke}
-        if(state==="COMPONENT10"){return exercise.getCurrent().component10_stroke}
-        if(state==="COMPONENT11"){return exercise.getCurrent().component11_stroke}
-        if(state==="COMPONENT12"){return exercise.getCurrent().component12_stroke}
-        if(state==="COMPONENT13"){return exercise.getCurrent().component13_stroke}
+        return getComponent().stroke
     }
 
     states: [
