@@ -10,6 +10,9 @@ Item {
         if(state==="BLUE1"){return blue1}
         if(state==="BLUE2"){return blue2}
         if(state==="BLUE3"){return blue3}
+        if(state==="YELLOW1"){return yellow1}
+        if(state==="YELLOW2"){return yellow2}
+        if(state==="YELLOW3"){return yellow3}
         return empty
     }
 
@@ -20,6 +23,9 @@ Item {
     property alias blue1: blue1
     property alias blue2: blue2
     property alias blue3: blue3
+    property alias yellow1: yellow1
+    property alias yellow2: yellow2
+    property alias yellow3: yellow3
 
     //We define a state to know which exercise is being used.
     //The state changes when a new sheet appears
@@ -32,7 +38,10 @@ Item {
         State {name: "RED3"; StateChangeScript {script: app.reset()}},
         State {name: "BLUE1"; StateChangeScript {script: app.reset()}},
         State {name: "BLUE2"; StateChangeScript {script: app.reset()}},
-        State {name: "BLUE3"; StateChangeScript {script: app.reset()}}
+        State {name: "BLUE3"; StateChangeScript {script: app.reset()}},
+        State {name: "YELLOW1"; StateChangeScript {script: app.reset()}},
+        State {name: "YELLOW2"; StateChangeScript {script: app.reset()}},
+        State {name: "YELLOW3"; StateChangeScript {script: app.reset()}}
     ]
 
     ExerciseEmptyTemplate { id: empty }
@@ -42,5 +51,8 @@ Item {
     ExerciseBlue1 { id: blue1 }
     ExerciseBlue2 { id: blue2 }
     ExerciseBlue3 { id: blue3 }
+    ExerciseYellow1 { id: yellow1 }
+    ExerciseYellow2 { id: yellow2 }
+    ExerciseYellow3 { id: yellow3 }
 
 }

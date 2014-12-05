@@ -19,7 +19,6 @@ Item {
     property double right_part_X: 20.3
     property double right_part_Y: 4.2
 
-
     //We define aliases to build links from this components to the main
     property alias component1 : component1
     property alias component2 : component2
@@ -113,8 +112,8 @@ Item {
         word : "进口"
         stroke : ""
         sound: "qrc:/sound/translate_进.wav"
-        x_cm : 2.5
-        y_cm : 9
+        x_cm : 2.1
+        y_cm : 9.4
         tag : "tag_141"
     }
 
@@ -127,8 +126,8 @@ Item {
         word : "这里"
         stroke : ""
         sound: "qrc:/sound/translate_这.wav"
-        x_cm : 8
-        y_cm : 9
+        x_cm : 7.8
+        y_cm : 9.4
         tag : "tag_142"
     }
 
@@ -141,8 +140,8 @@ Item {
         word : "知道"
         stroke : ""
         sound: "qrc:/sound/translate_道.wav"
-        x_cm : 13
-        y_cm : 9
+        x_cm : 13.2
+        y_cm : 9.4
         tag : "tag_143"
     }
 

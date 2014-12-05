@@ -69,5 +69,8 @@
         <file>MyComponent.qml</file>
         <file>MyRadical.qml</file>
         <file>sound/translate_较.wav</file>
+        <file>ExerciseYellow1.qml</file>
+        <file>ExerciseYellow2.qml</file>
+        <file>ExerciseYellow3.qml</file>
     </qresource>
 </RCC>

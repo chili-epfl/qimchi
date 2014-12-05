@@ -82,6 +82,6 @@ Item {
 
     MyRadical{ id: radical7; radical : "父"}
 
-    MyRadical{ id: radical8;radical : "石" }
+    MyRadical{ id: radical8; radical : "石" }
 
 }
