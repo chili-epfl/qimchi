@@ -98,7 +98,6 @@ Item {
         character : "衫"
         pinyin : "Shan (1)"
         word : "衬衫"
-        stroke : ""
         sound: "qrc:/sound/translate_衫.wav"
         x_cm : 3.4
         y_cm : 9.5
@@ -112,7 +111,6 @@ Item {
         character : "裤"
         pinyin : "Ku (4)"
         word : "裤子"
-        stroke : ""
         sound: "qrc:/sound/translate_裤.wav"
         x_cm : 9
         y_cm : 9.5

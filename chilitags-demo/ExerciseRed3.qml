@@ -82,7 +82,6 @@ Item {
         character : "饭"
         pinyin : "Fan (4)"
         word : "饭店"
-        stroke : ""
         sound : "qrc:/sound/translate_饭.wav"
         x_cm : 2.1
         y_cm : 9.3
@@ -122,7 +121,7 @@ Item {
         character : "较"
         pinyin : "Jiao (4)"
         word : "比较"
-        stroke : "qrc:/gifs/jiao4.gif"
+        stroke : "qrc:/strokes/stroke_较.gif"
         sound : "qrc:/sound/translate_较.wav"
         x_cm : 17.4
         y_cm : 9.3
@@ -139,7 +138,6 @@ Item {
         character : "校"
         pinyin : "Xiao (4)"
         word : "学校"
-        stroke : ""
         sound : "qrc:/sound/translate_校.wav"
         x_cm : 23.9
         y_cm : 9.3

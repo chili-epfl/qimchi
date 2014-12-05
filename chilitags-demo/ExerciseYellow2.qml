@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     visible:false
 
-    property string name : "ExerciseYellow1"
+    property string name : "ExerciseYellow2"
     property string main_character : "作"
 
     property string top_left_tag: "tag_148"
@@ -85,6 +85,7 @@ Item {
         character: "字"
         word: "Zi (4)"
         pinyin: "写字"
+        stroke : "qrc:/strokes/stroke_字.gif"
         sound: "qrc:/sound/translate_字.wav"
         x_cm: 3.2
         y_cm: 9.5
@@ -98,6 +99,7 @@ Item {
         character: "家"
         word: "家人"
         pinyin: "Jia (1)"
+        stroke : "qrc:/strokes/stroke_家.gif"
         sound: "qrc:/sound/translate_家.wav"
         x_cm: 8.1
         y_cm: 9.5
@@ -111,6 +113,7 @@ Item {
         character: "室"
         word: "教室"
         pinyin: "Shi (4)"
+        stroke : "qrc:/strokes/stroke_室.gif"
         sound: "qrc:/sound/translate_室.wav"
         x_cm: 12.9
         y_cm: 9.5
@@ -142,6 +145,7 @@ Item {
         character: "姐"
         word: "姐姐"
         pinyin: "Jie (3)"
+        stroke : "qrc:/strokes/stroke_姐.gif"
         sound: "qrc:/sound/translate_.wav"
         x_cm: 24.2
         y_cm: 9.5

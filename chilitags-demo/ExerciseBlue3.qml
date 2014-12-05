@@ -110,7 +110,7 @@ Item {
         character : "进"
         pinyin : "Jin (4)"
         word : "进口"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_进.gif"
         sound: "qrc:/sound/translate_进.wav"
         x_cm : 2.1
         y_cm : 9.4
@@ -124,7 +124,7 @@ Item {
         character : "这"
         pinyin : "Zhe (4)"
         word : "这里"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_这.gif"
         sound: "qrc:/sound/translate_这.wav"
         x_cm : 7.8
         y_cm : 9.4
@@ -138,7 +138,7 @@ Item {
         character : "道"
         pinyin : "Dao (4)"
         word : "知道"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_道.gif"
         sound: "qrc:/sound/translate_道.wav"
         x_cm : 13.2
         y_cm : 9.4

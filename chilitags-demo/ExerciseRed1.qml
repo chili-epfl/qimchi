@@ -57,7 +57,7 @@ Item {
         character : "好"
         pinyin : "hao (3)"
         word : "你好"
-        stroke : "qrc:/gifs/hao3.gif"
+        stroke : "qrc:/strokes/stroke_好.gif"
         sound : "qrc:/sound/translate_好.wav"
         x_cm : 0.7
         y_cm : 9.5
@@ -71,7 +71,7 @@ Item {
         character : "姓"
         pinyin : "xing (4)"
         word : "姓名"
-        stroke : "qrc:/gifs/xing4.gif"
+        stroke : "qrc:/strokes/stroke_姓.gif"
         sound : "qrc:/sound/translate_姓.wav"
         x_cm : 4.1
         y_cm : 9.5
@@ -85,7 +85,7 @@ Item {
         character : "姐"
         pinyin : "jie (3)"
         word : "姐姐"
-        stroke : "qrc:/gifs/jie3.gif"
+        stroke : "qrc:/strokes/stroke_姐.gif"
         sound : "qrc:/sound/translate_姐.wav"
         x_cm : 7.6
         y_cm : 9.5
@@ -99,7 +99,7 @@ Item {
         character : "她"
         pinyin : "ta (1)"
         word : "她们"
-        stroke : "qrc:/gifs/ta1.gif"
+        stroke : "qrc:/strokes/stroke_她.gif"
         sound : "qrc:/sound/translate_她.wav"
         x_cm : 11.1
         y_cm : 9.5
@@ -113,7 +113,7 @@ Item {
         character : "要"
         pinyin : "yao (4)"
         word : "不要"
-        stroke : "qrc:/gifs/yao4.gif"
+        stroke : "qrc:/strokes/stroke_要.gif"
         sound : "qrc:/sound/translate_要.wav"
         x_cm : 14.3
         y_cm : 9.5
@@ -160,7 +160,7 @@ Item {
         character : "吗"
         pinyin : "Ma"
         word : "好吗"
-        stroke : "qrc:/gifs/ma.gif"
+        stroke : "qrc:/strokes/stroke_吗.gif"
         sound : "qrc:/sound/translate_吗.wav"
         property double x_cm : 21
         property double y_cm : 9.5
@@ -182,7 +182,6 @@ Item {
         character : "码"
         pinyin : "Ma (3)"
         word : "号码"
-        stroke : ""
         sound : "qrc:/sound/translate_码.wav"
         property double x_cm : 24.3
         property double y_cm : 9.5

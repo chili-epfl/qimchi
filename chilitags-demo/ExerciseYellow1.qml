@@ -49,6 +49,7 @@ Item {
         character: "你"
         word: "你好"
         pinyin: "Ni (3)"
+        stroke : "qrc:/strokes/stroke_你.gif"
         sound: "qrc:/sound/translate_你.wav"
         x_cm: 0.7
         y_cm: 9.5
@@ -62,6 +63,7 @@ Item {
         character: "他"
         word: "他们"
         pinyin: "Ta (3)"
+        stroke : "qrc:/strokes/stroke_他.gif"
         sound: "qrc:/sound/translate_他.wav"
         x_cm: 3.8
         y_cm: 9.5
@@ -75,6 +77,7 @@ Item {
         character: "们"
         word: "我们，同学们"
         pinyin: "Men"
+        stroke : "qrc:/strokes/stroke_们.gif"
         sound: "qrc:/sound/translate_们.wav"
         x_cm: 6.9
         y_cm: 9.5
@@ -88,6 +91,7 @@ Item {
         character: "什"
         word: "什么"
         pinyin: "Shen (4)"
+        stroke : "qrc:/strokes/stroke_什.gif"
         sound: "qrc:/sound/translate_什.wav"
         x_cm: 10
         y_cm: 9.5
@@ -101,6 +105,7 @@ Item {
         character: "件"
         word: "邮件"
         pinyin: "Jian (4)"
+        stroke : "qrc:/strokes/stroke_件.gif"
         sound: "qrc:/sound/translate_件.wav"
         x_cm: 13.1
         y_cm: 9.5
@@ -114,6 +119,7 @@ Item {
         character: "便"
         word: "便宜"
         pinyin: "Pian (2)"
+        stroke : "qrc:/strokes/stroke_便.gif"
         sound: "qrc:/sound/translate_便.wav"
         x_cm: 16.2
         y_cm: 9.5

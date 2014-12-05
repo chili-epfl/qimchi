@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qt-logo.png</file>
-        <file>hao.gif</file>
-        <file>hao.wav</file>
         <file>Coordinates.js</file>
         <file>MyItem.qml</file>
         <file>StringFr.js</file>
@@ -13,19 +10,12 @@
         <file>frame.png</file>
         <file>HintBox.qml</file>
         <file>RadicalBox.qml</file>
-        <file>gifs/hao3.gif</file>
-        <file>gifs/jie3.gif</file>
-        <file>gifs/ma.gif</file>
-        <file>gifs/ta1.gif</file>
-        <file>gifs/xing4.gif</file>
-        <file>gifs/yao4.gif</file>
         <file>ExerciseRed1.qml</file>
         <file>ExerciseRed2.qml</file>
         <file>ExerciseEmptyTemplate.qml</file>
         <file>ExerciseSelector.qml</file>
         <file>Characters.qml</file>
         <file>ExerciseRed3.qml</file>
-        <file>gifs/jiao4.gif</file>
         <file>ExerciseBlue1.qml</file>
         <file>ExerciseBlue2.qml</file>
         <file>ExerciseBlue3.qml</file>
@@ -72,5 +62,37 @@
         <file>ExerciseYellow1.qml</file>
         <file>ExerciseYellow2.qml</file>
         <file>ExerciseYellow3.qml</file>
+        <file>strokes/stroke_叫.gif</file>
+        <file>strokes/stroke_什.gif</file>
+        <file>strokes/stroke_号.gif</file>
+        <file>strokes/stroke_只.gif</file>
+        <file>strokes/stroke_出.gif</file>
+        <file>strokes/stroke_们.gif</file>
+        <file>strokes/stroke_他.gif</file>
+        <file>strokes/stroke_多.gif</file>
+        <file>strokes/stroke_吃.gif</file>
+        <file>strokes/stroke_这.gif</file>
+        <file>strokes/stroke_好.gif</file>
+        <file>strokes/stroke_她.gif</file>
+        <file>strokes/stroke_吗.gif</file>
+        <file>strokes/stroke_件.gif</file>
+        <file>strokes/stroke_那.gif</file>
+        <file>strokes/stroke_进.gif</file>
+        <file>strokes/stroke_室.gif</file>
+        <file>strokes/stroke_你.gif</file>
+        <file>strokes/stroke_爸.gif</file>
+        <file>strokes/stroke_呢.gif</file>
+        <file>strokes/stroke_姓.gif</file>
+        <file>strokes/stroke_要.gif</file>
+        <file>strokes/stroke_家.gif</file>
+        <file>strokes/stroke_国.gif</file>
+        <file>strokes/stroke_便.gif</file>
+        <file>strokes/stroke_姐.gif</file>
+        <file>strokes/stroke_图.gif</file>
+        <file>strokes/stroke_较.gif</file>
+        <file>strokes/stroke_道.gif</file>
+        <file>strokes/stroke_名.gif</file>
+        <file>strokes/stroke_字.gif</file>
+        <file>strokes/stroke_哪.gif</file>
     </qresource>
 </RCC>

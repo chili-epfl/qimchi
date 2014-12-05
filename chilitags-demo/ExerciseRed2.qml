@@ -89,7 +89,7 @@ Item {
         character : "国"
         pinyin : "Guo (2)"
         word : "国家"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_国.gif"
         sound : "qrc:/sound/translate_国.wav"
         x_cm : 3.5
         y_cm : 9.5
@@ -103,7 +103,7 @@ Item {
         character : "图"
         pinyin : "Tu (2)"
         word : "地图"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_图.gif"
         sound : "qrc:/sound/translate_图.wav"
         x_cm : 8.9
         y_cm : 9.5

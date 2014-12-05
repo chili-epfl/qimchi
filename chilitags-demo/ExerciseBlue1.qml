@@ -52,7 +52,7 @@ Item {
         character : "呢"
         pinyin : "Ne"
         word : "你呢"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_呢.gif"
         sound : "qrc:/sound/translate_呢.wav"
         x_cm : 0.2
         y_cm : 9.6
@@ -66,7 +66,7 @@ Item {
         character : "吗"
         pinyin : "Ma"
         word : "是吗"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_吗.gif"
         sound : "qrc:/sound/translate_吗.wav"
         x_cm : 3.2
         y_cm : 9.6
@@ -80,7 +80,7 @@ Item {
         character : "叫"
         pinyin : "Jiao (4)"
         word : "叫人"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_叫.gif"
         sound : "qrc:/sound/translate_叫.wav"
         x_cm : 6.3
         y_cm : 9.6
@@ -94,7 +94,7 @@ Item {
         character : "哪"
         pinyin : "Na (3)"
         word : "哪里"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_哪.gif"
         sound : "qrc:/sound/translate_哪.wav"
         x_cm : 9.4
         y_cm : 9.6
@@ -108,7 +108,6 @@ Item {
         character : "喝"
         pinyin : "He (1)"
         word : "喝水、喝茶"
-        stroke : ""
         sound : "qrc:/sound/translate_喝.wav"
         x_cm : 12.5
         y_cm : 9.6
@@ -122,7 +121,7 @@ Item {
         character : "吃"
         pinyin : "Chi (1)"
         word : "吃饭、好吃"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_吃.gif"
         sound : "qrc:/sound/translate_吃.wav"
         x_cm : 15.6
         y_cm : 9.6
@@ -136,7 +135,7 @@ Item {
         character : "号"
         pinyin : "Hao (4)"
         word : "号码"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_号.gif"
         sound : "qrc:/sound/translate_号.wav"
         x_cm : 18.8
         y_cm : 9.6
@@ -150,7 +149,7 @@ Item {
         character : "只"
         pinyin : "Zhi (1)"
         word : "只会"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_只.gif"
         sound : "qrc:/sound/translate_只.wav"
         x_cm : 21.9
         y_cm : 9.6
@@ -206,7 +205,7 @@ Item {
         character : "爸"
         pinyin : "Ba (4)"
         word : "爸爸"
-        stroke : ""
+        stroke : "qrc:/strokes/stroke_爸.gif"
         sound : "qrc:/sound/translate_爸.wav"
         x_cm: 25.1
         y_cm: 9
