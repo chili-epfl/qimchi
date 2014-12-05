@@ -140,18 +140,18 @@ CardBox {
     states: [
         State {name: "NONE"},
         State {name: "TOOMUCH"},
-        State {name: "COMPONENT1"; PropertyChanges { target: characters.component1.child; color:"green" }},
-        State {name: "COMPONENT2"; PropertyChanges { target: characters.component2.child; color:"green" }},
-        State {name: "COMPONENT3"; PropertyChanges { target: characters.component3.child; color:"green" }},
-        State {name: "COMPONENT4"; PropertyChanges { target: characters.component4.child; color: "green" }},
-        State {name: "COMPONENT5"; PropertyChanges { target: characters.component5.child; color:"green" }},
-        State {name: "COMPONENT6"; PropertyChanges { target: characters.component6.child; color:"green" }},
-        State {name: "COMPONENT7"; PropertyChanges { target: characters.component7.child; color:"green" }},
-        State {name: "COMPONENT8"; PropertyChanges { target: characters.component8.child; color:"green" }},
-        State {name: "COMPONENT9"; PropertyChanges { target: characters.component9.child; color:"green" }},
-        State {name: "COMPONENT10"; PropertyChanges { target: characters.component10.child; color:"green" }},
-        State {name: "COMPONENT11"; PropertyChanges { target: characters.component11.child; color:"green" }},
-        State {name: "COMPONENT12"; PropertyChanges { target: characters.component12.child; color:"green" }},
-        State {name: "COMPONENT13"; PropertyChanges { target: characters.component13.child; color:"green" }}
+        State {name: "COMPONENT1"; PropertyChanges { target: characters.component1.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT2"; PropertyChanges { target: characters.component2.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT3"; PropertyChanges { target: characters.component3.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT4"; PropertyChanges { target: characters.component4.child; color: {main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT5"; PropertyChanges { target: characters.component5.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT6"; PropertyChanges { target: characters.component6.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT7"; PropertyChanges { target: characters.component7.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT8"; PropertyChanges { target: characters.component8.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT9"; PropertyChanges { target: characters.component9.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT10"; PropertyChanges { target: characters.component10.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT11"; PropertyChanges { target: characters.component11.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT12"; PropertyChanges { target: characters.component12.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }},
+        State {name: "COMPONENT13"; PropertyChanges { target: characters.component13.child; color:{main.state=="CONSTRUCTION_LEFT"?"green":"black"} }}
     ]
 }

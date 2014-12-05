@@ -138,14 +138,14 @@ CardBox {
 
     states: [
         State {name: "NO_SELECTOR"},
-        State {name: "RADICAL1"; PropertyChanges {target: characters.radical1.child; color: "green"}},
-        State {name: "RADICAL2"; PropertyChanges {target: characters.radical2.child; color: "green"}},
-        State {name: "RADICAL3"; PropertyChanges {target: characters.radical3.child; color: "green"}},
-        State {name: "RADICAL4"; PropertyChanges {target: characters.radical4.child; color: "green"}},
-        State {name: "RADICAL5"; PropertyChanges {target: characters.radical5.child; color: "green"}},
-        State {name: "RADICAL6"; PropertyChanges {target: characters.radical6.child; color: "green"}},
-        State {name: "RADICAL7"; PropertyChanges {target: characters.radical7.child; color: "green"}},
-        State {name: "RADICAL8"; PropertyChanges {target: characters.radical8.child; color: "green"}}
+        State {name: "RADICAL1"; PropertyChanges {target: characters.radical1.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL2"; PropertyChanges {target: characters.radical2.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL3"; PropertyChanges {target: characters.radical3.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL4"; PropertyChanges {target: characters.radical4.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL5"; PropertyChanges {target: characters.radical5.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL6"; PropertyChanges {target: characters.radical6.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL7"; PropertyChanges {target: characters.radical7.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}},
+        State {name: "RADICAL8"; PropertyChanges {target: characters.radical8.child; color: {main.state=="CONSTRUCTION_RIGHT"?"green":"black"}}}
     ]
 }
 
