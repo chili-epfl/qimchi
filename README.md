@@ -33,7 +33,7 @@ Current modules are:
 
 - **Qt3D:** Qt's 3D engine
 
-*Note*: In order to clone the repository with the submodules, you can use `git clone --recursive https://...` (You may have to configure your SSH keys in Github, as per [this tutorial](https://help.github.com/articles/generating-ssh-keys/)).
+*Note*: In order to clone the repository with the submodules, you can use `git clone --recursive https://...` (You may have to configure your SSH keys in Github, as per [this tutorial](https://help.github.com/articles/generating-ssh-keys/); ... and create a [gitorious](https://gitorious.org) account and add the SSH key similarly).
 
 
 Desktop Build
