@@ -57,7 +57,8 @@ Item {
 
     MyComponent {
         id :component3
-        component : "X"
+        component : " "
+        nonwritable : "qrc:/non-writable/componentblue3.png"
         tag : "tag_134"
     }
 
@@ -69,7 +70,8 @@ Item {
 
     MyComponent {
         id : component5
-        component : "X"
+        component : " "
+        nonwritable : "qrc:/non-writable/componentblue5.png"
         tag : "tag_136"
     }
 
@@ -81,7 +83,8 @@ Item {
 
     MyComponent {
         id: component7
-        component: "X"
+        component: " "
+        nonwritable : "qrc:/non-writable/componentblue7.png"
         tag : "tag_138"
     }
 

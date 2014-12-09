@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Item {
     property string component : ""
+    property string nonwritable : ""
     property bool correct : false
     property string character : ""
     property string pinyin : ""

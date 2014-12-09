@@ -551,12 +551,24 @@ ApplicationWindow {
             x_cm: 9.2
             y_cm: 9
             height: 250; width: 250
+            child.font.pointSize: 42
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?componentbox.getSelection():
                 main.state=="CONSTRUCTION_RIGHT"?radicalbox.getSelection():
                 ""
             }
-            child.font.pointSize:42
+            Image {
+                anchors.centerIn:parent
+                visible: parent.child.text==" "
+                source: {
+                    visible?
+                    main.state=="CONSTRUCTION_LEFT"?
+                        componentbox.getComponent().nonwritable:
+                        radicalbox.getComponent().nonwritable:
+                    ""
+                }
+            }
+
         }
 
         //We display word combination, pinyin or stroke order when one of

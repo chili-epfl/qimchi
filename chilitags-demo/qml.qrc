@@ -94,5 +94,9 @@
         <file>strokes/stroke_名.gif</file>
         <file>strokes/stroke_字.gif</file>
         <file>strokes/stroke_哪.gif</file>
+        <file>non-writable/componentblue3.png</file>
+        <file>non-writable/componentblue7.png</file>
+        <file>non-writable/componentblue5.png</file>
+        <file>non-writable/componentyellow8.png</file>
     </qresource>
 </RCC>

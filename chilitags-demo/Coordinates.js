@@ -5,11 +5,6 @@
 
 //The values of these variables must be mesured with a ruler in centimeter
 
-
-
-
-
-
 //Distance between the two centers of TopLeft tag and TopRight tag
 var horizontal_length = 26.5
 //Distance between the two centers of TopLeft tag and BottomLeft tag

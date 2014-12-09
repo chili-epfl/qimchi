@@ -75,7 +75,8 @@ Item {
 
     MyComponent {
         id :component3
-        component : "X"
+        component : " "
+        nonwritable : "qrc:/non-writable/componentblue3.png"
         correct : true
         character : "叫"
         pinyin : "Jiao (4)"
@@ -103,7 +104,8 @@ Item {
 
     MyComponent {
         id : component5
-        component : "X"
+        component : " "
+        nonwritable : "qrc:/non-writable/componentblue5.png"
         correct : true
         character : "喝"
         pinyin : "He (1)"
@@ -130,7 +132,8 @@ Item {
 
     MyComponent {
         id: component7
-        component: "X"
+        component: " "
+        nonwritable : "qrc:/non-writable/componentblue7.png"
         correct : true
         character : "号"
         pinyin : "Hao (4)"

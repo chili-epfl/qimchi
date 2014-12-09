@@ -134,7 +134,8 @@ Item {
 
     MyComponent {
         id : component8
-        component: "X"
+        component: " "
+        nonwritable : "qrc:/non-writable/componentyellow8.png"
         tag: "tag_163"
     }
 

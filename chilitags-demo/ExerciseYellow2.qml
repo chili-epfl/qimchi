@@ -4,7 +4,7 @@ Item {
     visible:false
 
     property string name : "ExerciseYellow2"
-    property string main_character : "作"
+    property string main_character : "宜"
 
     property string top_left_tag: "tag_148"
     property string top_right_tag: "tag_149"
@@ -94,7 +94,8 @@ Item {
 
     MyComponent {
         id : component8
-        component: "X"
+        component: " "
+        nonwritable : "qrc:/non-writable/componentyellow8.png"
         correct: true
         character: "家"
         word: "家人"
