@@ -6,8 +6,8 @@ import Chilitags 1.0
 import "Coordinates.js" as Coordinates
 
 //We decide which language to use
-//import "StringFr.js" as Str
-import "StringEn.js" as Str
+import "StringFr.js" as Str
+//import "StringEn.js" as Str
 
 ApplicationWindow {
     visible: true
@@ -76,10 +76,6 @@ ApplicationWindow {
     menuBar: MenuBar {
         Menu {
             title: Str.file
-            MenuItem {
-                text: Str.start
-                onTriggered: { playSound.source = "qrc:/sound/test.wav"; playSound.play()}
-            }
             MenuItem {
                 text: Str.reset
                 onTriggered: {reset()}
@@ -399,9 +395,6 @@ ApplicationWindow {
             State {
                 name: "INITIAL"
                 PropertyChanges {
-                    target: maintitle.child; text: Str.maintitle_initial
-                }
-                PropertyChanges {
                     target: chright; visible:false
                 }
                 PropertyChanges {
@@ -411,13 +404,6 @@ ApplicationWindow {
             State {
                 name: "CONSTRUCTION_LEFT"
                 PropertyChanges {
-                    target: maintitle.child; text: {
-                        (characters.component1.visible & characters.component2.visible & characters.component3.visible & characters.component4.visible & characters.component5.visible)?
-                            "Good ! You found all the components. \nChange exercise or use reset card.":
-                            Str.maintitle_construction_left
-                    }
-                }
-                PropertyChanges {
                     target: chleft.child
                     color: "blue"
                     font.pointSize: 64
@@ -425,20 +411,9 @@ ApplicationWindow {
             },
             State {
                 name: "LEFT_COMPLETED"
-                PropertyChanges {
-                    target: maintitle.child; text: Str.maintitle_left_completed
-                }
             },
             State {
                 name: "CONSTRUCTION_RIGHT"
-                PropertyChanges {
-                    target: maintitle.child;
-                    text: {
-                        (characters.component6.visible & characters.component7.visible)?
-                            "Good ! You found all the radicals. \nChange exercise or use reset card.":
-                            Str.maintitle_construction_right
-                    }
-                }
                 PropertyChanges {
                     target: chright.child
                     color: "blue"
@@ -447,9 +422,6 @@ ApplicationWindow {
             },
             State {
                 name: "RIGHT_COMPLETED"
-                PropertyChanges {
-                    target: maintitle.child; text: Str.maintitle_right_completed
-                }
             }
         ]
 
@@ -486,8 +458,14 @@ ApplicationWindow {
             visible: true
             x_cm: Coordinates.maintitle_X
             y_cm: Coordinates.maintitle_Y
+            child.text: {
+                main.state=="INITIAL"?Str.main_initial:
+                main.state=="CONSTRUCTION_LEFT"?Str.main_left + exercise.getCurrent().left_part_character + " ?":
+                main.state=="CONSTRUCTION_RIGHT"?Str.main_right + exercise.getCurrent().right_part_character + " ?":
+                ""
+            }
             child.color: "blue"
-            child.font.pointSize: 32
+            child.font.pointSize: 28
         }
 
         //chleft is the left part of the main character
@@ -524,21 +502,21 @@ ApplicationWindow {
             height: 250; width: 250
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?
-                    componentbox.state=="NONE"?"<- Use a component\ncard":
-                    componentbox.state=="TOOMUCH"?"<- Chose only one\ncomponent":
-                    hintbox.state=="WAITING_HINT"?"Use an hint card ->\nor\n<- change component":
-                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction\ncard ->":
-                    hintbox.state=="CONSTRUCTION"?"Flip the card\nto construct ->":
-                    hintbox.state=="WRONG"?"<- Try an other\ncomponent":
+                    componentbox.state=="NONE"?Str.use_component:
+                    componentbox.state=="TOOMUCH"?Str.too_much:
+                    hintbox.state=="WAITING_HINT"?Str.correct_choice:
+                    hintbox.state=="WAITING_CONSTRUCTION"?Str.use_construction:
+                    hintbox.state=="CONSTRUCTION"?Str.flip_card:
+                    hintbox.state=="WRONG"?Str.change_component:
                 "":
                 main.state=="CONSTRUCTION_RIGHT"?
-                    radicalbox.state=="NO_SELECTOR"?"Use the radical\nselector":
-                    hintbox.state=="WAITING_HINT"?"Use an hint card ->\nor\n<- change component":
-                    hintbox.state=="WAITING_CONSTRUCTION"?"Use the construction\ncard ->":
-                    hintbox.state=="CONSTRUCTION"?"Flip the card\nto construct ->":
-                    hintbox.state=="WRONG"?"<- Try an other\ncomponent":
+                    radicalbox.state=="NO_SELECTOR"?Str.use_radical:
+                    hintbox.state=="WAITING_HINT"?Str.correct_choice:
+                    hintbox.state=="WAITING_CONSTRUCTION"?Str.use_construction:
+                    hintbox.state=="CONSTRUCTION"?Str.flip_card:
+                    hintbox.state=="WRONG"?Str.change_radical:
                 "":
-                "Welcome"
+                Str.use_start
             }
             child.font.pointSize:24
         }
@@ -626,7 +604,7 @@ ApplicationWindow {
             id: success
             x_cm: 32;y_cm: 3
             property int count:0
-            child.text: "success : " + count
+            child.text: Str.success + count
             child.font.pointSize: 32
             child.color: "green"
         }
@@ -636,7 +614,7 @@ ApplicationWindow {
             id: mistakes
             x_cm:32;y_cm:6
             property int count:0
-            child.text: "mistakes : " + count
+            child.text: Str.mistakes + count
             child.font.pointSize: 32
             child.color: "red"
         }
@@ -645,7 +623,7 @@ ApplicationWindow {
             visible:true
             x_cm:32; y_cm:9
             property int rate : 100 * (success.count+2) / (2+success.count+mistakes.count)
-            child.text: "rate : " + rate + "%"
+            child.text: Str.rate + rate + "%"
             child.font.pointSize: 32
             child.color: {return rate<30?"red":rate<60?"orange":rate<80?"yellow":"green"}
         }

@@ -83,8 +83,8 @@ Item {
         component: "子"
         correct: true
         character: "字"
-        word: "Zi (4)"
-        pinyin: "写字"
+        word: "写字"
+        pinyin: "Zi (4)"
         stroke : "qrc:/strokes/stroke_字.gif"
         sound: "qrc:/sound/translate_字.wav"
         x_cm: 3.2

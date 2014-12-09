@@ -1,6 +1,9 @@
 import QtQuick 2.0
 //import "test.js" as exercise
 
+//We decide which language to use
+import "StringFr.js" as Str
+//import "StringEn.js" as Str
 
 
 //This text displays "ready" on one of the visible component card
@@ -124,8 +127,8 @@ CardBox {
     }
 
     function getSelection(){
-        if(isCorrect()){return "Correct !"}
-        else if(isWrong()){return "Wrong"}
+        if(isCorrect()){return Str.correct}
+        else if(isWrong()){return Str.wrong}
         else{return getComponent().component}
     }
 

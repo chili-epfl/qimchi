@@ -10,18 +10,40 @@
 
 //Texts for MenuBar
 var file = "File"
-var start = "Start"
-var stop = "Stop"
 var reset = "Reset"
 var exit = "Exit"
 
 
 
 //Texts for maintitle
-var maintitle_initial = "Use Start card to begin the exercise"
-var maintitle_construction_left = "Find which components go with "
-var maintitle_left_completed = "You have completed the first exercise"
-var maintitle_construction_right = "Find which radicals go with "
-var maintitle_right_completed = "Well Done"
+var main_initial = "Welcome to the Tangible Interface for Chinese Charaters Learning"
+var main_left = "Which character(s) can you construct with "
+var main_right = "Which character(s) can you construct with "
+
+
+//Instructions
+var use_start = "<- Use the Start card"
+var use_component = "<- Use a component\ncard"
+var use_radical = "Use the radical selector\n(anywhere)"
+var too_much = "<- Chose only one\ncomponent"
+var correct_choice = "Use an hint card ->\nor\n<- change component"
+var use_construction = "Use the construction\ncard ->"
+var flip_card = "Flip the card\nto construct ->"
+var change_component = "<- Try an other\ncomponent"
+var change_radical = "<- Try an other\nradical"
+
+//Selection
+var correct = "Correct !"
+var wrong = "Wrong"
+
+//Scores
+var success = "success : "
+var mistakes = "mistakes : "
+var rate = "rate : "
+
+
+
+
+
 
 
