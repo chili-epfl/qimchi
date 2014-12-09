@@ -33,6 +33,9 @@ Current modules are:
 
 - **Qt3D:** Qt's 3D engine
 
+*Note*: In order to clone the repository with the submodules, you can use `git clone --recursive https://...` (You may have to configure your SSH keys in Github, as per [this tutorial](https://help.github.com/articles/generating-ssh-keys/)).
+
+
 Desktop Build
 -------------
 
