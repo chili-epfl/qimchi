@@ -23,7 +23,7 @@ Build
 
 To build the project :
 
-- Install Chilitags from https://github.com/chili-epfl/chilitags (including installation of opencv as it is explained there - some people have found problems if opencv was installed as explained in the latest qimchi version). **Note:** Apparently it does not work anymore with the latest chilitags. If you find problems, checkout and install commit a4e6bf7badc5c996ff86729948fa34d30475d291 of chilitags
+- Install Chilitags from https://github.com/chili-epfl/chilitags (including installation of opencv as it is explained there - some people have found problems if opencv was installed as explained in the latest qimchi version). **Note:** Apparently it does not work anymore with the latest chilitags. If you find problems, checkout and install [commit a4e6bf7badc5c996ff86729948fa34d30475d291 of chilitags](https://github.com/chili-epfl/chilitags/commit/a4e6bf7badc5c996ff86729948fa34d30475d291)
 
 - Clone the repository and open qimchi.pro project in Qt Creator. In the project Run Settings (/!\ There are Run settings & Build settings. Be sure to modify Run settings.) add the path to the chillitags library to LD_LIBRARY_PATH (for us usr/local/lib)
 
