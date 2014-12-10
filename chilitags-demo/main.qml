@@ -12,11 +12,11 @@ import "StringFr.js" as Str
 ApplicationWindow {
     visible: true
     id:app
-    //visibility: "FullScreen"
+    visibility: "FullScreen"
     color: "black"
     //Settings for a "normal" window
-    width: 1280
-    height: 960
+    //width: 1280
+    //height: 960
 
     ExerciseSelector{
         id:exercise
@@ -331,11 +331,12 @@ ApplicationWindow {
     // i.e. in pixels, where 0,0 is the top left corner of the video
     Item {
         id: main
-        anchors.fill:parent
+        anchors.centerIn:parent
         visible:true
         // Reduce everything inside to half size.
         transform: Scale {xScale: .5; yScale:.5}
-
+        x:50;y:50
+        rotation: 180
         state: "INITIAL"
 
         //We define states for the different parts of the exercise
@@ -376,8 +377,10 @@ ApplicationWindow {
         // A video feedback of the camera
         VideoOutput {
             visible: true
-            anchors.top: parent.top
-            anchors.left: parent.left
+            id: video
+            anchors.centerIn: parent
+            //anchors.top: parent.top
+            //anchors.left: parent.left
             // The feedback has to be forwarded by the detection, because
             // cameras expect to have only one output surface
             source: detection

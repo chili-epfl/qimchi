@@ -19,7 +19,7 @@ var main_left = "Quels caractèr(s) pouvez vous construire \navec "
 var main_right = "Quels caractèr(s) pouvez vous construire \navec "
 
 //Instructions
-var use_start = "<- Utilisez la carte\nSTART"
+var use_start = "Utilisez la carte\nSTART ->"
 var use_component = "<- Utilisez une carte\nCOMPOSANT"
 var use_radical = "Utilisez le sélecteur\nde radical"
 var too_much = "<- Choisissez seulement\nun composant"
@@ -38,9 +38,6 @@ var wrong = "Faux"
 var success = "Réussi : "
 var mistakes = "Erreurs : "
 var rate = "Note : "
-
-
-
 
 
 

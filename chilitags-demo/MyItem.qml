@@ -23,7 +23,8 @@ Item {
 
 
     visible: false
-    x: getX(x_cm,y_cm); y: getY(x_cm,y_cm)
+    x: video.x + getX(x_cm,y_cm)
+    y: video.y + getY(x_cm,y_cm)
     width: 1; height: 1
     rotation: getRotation()
     transformOrigin: Item.TopLeft
