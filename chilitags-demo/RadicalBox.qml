@@ -25,13 +25,13 @@ CardBox {
     state: {
         var r = getRatio()
         selectorCursor.visible?
-        (r<0.25)?"RADICAL1":
-        (r<0.35)?"RADICAL2":
-        (r<0.45)?"RADICAL3":
-        (r<0.55)?"RADICAL4":
-        (r<0.65)?"RADICAL5":
-        (r<0.75)?"RADICAL6":
-        (r<0.85)?"RADICAL7":
+        (r<0.19)?"RADICAL1":
+        (r<0.29)?"RADICAL2":
+        (r<0.40)?"RADICAL3":
+        (r<0.51)?"RADICAL4":
+        (r<0.63)?"RADICAL5":
+        (r<0.74)?"RADICAL6":
+        (r<0.84)?"RADICAL7":
                  "RADICAL8":
         "NO_SELECTOR"
 
