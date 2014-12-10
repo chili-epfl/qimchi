@@ -56,8 +56,8 @@ Item {
         var v = y_cm / Coordinates.vertical_length
         return detection.projectionMatrix.times(
                                   tl
-                                  .plus(tr.minus(tl).times(h).times(1-v))
-                                  .plus(br.minus(bl).times(h).times(v))
+                                  .plus(tr.minus(tl).times(h))/*.times(1-v))
+                                  .plus(br.minus(bl).times(h).times(v))*/
                                   .plus(bl.minus(tl).times(v))
                               )
     }

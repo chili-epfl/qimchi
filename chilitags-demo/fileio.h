@@ -17,10 +17,10 @@ public:
     Q_INVOKABLE QString read();
     Q_INVOKABLE bool write(const QString& data);
 
-    QString source() { return mSource; };
+    QString source() { return mSource; }
 
 public slots:
-    void setSource(const QString& source) { mSource = source; };
+    void setSource(const QString& source) { mSource = source; }
 
 signals:
     void sourceChanged(const QString& source);

@@ -40,6 +40,7 @@ ApplicationWindow {
             logfile.write(JSON.stringify(str) + "\n")
         }
     }
+
     ExerciseSelector{
         id:exercise
     }
