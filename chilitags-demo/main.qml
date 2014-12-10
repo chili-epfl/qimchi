@@ -24,61 +24,15 @@ ApplicationWindow {
 
     title: { exercise.getCurrent().name + " : " + exercise.getCurrent().main_character }
 
-    function reset(){
-        main.state = "INITIAL"
-        characters.component1.visible = false
-        characters.component2.visible = false
-        characters.component3.visible = false
-        characters.component4.visible = false
-        characters.component5.visible = false
-        characters.component6.visible = false
-        characters.component7.visible = false
-        characters.component8.visible = false
-        characters.component9.visible = false
-        characters.component10.visible = false
-        characters.component11.visible = false
-        characters.component12.visible = false
-        characters.component13.visible = false
-        characters.radical1.visible = false
-        characters.radical2.visible = false
-        characters.radical3.visible = false
-        characters.radical4.visible = false
-        characters.radical5.visible = false
-        characters.radical6.visible = false
-        characters.radical7.visible = false
-        characters.radical8.visible = false
-        componentbox.component1_constructed = false
-        componentbox.component2_constructed = false
-        componentbox.component3_constructed = false
-        componentbox.component4_constructed = false
-        componentbox.component5_constructed = false
-        componentbox.component6_constructed = false
-        componentbox.component7_constructed = false
-        componentbox.component8_constructed = false
-        componentbox.component9_constructed = false
-        componentbox.component10_constructed = false
-        componentbox.component11_constructed = false
-        componentbox.component12_constructed = false
-        componentbox.component13_constructed = false
-        radicalbox.radical1_constructed = false
-        radicalbox.radical2_constructed = false
-        radicalbox.radical3_constructed = false
-        radicalbox.radical4_constructed = false
-        radicalbox.radical5_constructed = false
-        radicalbox.radical6_constructed = false
-        radicalbox.radical7_constructed = false
-        radicalbox.radical8_constructed = false
-        mistakes.count = 0
-        success.count = 0
-    }
-
-
+    //The menu bar with two options
+    //reset : for restarting the Exercise
+    //exit : to close the application
     menuBar: MenuBar {
         Menu {
             title: Str.file
             MenuItem {
                 text: Str.reset
-                onTriggered: {reset()}
+                onTriggered: {exercise.reset()}
             }
             MenuItem {
                 text: Str.exit
@@ -226,7 +180,7 @@ ApplicationWindow {
             property vector3d center : transform.times(parent.tagCenter)
             onVisibilityChanged: {
                 if(resetCard.visible){
-                    reset()
+                    exercise.reset()
                 }
             }
         }
@@ -406,22 +360,16 @@ ApplicationWindow {
                 PropertyChanges {
                     target: chleft.child
                     color: "blue"
-                    font.pointSize: 64
+                    font.pointSize: 48
                 }
-            },
-            State {
-                name: "LEFT_COMPLETED"
             },
             State {
                 name: "CONSTRUCTION_RIGHT"
                 PropertyChanges {
                     target: chright.child
                     color: "blue"
-                    font.pointSize: 64
+                    font.pointSize: 48
                 }
-            },
-            State {
-                name: "RIGHT_COMPLETED"
             }
         ]
 
@@ -502,19 +450,19 @@ ApplicationWindow {
             height: 250; width: 250
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?
-                    componentbox.state=="NONE"?Str.use_component:
-                    componentbox.state=="TOOMUCH"?Str.too_much:
-                    hintbox.state=="WAITING_HINT"?Str.correct_choice:
-                    hintbox.state=="WAITING_CONSTRUCTION"?Str.use_construction:
-                    hintbox.state=="CONSTRUCTION"?Str.flip_card:
-                    hintbox.state=="WRONG"?Str.change_component:
+                    componentbox.state=="NONE"?componentbox.allFound()?Str.well_done:Str.use_component:
+                    componentbox.state=="TOOMUCH"?componentbox.allFound()?Str.well_done:Str.too_much:
+                    hintbox.state=="WAITING_HINT"?componentbox.allFound()?Str.well_done:Str.correct_choice:
+                    hintbox.state=="WAITING_CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.use_construction:
+                    hintbox.state=="CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.flip_card:
+                    hintbox.state=="WRONG"?componentbox.allFound()?Str.well_done:Str.change_component:
                 "":
                 main.state=="CONSTRUCTION_RIGHT"?
-                    radicalbox.state=="NO_SELECTOR"?Str.use_radical:
-                    hintbox.state=="WAITING_HINT"?Str.correct_choice:
-                    hintbox.state=="WAITING_CONSTRUCTION"?Str.use_construction:
-                    hintbox.state=="CONSTRUCTION"?Str.flip_card:
-                    hintbox.state=="WRONG"?Str.change_radical:
+                    radicalbox.state=="NO_SELECTOR"?radicalbox.allFound()?Str.well_done:Str.use_radical:
+                    hintbox.state=="WAITING_HINT"?radicalbox.allFound()?Str.well_done:Str.correct_choice:
+                    hintbox.state=="WAITING_CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.use_construction:
+                    hintbox.state=="CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.flip_card:
+                    hintbox.state=="WRONG"?radicalbox.allFound()?Str.well_done:Str.change_radical:
                 "":
                 Str.use_start
             }
@@ -525,7 +473,11 @@ ApplicationWindow {
         //whether the component is correct or not if already constructed
         MyItem {
             id: displaySelection
-            visible:true
+            visible: {
+                main.state=="CONSTRUCTION_LEFT"?!componentbox.allFound():
+                main.state=="CONSTRUCTION_RIGHT"?!radicalbox.allFound():
+                true
+            }
             x_cm: 9.2
             y_cm: 9
             height: 250; width: 250

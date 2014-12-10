@@ -31,6 +31,7 @@ var use_construction = "Use the construction\ncard ->"
 var flip_card = "Flip the card\nto construct ->"
 var change_component = "<- Try an other\ncomponent"
 var change_radical = "<- Try an other\nradical"
+var well_done = "Well done ! You found them all"
 
 //Selection
 var correct = "Correct !"

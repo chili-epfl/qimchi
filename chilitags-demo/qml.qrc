@@ -10,15 +10,9 @@
         <file>frame.png</file>
         <file>HintBox.qml</file>
         <file>RadicalBox.qml</file>
-        <file>ExerciseRed1.qml</file>
-        <file>ExerciseRed2.qml</file>
         <file>ExerciseEmptyTemplate.qml</file>
         <file>ExerciseSelector.qml</file>
         <file>Characters.qml</file>
-        <file>ExerciseRed3.qml</file>
-        <file>ExerciseBlue1.qml</file>
-        <file>ExerciseBlue2.qml</file>
-        <file>ExerciseBlue3.qml</file>
         <file>sound/translate_姐.wav</file>
         <file>sound/translate_饭.wav</file>
         <file>sound/translate_们.wav</file>
@@ -59,9 +53,6 @@
         <file>MyComponent.qml</file>
         <file>MyRadical.qml</file>
         <file>sound/translate_较.wav</file>
-        <file>ExerciseYellow1.qml</file>
-        <file>ExerciseYellow2.qml</file>
-        <file>ExerciseYellow3.qml</file>
         <file>strokes/stroke_叫.gif</file>
         <file>strokes/stroke_什.gif</file>
         <file>strokes/stroke_号.gif</file>
@@ -98,5 +89,14 @@
         <file>non-writable/componentblue7.png</file>
         <file>non-writable/componentblue5.png</file>
         <file>non-writable/componentyellow8.png</file>
+        <file>ExerciseRed2.qml</file>
+        <file>ExerciseRed3.qml</file>
+        <file>ExerciseBlue2.qml</file>
+        <file>ExerciseYellow3.qml</file>
+        <file>ExerciseYellow2.qml</file>
+        <file>ExerciseBlue3.qml</file>
+        <file>ExerciseYellow1.qml</file>
+        <file>ExerciseRed1.qml</file>
+        <file>ExerciseBlue1.qml</file>
     </qresource>
 </RCC>

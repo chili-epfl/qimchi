@@ -101,6 +101,24 @@ CardBox {
         return alreadyConstructed() & !getComponent().correct
     }
 
+    function allFound(){
+        var b = true
+        b = b & (!exercise.getCurrent().component1.correct | component1_constructed)
+        b = b & (!exercise.getCurrent().component2.correct | component2_constructed)
+        b = b & (!exercise.getCurrent().component3.correct | component3_constructed)
+        b = b & (!exercise.getCurrent().component4.correct | component4_constructed)
+        b = b & (!exercise.getCurrent().component5.correct | component5_constructed)
+        b = b & (!exercise.getCurrent().component6.correct | component6_constructed)
+        b = b & (!exercise.getCurrent().component7.correct | component7_constructed)
+        b = b & (!exercise.getCurrent().component8.correct | component8_constructed)
+        b = b & (!exercise.getCurrent().component9.correct | component9_constructed)
+        b = b & (!exercise.getCurrent().component10.correct | component10_constructed)
+        b = b & (!exercise.getCurrent().component11.correct | component11_constructed)
+        b = b & (!exercise.getCurrent().component12.correct | component12_constructed)
+        b = b & (!exercise.getCurrent().component13.correct | component13_constructed)
+        return b;
+    }
+
     function getComponent(){
         if(state==="COMPONENT1"){return exercise.getCurrent().component1}
         if(state==="COMPONENT2"){return exercise.getCurrent().component2}

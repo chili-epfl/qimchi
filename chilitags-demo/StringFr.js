@@ -28,6 +28,7 @@ var use_construction = "Utilisez la carte\n CONSTRUIRE ->"
 var flip_card = "Retournez la carte\npour l'activer ->"
 var change_component = "<- Essayez un autre\ncomposant"
 var change_radical = "<- Essayez un autre\nradical"
+var well_done = "Bravo !\nVous avez trouvé tous\nles caractères"
 
 //Selection
 var correct = "Correct !"

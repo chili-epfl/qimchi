@@ -147,7 +147,7 @@ Item {
         word: "姐姐"
         pinyin: "Jie (3)"
         stroke : "qrc:/strokes/stroke_姐.gif"
-        sound: "qrc:/sound/translate_.wav"
+        sound: "qrc:/sound/translate_姐.wav"
         x_cm: 24.2
         y_cm: 9.5
     }

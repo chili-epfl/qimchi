@@ -5,13 +5,6 @@ import QtQuick 2.0
 import "StringFr.js" as Str
 //import "StringEn.js" as Str
 
-
-//This text displays "ready" on one of the visible component card
-//Only the component card with ready on it will be activated by the function cards
-//When two are visible at the same time the selected one will be the smallest rank
-//
-//This item also makes the character of the selected component appear green
-//and manages the right text on pinyinCards and wordCombinationCard
 CardBox {
     visible: (main.state == "CONSTRUCTION_RIGHT")
 
@@ -128,8 +121,9 @@ CardBox {
 
     function getSelection(){
         if(isCorrect()){return Str.correct}
-        else if(isWrong()){return Str.wrong}
-        else{return getRadical().radical}
+        if(isWrong()){return Str.wrong}
+        if(state=="NO_SELECTOR"){return ""}
+        return getRadical().radical
     }
 
     function getWord(){
@@ -138,6 +132,19 @@ CardBox {
 
     function getStrokes(){
         return getRadical().stroke
+    }
+
+    function allFound(){
+        var b = true
+        b = b & (!exercise.getCurrent().radical1.correct | radical1_constructed)
+        b = b & (!exercise.getCurrent().radical2.correct | radical2_constructed)
+        b = b & (!exercise.getCurrent().radical3.correct | radical3_constructed)
+        b = b & (!exercise.getCurrent().radical4.correct | radical4_constructed)
+        b = b & (!exercise.getCurrent().radical5.correct | radical5_constructed)
+        b = b & (!exercise.getCurrent().radical6.correct | radical6_constructed)
+        b = b & (!exercise.getCurrent().radical7.correct | radical7_constructed)
+        b = b & (!exercise.getCurrent().radical8.correct | radical8_constructed)
+        return b;
     }
 
     states: [
