@@ -23,7 +23,7 @@ ApplicationWindow {
 
     FileIOQML {
         id: logfile
-        source: "my_file.txt"
+        source: "logfile.txt"
         onError: console.log(msg)
 
         function log_tag(tag){
@@ -39,7 +39,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        logfile.write("\n\nNEW LAUNCH\n\n")
+        logfile.write("\nNEW LAUNCH\n\n")
     }
 
     ExerciseSelector{
@@ -487,7 +487,7 @@ ApplicationWindow {
                 PropertyChanges {
                     target: chleft.child
                     color: "blue"
-                    font.pointSize: 48
+                    font.pixelSize: 48
                 }
             },
             State {
@@ -495,7 +495,7 @@ ApplicationWindow {
                 PropertyChanges {
                     target: chright.child
                     color: "blue"
-                    font.pointSize: 48
+                    font.pixelSize: 48
                 }
             }
         ]
@@ -542,7 +542,7 @@ ApplicationWindow {
                 ""
             }
             child.color: "blue"
-            child.font.pointSize: 28
+            child.font.pixelSize: 28
         }
 
         //chleft is the left part of the main character
@@ -551,7 +551,7 @@ ApplicationWindow {
             visible: true
             x_cm: exercise.getCurrent().left_part_X
             y_cm: exercise.getCurrent().left_part_Y
-            child.font.pointSize: 42
+            child.font.pixelSize: 42
             child.text: exercise.getCurrent().left_part_character
         }
 
@@ -562,7 +562,7 @@ ApplicationWindow {
             visible: true
             x_cm: exercise.getCurrent().right_part_X
             y_cm: exercise.getCurrent().right_part_Y
-            child.font.pointSize: 42
+            child.font.pixelSize: 42
             child.text: exercise.getCurrent().right_part_character
         }
 
@@ -598,7 +598,7 @@ ApplicationWindow {
                 "":
                 Str.use_start
             }
-            child.font.pointSize:24
+            child.font.pixelSize:24
         }
 
         //We give feedback about which component is selected for construction or
@@ -613,7 +613,7 @@ ApplicationWindow {
             x_cm: 9.2
             y_cm: 9
             height: 250; width: 250
-            child.font.pointSize: 42
+            child.font.pixelSize: 42
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?componentbox.getSelection():
                 main.state=="CONSTRUCTION_RIGHT"?radicalbox.getSelection():
@@ -652,7 +652,7 @@ ApplicationWindow {
                 "":
                 ""
             }
-            child.font.pointSize:42
+            child.font.pixelSize:42
             //We use Audio to play the pronunciation of the characters
             Audio {
                 id: playSound
@@ -689,7 +689,7 @@ ApplicationWindow {
             x_cm: 32;y_cm: 3
             property int count:0
             child.text: Str.success + count
-            child.font.pointSize: 32
+            child.font.pixelSize: 32
             child.color: "green"
         }
 
@@ -699,7 +699,7 @@ ApplicationWindow {
             x_cm:32;y_cm:6
             property int count:0
             child.text: Str.mistakes + count
-            child.font.pointSize: 32
+            child.font.pixelSize: 32
             child.color: "red"
         }
 
@@ -708,7 +708,7 @@ ApplicationWindow {
             x_cm:32; y_cm:9
             property int rate : 100 * (success.count+2) / (2+success.count+mistakes.count)
             child.text: Str.rate + rate + "%"
-            child.font.pointSize: 32
+            child.font.pixelSize: 32
             child.color: {return rate<30?"red":rate<60?"orange":rate<80?"yellow":"green"}
         }
 

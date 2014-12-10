@@ -31,7 +31,7 @@ Item {
 
     Text {
         id: asdf
-        font.pointSize: 60
+        font.pixelSize: 60
         horizontalAlignment: Text.AlignHCenter
         text: ""
         anchors.centerIn: parent
