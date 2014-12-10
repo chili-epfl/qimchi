@@ -23,7 +23,10 @@ ApplicationWindow {
 
     FileIOQML {
         id: logfile
-        source: "logfile.txt"
+        source: {
+            var d = new Date()
+            "logfile_the_" + d.getDate() + "_at_" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()  + ".txt"
+        }
         onError: console.log(msg)
 
         function log_tag(tag){
@@ -37,11 +40,6 @@ ApplicationWindow {
             logfile.write(JSON.stringify(str) + "\n")
         }
     }
-
-    Component.onCompleted: {
-        logfile.write("\nNEW LAUNCH\n\n")
-    }
-
     ExerciseSelector{
         id:exercise
     }
