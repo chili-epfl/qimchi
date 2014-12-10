@@ -60,14 +60,14 @@ CardBox {
 
     function flip(){
         if(hintbox.state=="CONSTRUCTION"){
-            if(state=="RADICAL1"){radical1_constructed = true; characters.radical1.visible = isCorrect()}
-            if(state=="RADICAL2"){radical2_constructed = true; characters.radical2.visible = isCorrect()}
-            if(state=="RADICAL3"){radical3_constructed = true; characters.radical3.visible = isCorrect()}
-            if(state=="RADICAL4"){radical4_constructed = true; characters.radical4.visible = isCorrect()}
-            if(state=="RADICAL5"){radical5_constructed = true; characters.radical5.visible = isCorrect()}
-            if(state=="RADICAL6"){radical6_constructed = true; characters.radical6.visible = isCorrect()}
-            if(state=="RADICAL7"){radical7_constructed = true; characters.radical7.visible = isCorrect()}
-            if(state=="RADICAL8"){radical8_constructed = true; characters.radical8.visible = isCorrect()}
+            if(state=="RADICAL1"){radical1_constructed = true; characters.radical1.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL2"){radical2_constructed = true; characters.radical2.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL3"){radical3_constructed = true; characters.radical3.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL4"){radical4_constructed = true; characters.radical4.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL5"){radical5_constructed = true; characters.radical5.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL6"){radical6_constructed = true; characters.radical6.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL7"){radical7_constructed = true; characters.radical7.visible = isCorrect() & !getRadical().ismain}
+            if(state=="RADICAL8"){radical8_constructed = true; characters.radical8.visible = isCorrect() & !getRadical().ismain}
 
             if(isCorrect()){success.count += 1}else{mistakes.count += 1}
         }

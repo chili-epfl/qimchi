@@ -462,7 +462,10 @@ ApplicationWindow {
                 "":
                 main.state=="CONSTRUCTION_RIGHT"?
                     radicalbox.state=="NO_SELECTOR"?radicalbox.allFound()?Str.well_done:Str.use_radical:
-                    hintbox.state=="WAITING_HINT"?radicalbox.allFound()?Str.well_done:Str.correct_choice:
+                    hintbox.state=="WAITING_HINT"?
+                        radicalbox.getRadical().ismain?Str.ismain:
+                        radicalbox.allFound()?Str.well_done:
+                        Str.correct_choice:
                     hintbox.state=="WAITING_CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.use_construction:
                     hintbox.state=="CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.flip_card:
                     hintbox.state=="WRONG"?radicalbox.allFound()?Str.well_done:Str.change_radical:

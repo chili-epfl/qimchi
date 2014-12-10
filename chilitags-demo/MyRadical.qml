@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     property string radical : ""
     property bool correct : false
+    property bool ismain : false
     property string character : ""
     property string pinyin : ""
     property string word : ""

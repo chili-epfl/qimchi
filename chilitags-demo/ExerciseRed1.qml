@@ -167,7 +167,12 @@ Item {
 
     }
 
-    MyRadical{ id: radical4; radical : "女"}
+    MyRadical{
+        id: radical4
+        radical : "女"
+        correct: true
+        ismain: true
+    }
 
     MyRadical{ id: radical5; radical : "木"}
 

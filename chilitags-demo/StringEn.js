@@ -32,6 +32,7 @@ var flip_card = "Flip the card\nto construct ->"
 var change_component = "<- Try an other\ncomponent"
 var change_radical = "<- Try an other\nradical"
 var well_done = "Well done ! You found them all"
+var ismain = "You constructed\nthe main character"
 
 //Selection
 var correct = "Correct !"

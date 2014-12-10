@@ -193,7 +193,12 @@ Item {
 
     MyRadical{ id: radical2; radical : "车" }
 
-    MyRadical{id: radical3; radical : "口"}
+    MyRadical{
+        id: radical3
+        radical : "口"
+        correct: true
+        ismain: true
+    }
 
     MyRadical{ id: radical4; radical : "女"}
 
@@ -210,8 +215,8 @@ Item {
         word : "爸爸"
         stroke : "qrc:/strokes/stroke_爸.gif"
         sound : "qrc:/sound/translate_爸.wav"
-        x_cm: 25.1
-        y_cm: 9
+        x_cm: 26
+        y_cm: 9.6
     }
 
     MyRadical{ id: radical8;radical : "石" }
