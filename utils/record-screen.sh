@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Mount something
+udisks --mount /dev/sda2
 
-# cd into something
+cd /media/Spare/tmp
 
 now=$(date +"%Y_%m_%d-%H_%M_%S")
 ffmpeg -f x11grab -s 1360x768 -r 10 -i :0.0 screen_$now.mkv
