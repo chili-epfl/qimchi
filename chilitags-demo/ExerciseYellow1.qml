@@ -62,7 +62,7 @@ Item {
         correct: true
         character: "他"
         word: "他们"
-        pinyin: "Ta (3)"
+        pinyin: "Ta (1)"
         stroke : "qrc:/strokes/stroke_他.gif"
         sound: "qrc:/sound/translate_他.wav"
         x_cm: 3.8
@@ -90,7 +90,7 @@ Item {
         correct: true
         character: "什"
         word: "什么"
-        pinyin: "Shen (4)"
+        pinyin: "Shen (2)"
         stroke : "qrc:/strokes/stroke_什.gif"
         sound: "qrc:/sound/translate_什.wav"
         x_cm: 10
@@ -117,8 +117,8 @@ Item {
         component: "更"
         correct: true
         character: "便"
-        word: "便宜"
-        pinyin: "Pian (2)"
+        word: "方便 , 便宜"
+        pinyin: "Bian (4)\nPian (2)"
         stroke : "qrc:/strokes/stroke_便.gif"
         sound: "qrc:/sound/translate_便.wav"
         x_cm: 16.2

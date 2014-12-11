@@ -122,8 +122,8 @@ Item {
         radical : "夕"
         correct: true
         character: "多"
-        word: "Duo (1)"
-        pinyin: "多少"
+        word: "多少"
+        pinyin: "Duo (1)"
         stroke : "qrc:/strokes/stroke_多.gif"
         sound: "qrc:/sound/translate_多.wav"
         x_cm: 17.6
@@ -137,8 +137,8 @@ Item {
         radical : "口"
         correct: true
         character: "名"
-        word: "Ming (2)"
-        pinyin: "姓名"
+        word: "姓名"
+        pinyin: "Ming (2)"
         stroke : "qrc:/strokes/stroke_名.gif"
         sound: "qrc:/sound/translate_名.wav"
         x_cm: 23.7
