@@ -7,3 +7,6 @@
 [submodule "modules/qt3d"]
 	path = modules/qt3d
 	url = git@gitorious.org:qt/qt3d.git
+[submodule "modules/imu"]
+	path = modules/imu
+	url = git@github.com:chili-epfl/qml-imu.git
