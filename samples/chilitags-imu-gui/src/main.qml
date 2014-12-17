@@ -13,6 +13,7 @@ Window {
     //Inertial measurement unit
     IMU{
         id: imu
+        accBias: Qt.vector3d(0.397, -0.008, -0.005)
         targetTranslation: Qt.vector3d(0,0.04,0) //Camera frame translation from local inertial frame
         targetRotation: Qt.quaternion(0,1,0,0)   //Camera frame rotation in local inertial frame
     }
@@ -31,10 +32,10 @@ Window {
         imu: imu
         persistence: 30
 
-        ChilitagsObject{
-            id: tag
-            name: "tag_0"
-        }
+        ChilitagsObject{ id: tag0; name: "tag_0" }
+        ChilitagsObject{ id: tag1; name: "tag_1" }
+        ChilitagsObject{ id: tag2; name: "tag_2" }
+        ChilitagsObject{ id: tag3; name: "tag_3" }
     }
 
     //Set up visual output
@@ -66,10 +67,28 @@ Window {
 
             //Draw a cube that's green when detected and red when not detected
             Cube{
-                id: cube
+                id: cube0
                 scale: 20               //Default tag size
-                effect: Effect { color: tag.visible ? "green" : "red" }
-                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag.transform }] //We can center the cube like this
+                effect: Effect { color: tag0.visible ? "green" : "red" }
+                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag0.transform }] //We can center the cube like this
+            }
+            Cube{
+                id: cube1
+                scale: 20               //Default tag size
+                effect: Effect { color: tag1.visible ? "green" : "red" }
+                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag1.transform }] //We can center the cube like this
+            }
+            Cube{
+                id: cube2
+                scale: 20               //Default tag size
+                effect: Effect { color: tag2.visible ? "green" : "red" }
+                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag2.transform }] //We can center the cube like this
+            }
+            Cube{
+                id: cube3
+                scale: 20               //Default tag size
+                effect: Effect { color: tag3.visible ? "green" : "red" }
+                transform: [ Translation3D{ translate: Qt.vector3d(10,10,-10)}, MatrixTransform3D{ matrix: tag3.transform }] //We can center the cube like this
             }
         }
     }
