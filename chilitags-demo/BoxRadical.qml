@@ -5,7 +5,7 @@ import QtQuick 2.0
 import "StringFr.js" as Str
 //import "StringEn.js" as Str
 
-CardBox {
+Box {
     visible: (main.state == "CONSTRUCTION_RIGHT")
 
     property bool radical1_constructed : false
@@ -59,7 +59,7 @@ CardBox {
     }
 
     function flip(){
-        if(hintbox.state=="CONSTRUCTION"){
+        if(boxfunction.state=="CONSTRUCTION"){
             if(state=="RADICAL1"){radical1_constructed = true; characters.radical1.visible = isCorrect() & !getRadical().ismain}
             if(state=="RADICAL2"){radical2_constructed = true; characters.radical2.visible = isCorrect() & !getRadical().ismain}
             if(state=="RADICAL3"){radical3_constructed = true; characters.radical3.visible = isCorrect() & !getRadical().ismain}

@@ -1,5 +1,4 @@
 import QtQuick 2.0
-//import "test.js" as exercise
 
 //We decide which language to use
 import "StringFr.js" as Str
@@ -12,7 +11,7 @@ import "StringFr.js" as Str
 //
 //This item also makes the character of the selected component appear green
 //and manages the right text on pinyinCards and wordCombinationCard
-CardBox {
+Box {
     visible: (main.state == "CONSTRUCTION_LEFT")
 
     x_cm: 4.5
@@ -54,7 +53,7 @@ CardBox {
     }
 
     function flip(){
-        if(hintbox.state=="CONSTRUCTION"){
+        if(boxfunction.state=="CONSTRUCTION"){
             if(state=="COMPONENT1"){component1_constructed = true; characters.component1.visible=isCorrect()}
             if(state=="COMPONENT2"){component2_constructed = true; characters.component2.visible=isCorrect()}
             if(state=="COMPONENT3"){component3_constructed = true; characters.component3.visible=isCorrect()}

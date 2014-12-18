@@ -14,11 +14,14 @@ import "StringFr.js" as Str
 ApplicationWindow {
     visible: true
     id:app
-    visibility: "FullScreen"
-    color: "black"
+    //Settings for fullscreen window
+    //visibility: "FullScreen"
     //Settings for a "normal" window
-    //width: 1280
-    //height: 960
+    width: 1280
+    height: 960
+
+
+    color: "black"
 
 
     FileIOQML {
@@ -219,50 +222,26 @@ ApplicationWindow {
             id: startCard
             name: "tag_5"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                logfile.log_tag(startCard)
-
-                if(main.state == "INITIAL"){
-                    if(startCard.visible){main.state = "CONSTRUCTION_LEFT"}
-                }
-            }
+            onVisibilityChanged: {logfile.log_tag(startCard)}
         }
         ChilitagsObject {
             id: resetCard
             name: "tag_6"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                logfile.log_tag(resetCard)
-
-                if(resetCard.visible){
-                    exercise.reset()
-                }
-            }
+            onVisibilityChanged: {logfile.log_tag(resetCard)}
         }
         ChilitagsObject {
-            id: switchToComponent
+            id: switchToComponents
             name: "tag_7"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                logfile.log_tag(switchToComponent)
-
-                if(main.state == "CONSTRUCTION_RIGHT"){
-                    if(switchToComponent.visible){main.state = "CONSTRUCTION_LEFT"}
-                }
-            }
+            onVisibilityChanged: {logfile.log_tag(switchToComponents)}
         }
 
         ChilitagsObject {
             id: switchToRadicals
             name: "tag_8"
             property vector3d center : transform.times(parent.tagCenter)
-            onVisibilityChanged: {
-                logfile.log_tag(switchToRadicals)
-
-                if(main.state == "CONSTRUCTION_LEFT"){
-                    if(switchToRadicals.visible){main.state = "CONSTRUCTION_RIGHT"}
-                }
-            }
+            onVisibilityChanged: {logfile.log_tag(switchToRadicals)}
         }
 
         // We declare tags for the at most 12 components (orange cards)
@@ -462,7 +441,7 @@ ApplicationWindow {
         transform: Scale {xScale: .5; yScale:.5}
         x:50;y:50
         rotation: 180
-        state: "INITIAL"
+        state: "CONSTRUCTION_LEFT"
 
         //We define states for the different parts of the exercise
         //In chronological order :
@@ -513,19 +492,19 @@ ApplicationWindow {
 
 
         //This text displays "Ready" on the current selected component
-        ComponentBox {
+        BoxComponent {
             visible: false
             id: componentbox
         }
 
-        RadicalBox {
+        BoxRadical {
             visible: false
             id : radicalbox
         }
 
-        HintBox {
+        BoxFunction {
             visible: false
-            id: hintbox
+            id: boxfunction
         }
 
         //mainTitle is the text at the top of the sheet
@@ -580,20 +559,20 @@ ApplicationWindow {
                 main.state=="CONSTRUCTION_LEFT"?
                     componentbox.state=="NONE"?componentbox.allFound()?Str.well_done:Str.use_component:
                     componentbox.state=="TOOMUCH"?componentbox.allFound()?Str.well_done:Str.too_much:
-                    hintbox.state=="WAITING_HINT"?componentbox.allFound()?Str.well_done:Str.correct_choice:
-                    hintbox.state=="WAITING_CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.use_construction:
-                    hintbox.state=="CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.flip_card:
-                    hintbox.state=="WRONG"?componentbox.allFound()?Str.well_done:Str.change_component:
+                    boxfunction.state=="WAITING_HINT"?componentbox.allFound()?Str.well_done:Str.correct_choice:
+                    boxfunction.state=="WAITING_CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.use_construction:
+                    boxfunction.state=="CONSTRUCTION"?componentbox.allFound()?Str.well_done:Str.flip_card:
+                    boxfunction.state=="WRONG"?componentbox.allFound()?Str.well_done:Str.change_component:
                 "":
                 main.state=="CONSTRUCTION_RIGHT"?
                     radicalbox.state=="NO_SELECTOR"?radicalbox.allFound()?Str.well_done:Str.use_radical:
-                    hintbox.state=="WAITING_HINT"?
+                    boxfunction.state=="WAITING_HINT"?
                         radicalbox.getRadical().ismain?Str.ismain:
                         radicalbox.allFound()?Str.well_done:
                         Str.correct_choice:
-                    hintbox.state=="WAITING_CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.use_construction:
-                    hintbox.state=="CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.flip_card:
-                    hintbox.state=="WRONG"?radicalbox.allFound()?Str.well_done:Str.change_radical:
+                    boxfunction.state=="WAITING_CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.use_construction:
+                    boxfunction.state=="CONSTRUCTION"?radicalbox.allFound()?Str.well_done:Str.flip_card:
+                    boxfunction.state=="WRONG"?radicalbox.allFound()?Str.well_done:Str.change_radical:
                 "":
                 Str.use_start
             }
@@ -642,12 +621,12 @@ ApplicationWindow {
             height: 250; width: 250
             child.text:{
                 main.state=="CONSTRUCTION_LEFT"?
-                    hintbox.state=="PINYIN_PRONUNCIATION"?componentbox.getPinyin():
-                    hintbox.state=="WORD_COMBINATION"?componentbox.getWord():
+                    boxfunction.state=="PINYIN_PRONUNCIATION"?componentbox.getPinyin():
+                    boxfunction.state=="WORD_COMBINATION"?componentbox.getWord():
                 "":
                 main.state=="CONSTRUCTION_RIGHT"?
-                    hintbox.state=="PINYIN_PRONUNCIATION"?radicalbox.getPinyin():
-                    hintbox.state=="WORD_COMBINATION"?radicalbox.getWord():
+                    boxfunction.state=="PINYIN_PRONUNCIATION"?radicalbox.getPinyin():
+                    boxfunction.state=="WORD_COMBINATION"?radicalbox.getWord():
                 "":
                 ""
             }
@@ -656,7 +635,7 @@ ApplicationWindow {
             Audio {
                 id: playSound
                 source: {
-                    hintbox.state=="PINYIN_PRONUNCIATION"?
+                    boxfunction.state=="PINYIN_PRONUNCIATION"?
                     main.state=="CONSTRUCTION_LEFT"?
                         componentbox.getSound():
                         radicalbox.getSound():
@@ -669,13 +648,13 @@ ApplicationWindow {
             AnimatedImage {
                 z:2
                 source: {
-                    hintbox.state=="STROKE_ORDER"?
+                    boxfunction.state=="STROKE_ORDER"?
                     main.state=="CONSTRUCTION_LEFT"?
                         componentbox.getStrokes():
                         radicalbox.getStrokes():
                     ""
                 }
-                visible: hintbox.state==="STROKE_ORDER"
+                visible: boxfunction.state==="STROKE_ORDER"
                 asynchronous: true
                 anchors.fill: parent
             }

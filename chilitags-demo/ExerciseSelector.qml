@@ -57,7 +57,7 @@ Item {
     ExerciseYellow3 { id: yellow3 }
 
     function reset(){
-        main.state = "INITIAL"
+        main.state = "CONSTRUCTION_LEFT"
         characters.component1.visible = false
         characters.component2.visible = false
         characters.component3.visible = false

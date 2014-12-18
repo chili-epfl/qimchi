@@ -8,7 +8,7 @@ import QtQuick 2.0
 //
 //This item also makes the character of the selected component appear green
 //and manages the right text on pinyinCards and wordCombinationCard
-CardBox {
+Box {
 
     x_cm: 20.5
     y_cm: 14
@@ -16,6 +16,8 @@ CardBox {
     width_cm: 8.5
 
     state: {
+        isIn(switchToComponents)?"SWITCH_COMPONENT":
+        isIn(switchToRadicals)?"SWITCH_RADICAL":
         main.state=="CONSTRUCTION_LEFT"?
             componentbox.notEmpty()?
             componentbox.alreadyConstructed()?
@@ -52,6 +54,14 @@ CardBox {
         State { name: "WAITING_HINT" },
         State { name: "WAITING_CONSTRUCTION" },
         State { name: "WRONG" },
+        State {
+            name: "SWITCH_COMPONENT"
+            StateChangeScript { script: main.state = "CONSTRUCTION_LEFT" }
+        },
+        State {
+            name: "SWITCH_RADICAL"
+            StateChangeScript { script: main.state = "CONSTRUCTION_RIGHT" }
+        },
         State { name: "NO_COMPONENT" }
 
     ]
