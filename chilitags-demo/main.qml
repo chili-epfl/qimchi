@@ -465,16 +465,18 @@ ApplicationWindow {
                 PropertyChanges {
                     target: chleft.child
                     color: "blue"
-                    font.pixelSize: 48
+                    font.pixelSize: 64
                 }
+                PropertyChanges {target:chleftrect; visible:true}
             },
             State {
                 name: "CONSTRUCTION_RIGHT"
                 PropertyChanges {
                     target: chright.child
                     color: "blue"
-                    font.pixelSize: 48
+                    font.pixelSize: 64
                 }
+                PropertyChanges {target:chrightrect; visible:true}
             }
         ]
 
@@ -531,6 +533,18 @@ ApplicationWindow {
             y_cm: exercise.getCurrent().left_part_Y
             child.font.pixelSize: 42
             child.text: exercise.getCurrent().left_part_character
+
+            Rectangle {
+                id:chleftrect
+                visible:false
+                width: 100
+                height: width
+                anchors.centerIn: parent
+                color: "transparent"
+                border.color: "blue"
+                border.width: 4
+                radius: width*0.5
+            }
         }
 
 
@@ -542,6 +556,18 @@ ApplicationWindow {
             y_cm: exercise.getCurrent().right_part_Y
             child.font.pixelSize: 42
             child.text: exercise.getCurrent().right_part_character
+
+            Rectangle {
+                id:chrightrect
+                visible:false
+                width: 100
+                height: width
+                anchors.centerIn: parent
+                color: "transparent"
+                border.color: "blue"
+                border.width: 4
+                radius: width*0.5
+            }
         }
 
         Characters {
